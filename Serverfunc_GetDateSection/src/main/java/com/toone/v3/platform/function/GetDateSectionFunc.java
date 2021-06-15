@@ -62,19 +62,19 @@ public class GetDateSectionFunc implements IFunction {
                     outputVo.put(calendar.get(Calendar.YEAR));
                     break;
                 case 2:// 月
-                    outputVo.put(calendar.get(Calendar.MONTH) + 1);
+                    outputVo.put(supplyZero(calendar.get(Calendar.MONTH) + 1));
                     break;
                 case 3:// 日
-                    outputVo.put(calendar.get(Calendar.DAY_OF_MONTH));
+                    outputVo.put(supplyZero(calendar.get(Calendar.DAY_OF_MONTH)));
                     break;
                 case 4:// 时
-                    outputVo.put(calendar.get(Calendar.HOUR_OF_DAY));
+                    outputVo.put(supplyZero(calendar.get(Calendar.HOUR_OF_DAY)));
                     break;
                 case 6:// 分
-                    outputVo.put(calendar.get(Calendar.MINUTE));
+                    outputVo.put(supplyZero(calendar.get(Calendar.MINUTE)));
                     break;
                 case 7:// 秒
-                    outputVo.put(calendar.get(Calendar.SECOND));
+                    outputVo.put(supplyZero(calendar.get(Calendar.SECOND)));
                     break;
                 case 9:// 星期
                     outputVo.put(getDateNum(date));
@@ -92,6 +92,10 @@ public class GetDateSectionFunc implements IFunction {
             log.error("函数【" + funcCode + "】计算失败", e);
         }
         return outputVo;
+    }
+
+    private String supplyZero(int num){
+        return num < 10 ? "0" + num : num + "";
     }
 
     private int getDateNum(Date date){

@@ -57,7 +57,7 @@ public class ExpRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("结果")
-                .setType(VariableType.Number)
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Exp.Function_Code())

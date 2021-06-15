@@ -40,31 +40,31 @@ public class CompareFunc implements IFunction {
 
             String str1;
             String str2;
-            if(param1 == null) {
+            if (param1 == null) {
                 str1 = "";
-            } else if(!(param1 instanceof String)) {
+            } else if (!(param1 instanceof String)) {
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Compare.Function_Code() + "】的第1个参数必须是字符串类型，参数1：" + param1);
             } else {
                 str1 = (String) param1;
             }
-            if(param2 == null) {
+            if (param2 == null) {
                 str2 = "";
-            } else if(!(param2 instanceof String)) {
+            } else if (!(param2 instanceof String)) {
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Compare.Function_Code() + "】的第2个参数必须是字符串类型，参数2：" + param2);
             } else {
                 str2 = (String) param2;
             }
             boolean ignoreCase;
-            if(!(param3 instanceof Boolean)) {
+            if (!(param3 instanceof Boolean)) {
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Compare.Function_Code() + "】的第3个参数必须是布尔类型，参数3：" + param3);
             } else {
                 ignoreCase = (boolean) param3;
             }
 
-            if(ignoreCase) {
-                outputVo.put(str1.equals(str2));
-            } else {
+            if (ignoreCase) {
                 outputVo.put(str1.equalsIgnoreCase(str2));
+            } else {
+                outputVo.put(str1.equals(str2));
             }
 
             outputVo.setSuccess(true);

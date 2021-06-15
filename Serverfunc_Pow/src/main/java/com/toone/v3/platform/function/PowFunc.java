@@ -47,14 +47,20 @@ public class PowFunc implements IFunction {
                 throw new ServerFuncException("函数【" + funcCode + "】的第二个参数不能为0");
             }
 
-            BigDecimal result;
-            BigDecimal bd1 = new BigDecimal(param1.toString());
-            BigDecimal bd2 = new BigDecimal(param2.toString());
-            result = bd1.divide(bd2, 6, BigDecimal.ROUND_HALF_UP);
-            result = new BigDecimal("" + result).setScale(0, BigDecimal.ROUND_DOWN);
+
+            double result = 0 ;
+            double arg1 = Double.parseDouble(param1.toString());
+            double arg2 = Double.parseDouble(param2.toString());
+            result = Math.pow(arg1, arg2);
+            if(Double.isNaN(result)){
+                throw new ServerFuncException("指定数字的幂函数无法计算，请尽量修改幂为正整数类型");
+            }
+            if(Double.isInfinite(result)){
+                throw new ServerFuncException("指定数字的幂函数运算数据超出计算机所表示的范围，无法计算");
+            }
 
             outputVo.setSuccess(true);
-            outputVo.put(result.toPlainString());
+            outputVo.put(BigDecimal.valueOf(result).toPlainString());
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

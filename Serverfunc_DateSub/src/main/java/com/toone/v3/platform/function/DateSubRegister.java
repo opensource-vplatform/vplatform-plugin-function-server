@@ -65,7 +65,7 @@ public class DateSubRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("转换后的日期")
-                .setType(VariableType.Number)
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.DateSub.Function_Code())

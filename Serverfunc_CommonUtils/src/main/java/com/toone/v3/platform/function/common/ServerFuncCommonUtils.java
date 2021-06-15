@@ -694,12 +694,10 @@ public interface ServerFuncCommonUtils extends IOutService {
             throw new ServerFuncException("函数【" + funcName + "】的第" + index + "个参数必须满足格式：yyyy-MM-dd或者yyyy-MM-dd HH:mm:ss，当前值：" + obj);
         } else {
             String str = obj.toString().trim();
-            if (str.length() == 10) {
-                return new SimpleDateFormat("yyyy-MM-dd");
-            } else if (str.length() == 19) {
+            if (str.length() > 10) {
                 return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             } else {
-                throw new ServerFuncException("函数【" + funcName + "】的第" + index + "个参数必须满足格式：yyyy-MM-dd或者yyyy-MM-dd HH:mm:ss，当前值：" + str);
+                return new SimpleDateFormat("yyyy-MM-dd");
             }
         }
     }

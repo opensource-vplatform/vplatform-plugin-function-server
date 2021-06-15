@@ -39,12 +39,14 @@ public class ChangeMoneyToChineseFunc implements IFunction {
 
             param = context.getInput(0);
 
-            if(!(param instanceof Number)) {
+            double number;
+            try {
+                number = Double.parseDouble(param.toString());
+            } catch(Exception e) {
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
             double maxNum = 999999999999999.9999;
-            Double number = Double.parseDouble(param.toString());
             if (number < 0) {
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code() + "】暂不支持负数，参数1：" + param);
             }

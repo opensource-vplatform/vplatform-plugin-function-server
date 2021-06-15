@@ -45,7 +45,7 @@ public class MinFunc implements IFunction {
             service.checkParamNumeric(funcCode, param1, param2);
 
             BigDecimal bd1 = new BigDecimal(param1.toString());
-            BigDecimal bd2 = new BigDecimal(param1.toString());
+            BigDecimal bd2 = new BigDecimal(param2.toString());
             if( bd1.compareTo(bd2) < 0){
                 outputVo.put(param1);
             }else{

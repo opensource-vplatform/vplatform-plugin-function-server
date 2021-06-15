@@ -52,25 +52,33 @@ public class GetAllParentIdsFunc implements IFunction {
 
             String id = param1.toString();
             Object runtimeParams = VDS.getIntance().getFormulaEngine().eval(param2.toString());
-            if (runtimeParams instanceof IDataView) {
-                IDataView dataView = (IDataView) runtimeParams;
-                List<Map<String, Object>> datas = dataView.getDatas();
-                String separator = param4 == null ? " " : param4.toString();
 
-                List<String> ids = new ArrayList<>();
-                ids.add(id);
-                String str = findParentIds(datas, ids, separator);
-                if(param3 == null || !"true".equalsIgnoreCase(param3.toString())) {
-                    if(str.length()>0){
-                        str=str+id;
-                    }else{
-                        str=id;
+            // 判断是否DataView对象
+            if (runtimeParams instanceof IDataView) {
+                StringBuilder buf = new StringBuilder(1024);
+                IDataView dataView = (IDataView) runtimeParams;
+                List<Map<String, Object>> listMap = dataView.getDatas();
+                boolean self = true;
+                if (param3 instanceof String) {
+                    self = Boolean.valueOf(param3.toString());
+                } else {
+                    self = (Boolean) param3;
+                }
+                String separator = (String) param4;
+                List<String> list = new ArrayList<String>();
+                list.add(id);
+                String str = findParentIds(listMap, list, separator, buf);
+                if (self) {
+                    if (str.length() > 0) {
+                        str = str + id;
+                    } else {
+                        str = id;
                     }
                 } else {
-                    if(str.length()>0){
-                        str=str.substring(0, str.length()-separator.length());
-                    }else{
-                        str="";
+                    if (str.length() > 0) {
+                        str = str.substring(0, str.length() - separator.length());
+                    } else {
+                        str = "";
                     }
                 }
                 outputVo.put(str);
@@ -89,13 +97,13 @@ public class GetAllParentIdsFunc implements IFunction {
         return outputVo;
     }
 
-    private String findParentIds(List<Map<String, Object>> datas, List<String> ids, String separator) {
-        StringBuilder buf = new StringBuilder(1024);
-        List<String> idList = new ArrayList<>();
-        for (String id : ids) {
-            for (Map<String, Object> data : datas) {
-                if (data.get("id").equals(id)) {
-                    Object opid = data.get("PID");
+    public static String findParentIds(List<Map<String, Object>> listMap, List<String> ids, String separator, StringBuilder buf) {
+
+        List<String> idList = new ArrayList<String>();
+        for (int i = 0; i < ids.size(); i++) {
+            for (int j = 0; j < listMap.size(); j++) {
+                if (listMap.get(j).get("id").equals(ids.get(i))) {
+                    Object opid = listMap.get(j).get("PID");
                     if (opid != null) {
                         String pid = opid.toString();
                         if (!pid.equals("")) {
@@ -107,7 +115,7 @@ public class GetAllParentIdsFunc implements IFunction {
             }
         }
         if (idList.size() > 0) {
-            return findParentIds(datas, idList, separator);
+            return findParentIds(listMap, idList, separator, buf);
         } else {
             return buf.toString();
         }

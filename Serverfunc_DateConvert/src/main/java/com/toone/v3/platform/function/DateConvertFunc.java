@@ -9,6 +9,8 @@ import com.yindangu.v3.business.plugin.business.api.func.IFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Locale;
+
 /**
  * 将一时间的单位转换成另一种单位后的时间数。<br>
  * <br>
@@ -69,13 +71,13 @@ public class DateConvertFunc implements IFunction {
         if (param3 == null) {
             throw new ServerFuncException("函数【" + ServerFuncCommonUtils.DateConvert.Function_Code() + "】的第3个参数必须是枚举值：s：秒、m：分、H：时、d：日，当前值：NULL");
         }
-        String str3 = param3.toString().trim();
+        String str3 = param3.toString().trim().toLowerCase();
         switch (str3) {
             case "s":
                 return time / 1000;
             case "m":
                 return time / (1000 * 60);
-            case "H":
+            case "h":
                 return time / (1000 * 60 * 60);
             case "d":
                 return time / (1000 * 60 * 60 * 24);

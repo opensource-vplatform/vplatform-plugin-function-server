@@ -36,10 +36,10 @@ public class EncodeBASE64Func implements IFunction {
         Object param2 = null;
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
-            service.checkParamSize(funcCode, context, 2);
+            service.checkParamSize(funcCode, context, 1);
 
             param1 = context.getInput(0);
-            param2 = context.getInput(1);
+            param2 = context.getInputSize() == 2 ? context.getInput(1) : "utf-8";
 
             service.checkParamNull(funcCode, param1, param2);
 

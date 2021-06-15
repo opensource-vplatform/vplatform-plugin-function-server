@@ -19,6 +19,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.14</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/src/main/resources/lib/commons-codec-1.14.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.yindangu.v3.platform</groupId>
             <artifactId>Serverfunc_CommonUtils</artifactId>
             <version>3.0.0</version>

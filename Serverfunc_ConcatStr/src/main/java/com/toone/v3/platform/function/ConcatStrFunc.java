@@ -34,7 +34,7 @@ public class ConcatStrFunc implements IFunction {
                 throw new ServerFuncException("函数【" + funcCode + "】至少需要2个参数，当前参数个数：" + size);
             }
 
-            StringBuilder result = new StringBuilder("1024");
+            StringBuilder result = new StringBuilder(1024);
             for (int i = 0; i < size; i++) {
                 Object param = context.getInput(i);
                 if (param == null) {

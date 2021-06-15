@@ -36,12 +36,14 @@ public class CosFunc implements IFunction {
 
             param = context.getInput(0);
 
-            if (!(param instanceof Number)) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Asin.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
+            double param1;
+            try {
+                param1 = Double.parseDouble(param.toString());
+            } catch(Exception e) {
+                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Cos.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
-            double param1 = Double.parseDouble(param.toString());
-            BigDecimal result = BigDecimal.valueOf(Math.cos(service.radianToAngle(param1)));
+            BigDecimal result = BigDecimal.valueOf(Math.cos(service.angleToRadian(param1)));
             result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
 
             if (new BigDecimal(result.intValue()).compareTo(result) == 0) {

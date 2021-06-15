@@ -50,7 +50,9 @@ public class EncryptionFunc implements IFunction {
                     throw new ServerFuncException("函数【" + funcCode + "】的第1个参数只能使用枚举值：MD5，Base64，AES，参数1：" + param1);
                 }
                 DensityStrategy densityStrategy = DensityStrategy.Factory.getDensityStrategyInstance(strategy);
-                densityStrategy.encryption(param2.toString(), (String) param3);
+                String encryption = densityStrategy.encryption(param2.toString(), (String) param3);
+                outputVo.put(encryption);
+                outputVo.setSuccess(true);
             } else {
                 throw new ServerFuncException("函数【" + funcCode + "】需要2个或者3个参数，当前参数个数：" + size);
             }

@@ -1,12 +1,11 @@
 package com.toone.v3.platform.function;
 
 import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
+import com.yindangu.v3.business.plugin.business.api.httpcommand.IHttpCommand;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
-import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
-import com.yindangu.v3.plugin.vds.reg.api.model.IFunctionProfileVo;
-import com.yindangu.v3.plugin.vds.reg.api.model.IPluginProfileVo;
-import com.yindangu.v3.plugin.vds.reg.api.model.VariableType;
+import com.yindangu.v3.plugin.vds.reg.api.builder.IHttpCommandBuilder;
+import com.yindangu.v3.plugin.vds.reg.api.model.*;
 import com.yindangu.v3.plugin.vds.reg.common.RegVds;
 
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ public class GetLngOrLatByAddrRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_GetLngOrLatByAddr";
     private static final String Component_Version = "3.10.0";
+    private static final String Command_Code = "GetLngOrLatByAddr";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
@@ -37,6 +37,7 @@ public class GetLngOrLatByAddrRegister implements IRegisterPlugin {
     public List<IPluginProfileVo> getPluginProfile() {
         List<IPluginProfileVo> plugins = new ArrayList<>();
         plugins.add(getFunc());
+        plugins.add(getCommand());
 
         return plugins;
     }
@@ -70,6 +71,17 @@ public class GetLngOrLatByAddrRegister implements IRegisterPlugin {
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);
+
+        return pluginBuilder.build();
+    }
+
+    private IHttpCommandProfileVo getCommand() {
+        IHttpCommandBuilder pluginBuilder = RegVds.getPlugin().getHttpCommandPlugin();
+        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
+                .setCode(Command_Code)
+                .setDesc("")
+                .setName("获取经纬度")
+                .setEntry(GetLngOrLatByAddrCommand.class);
 
         return pluginBuilder.build();
     }

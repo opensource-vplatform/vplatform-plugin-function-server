@@ -45,7 +45,7 @@ public class SinFunc implements IFunction {
             service.checkParamNumeric(funcCode, param);
 
             double param1 = Double.parseDouble(param.toString());
-            BigDecimal result = BigDecimal.valueOf(Math.sin(service.radianToAngle(param1)));
+            BigDecimal result = BigDecimal.valueOf(Math.sin(service.angleToRadian(param1)));
             result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
 
             if (new BigDecimal(result.intValue()).compareTo(result) == 0) {

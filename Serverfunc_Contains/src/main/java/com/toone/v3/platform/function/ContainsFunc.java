@@ -54,7 +54,8 @@ public class ContainsFunc implements IFunction {
                 str2 = (String) param2;
             }
 
-            outputVo.put(str1.indexOf(str2));
+            int flag = str1.indexOf(str2);
+            outputVo.put(flag >= 0 ? true : false);
             outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);

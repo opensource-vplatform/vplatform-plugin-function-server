@@ -30,12 +30,14 @@ public class CoshFunc implements IFunction {
 
             param = context.getInput(0);
 
-            if(!(param instanceof Number)) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Asin.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
+            double param1;
+            try {
+                param1 = Double.parseDouble(param.toString());
+            } catch(Exception e) {
+                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Cosh.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
-            double param1 = Double.parseDouble(param.toString());
-            BigDecimal result = BigDecimal.valueOf(Math.cosh(service.radianToAngle(param1)));
+            BigDecimal result = BigDecimal.valueOf(Math.cosh(param1));
 
             outputVo.setSuccess(true);
             outputVo.put(result.toPlainString());

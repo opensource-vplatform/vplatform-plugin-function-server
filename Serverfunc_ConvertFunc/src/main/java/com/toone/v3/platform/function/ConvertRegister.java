@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class ConvertRegister implements IRegisterPlugin {
 
-    private static final String Component_Code = "Serverfunc_Convert";
+    private static final String Component_Code = "Serverfunc_ConvertFunc";
     private static final String Component_Version = "3.10.0";
 
     @Override

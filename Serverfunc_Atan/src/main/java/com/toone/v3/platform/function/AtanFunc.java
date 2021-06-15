@@ -37,11 +37,13 @@ public class AtanFunc implements IFunction {
 
             param = context.getInput(0);
 
-            if (!(param instanceof Number)) {
+            double param1;
+            try {
+                param1 = Double.parseDouble(param.toString());
+            } catch(Exception e) {
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Atan.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
-            double param1 = Double.parseDouble(param.toString().trim());
             BigDecimal result = new BigDecimal(service.radianToAngle(Math.atan(param1)));
             result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
 

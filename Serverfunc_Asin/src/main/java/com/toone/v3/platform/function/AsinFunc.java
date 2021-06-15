@@ -36,11 +36,15 @@ public class AsinFunc implements IFunction {
 
             param = context.getInput(0);
 
-            if(!(param instanceof Number)) {
+            service.checkParamNull(ServerFuncCommonUtils.Asin.Function_Code(), param);
+
+            double param1;
+            try {
+                param1 = Double.parseDouble(param.toString());
+            } catch(Exception e) {
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Asin.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
-            double param1 = Double.parseDouble(param.toString());
             if (param1 > 1 || param1 < -1)
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Asin.Function_Code() + "】的第1个参数必须必须在1到-1之间，参数1：" + param);
 
