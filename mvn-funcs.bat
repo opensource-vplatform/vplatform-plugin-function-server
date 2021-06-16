@@ -1,4 +1,5 @@
 @echo off
+rem chcp 65001 == utf-8字符集
 set setting=E:\works\toone-maven-settings.xml
 echo ==================maven 仓库设置(%setting%)====================
 rd /s /Q target
