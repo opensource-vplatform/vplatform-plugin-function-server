@@ -37,7 +37,7 @@ public class CoshFunc implements IFunction {
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Cosh.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
-            BigDecimal result = BigDecimal.valueOf(Math.cosh(param1));
+            BigDecimal result = new BigDecimal(Math.cosh(param1));
 
             outputVo.setSuccess(true);
             outputVo.put(result.toPlainString());

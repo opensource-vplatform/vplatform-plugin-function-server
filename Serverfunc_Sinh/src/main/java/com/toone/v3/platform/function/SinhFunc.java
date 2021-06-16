@@ -44,7 +44,7 @@ public class SinhFunc implements IFunction {
             service.checkParamNumeric(funcCode, param);
 
             double angle = Double.parseDouble(param.toString());
-            BigDecimal result = BigDecimal.valueOf(Math.sinh(angle));
+            BigDecimal result = new BigDecimal(Math.sinh(angle));
 
             outputVo.setSuccess(true);
             outputVo.put(result.toPlainString());

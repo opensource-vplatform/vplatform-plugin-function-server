@@ -44,7 +44,7 @@ public class Log10Func implements IFunction {
             if(p <= 0) {
                 throw new ServerFuncException("函数【" + funcCode + "】的参数必须大于0，当前入参1：" + p);
             }
-            BigDecimal result = BigDecimal.valueOf(Math.log10(p));
+            BigDecimal result = new BigDecimal(Math.log10(p));
 
             outputVo.setSuccess(true);
             outputVo.put(result.toPlainString());

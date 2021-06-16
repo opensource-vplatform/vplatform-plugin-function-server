@@ -50,7 +50,7 @@ public class TanFunc implements IFunction {
             if (judgeNum == 0)
                 throw new ServerFuncException("函数【" + funcCode + "】参数不符合要求");
 
-            BigDecimal result = BigDecimal.valueOf(Math.tan(service.angleToRadian(param1)));
+            BigDecimal result = new BigDecimal(Math.tan(service.angleToRadian(param1)));
             result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
 
             outputVo.setSuccess(true);

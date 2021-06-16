@@ -81,7 +81,8 @@ public class GetAllParentIdsFunc implements IFunction {
                         str = "";
                     }
                 }
-                outputVo.put(str);
+
+                outputVo.put(new StringBuilder(str).reverse().toString());
             } else {
                 outputVo.put("");
             }

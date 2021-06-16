@@ -38,9 +38,15 @@ public class FloorFunc implements IFunction {
             service.checkParamSize(funcCode, context, 1);
             param = context.getInput(0);
             service.checkParamNull(funcCode, param);
-            service.checkParamNumeric(funcCode, param);
 
-            BigDecimal result = BigDecimal.valueOf(Math.floor(Double.parseDouble(param.toString())));
+            double param1;
+            try {
+                param1 = Double.parseDouble(param.toString());
+            } catch(Exception e) {
+                throw new ServerFuncException("函数【】的第1个参数必须是数字类型，当前值：" + param);
+            }
+
+            BigDecimal result = new BigDecimal(Math.floor(param1));
             outputVo.setSuccess(true);
             outputVo.put(result.toPlainString());
         } catch (ServerFuncException e) {

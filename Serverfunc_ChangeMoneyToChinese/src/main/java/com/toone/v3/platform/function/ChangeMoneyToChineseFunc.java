@@ -36,12 +36,13 @@ public class ChangeMoneyToChineseFunc implements IFunction {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
             service.checkParamSize(ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code(), context, 1);
-
             param = context.getInput(0);
+            service.checkParamNull(ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code(), param);
 
-            double number;
+            Double number;
+            BigDecimal result = new BigDecimal(param.toString());
             try {
-                number = Double.parseDouble(param.toString());
+                number = Double.parseDouble(result.toPlainString());
             } catch(Exception e) {
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
             }
@@ -65,7 +66,7 @@ public class ChangeMoneyToChineseFunc implements IFunction {
             String ChineseStr = "";
             String[] parts;
 
-            String money = param.toString();
+            String money = result.toPlainString();
             if (money.indexOf(".") == -1) {
                 IntegerNum = money;
                 DecimalNum = "";

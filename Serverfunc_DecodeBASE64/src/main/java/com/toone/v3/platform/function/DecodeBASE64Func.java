@@ -36,7 +36,10 @@ public class DecodeBASE64Func implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
-            service.checkParamSize(funcCode, context, 1);
+            int size = context.getInputSize();
+            if(size == 0) {
+                throw new ServerFuncException("函数【" + funcCode + "】至少需要1个参数，实际参数个数：" + size);
+            }
 
             param1 = context.getInput(0);
             param2 = context.getInputSize() == 2 ? context.getInput(1) : "utf-8";
