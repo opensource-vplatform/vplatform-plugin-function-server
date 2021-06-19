@@ -67,6 +67,10 @@ public class DecodeBASE64Register implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.DecodeBASE64.Function_Desc())
                 .setName(ServerFuncCommonUtils.DecodeBASE64.Function_Name())
                 .setEntry(DecodeBASE64Func.class)
+                .setExample("代码示例:DecodeBASE64(\"PCF4bWw+PC8+\",\"utf-8\")，返回值为 \"<!xml></>\"。\n" +
+                        "参数1：所需解码的字符串(字符串类型)；\n" +
+                        "参数2：字符编码（字符串类型）；\n" +
+                        "返回值类型：字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

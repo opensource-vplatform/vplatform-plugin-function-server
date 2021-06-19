@@ -62,6 +62,9 @@ public class DateTimeToUnixtimestampRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.DateTimeToUnixtimestamp.Function_Desc())
                 .setName(ServerFuncCommonUtils.DateTimeToUnixtimestamp.Function_Name())
                 .setEntry(DateTimeToUnixtimestampFunc.class)
+                .setExample("代码示例:DateTimeToUnixtimestamp(\"2018-08-28 16:14:13\"),返回值为:1535444053\n" +
+                        "参数1--日期时间,格式必须为:yyyy-MM-dd HH:mm:ss(字符串类型),必填\n" +
+                        "返回值为字符串类型")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

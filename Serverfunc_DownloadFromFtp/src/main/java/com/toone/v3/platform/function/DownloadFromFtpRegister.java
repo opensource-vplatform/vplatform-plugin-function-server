@@ -87,6 +87,14 @@ public class DownloadFromFtpRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.DownloadFromFtp.Function_Desc())
                 .setName(ServerFuncCommonUtils.DownloadFromFtp.Function_Name())
                 .setEntry(DownloadFromFtpFunc.class)
+                .setExample("码示例:DownloadFromFtp(\"test.docx\",\"www.url.com\",21,\"user\",\"pwd\",\"ftp/test\")\n" +
+                        "参数1--ftp文件名(字符串类型)\n" +
+                        "参数2--服务器地址(字符串类型)\n" +
+                        "参数3--端口号(整数类型)\n" +
+                        "参数4--ftp用户名(字符串类型)\n" +
+                        "参数5--ftp密码(字符串类型)\n" +
+                        "参数6--ftp文件所在路径(字符串类型)\n" +
+                        "返回值为文件ID(字符串类型)")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

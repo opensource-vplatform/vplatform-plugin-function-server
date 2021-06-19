@@ -52,7 +52,7 @@ public class AsinFunc implements IFunction {
             result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
 
             outputVo.setSuccess(true);
-            outputVo.put(result.toPlainString());
+            outputVo.put(result);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

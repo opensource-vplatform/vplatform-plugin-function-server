@@ -77,6 +77,12 @@ public class GetAllParentIdsRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetAllParentIds.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetAllParentIds.Function_Name())
                 .setEntry(GetAllParentIdsFunc.class)
+                .setExample("代码示例: GetAllParentIds(\"a\",\"BR_IN_PARENT.entityCode\",True,\";\")，id为a，父节点有b、c，分隔符为;，若包含自身节点，则返回b;c;a，若不包含自身节点，则返回b;c，返回节点顺序为从高到低。\n" +
+                        "参数1--节点id值（字符串类型）； \n" +
+                        "参数2--实体编码(字符串类型)，实体可以是方法输入(BR_IN_PARENT.entityCode)、方法输出(BR_OUT_PARENT.entityCode)、方法变量(BR_VAR_PARENT.entityCode) ； \n" +
+                        "参数3--是否包含自身节点（布尔类型）；\n" +
+                        "参数4--分隔符（字符串类型）；\n" +
+                        "返回值类型：字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

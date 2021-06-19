@@ -62,6 +62,9 @@ public class GetSystemVariableRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetSystemVariable.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetSystemVariable.Function_Name())
                 .setEntry(GetSystemVariableFunc.class)
+                .setExample("代码示例:GetSystemVariable(BR_IN_PARENT.arg1) 返回值为 \"EEEE\"。\n" +
+                        "参数1--构件变量或者常量名（字符串类型）；\n" +
+                        "返回值类型为不定，由构件变量或者构件常量决定。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

@@ -64,6 +64,9 @@ public class ChangeMoneyToChineseRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Desc())
                 .setName(ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Name())
                 .setEntry(ChangeMoneyToChineseFunc.class)
+                .setExample("代码示例:ChangeMoneyToChinese(998.1314)，返回值是为：\"玖佰玖拾捌元壹角叁分壹厘肆毫\" 。\n" +
+                        "参数1：要转换的金额(数字类型)；\n" +
+                        "返回值类型：字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

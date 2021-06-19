@@ -60,7 +60,7 @@ public class PowFunc implements IFunction {
             }
 
             outputVo.setSuccess(true);
-            outputVo.put(BigDecimal.valueOf(result).toPlainString());
+            outputVo.put(BigDecimal.valueOf(result));
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

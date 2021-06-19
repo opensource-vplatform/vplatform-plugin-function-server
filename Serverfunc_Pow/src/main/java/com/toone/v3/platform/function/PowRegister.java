@@ -63,13 +63,18 @@ public class PowRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("结果")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Integer, VariableType.Number))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Pow.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Pow.Function_Desc())
                 .setName(ServerFuncCommonUtils.Pow.Function_Name())
                 .setEntry(PowFunc.class)
+                .setExample("代码示例：Pow(3,2)返回值为9。\n" +
+                        "参数1--指数（数字类型）；\n" +
+                        "参数2--幂（数字类型）；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

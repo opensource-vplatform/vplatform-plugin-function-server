@@ -70,6 +70,10 @@ public class DivremRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.Divrem.Function_Desc())
                 .setName(ServerFuncCommonUtils.Divrem.Function_Name())
                 .setEntry(DivremFunc.class)
+                .setExample("代码示例:Divrem(54,8) 返回值为6。\n" +
+                        "参数1--被除数（数字类型）；\n" +
+                        "参数2--除数（数字类型，不能为0）；\n" +
+                        "返回值类型：整数类型。该函数是取两数相除后的整数商，即相除后的整数部分不会保留任何小数，结果只保留整数部分（非四舍五入）")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

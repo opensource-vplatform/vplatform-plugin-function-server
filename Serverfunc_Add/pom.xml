@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.toone.v3.platform</groupId>
-    <artifactId>Serverfunc_Add</artifactId>
+    <artifactId>Serverfunc_ServerAdd</artifactId>
     <version>3.10.0</version>
 
-    <name>Serverfunc_Add</name>
+    <name>Serverfunc_ServerAdd</name>
     <url>https://yindangu.gitbook.io/v-devsuite</url>
 
     <properties>

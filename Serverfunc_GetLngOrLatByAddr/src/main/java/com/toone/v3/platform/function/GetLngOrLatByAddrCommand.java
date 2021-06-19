@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.yindangu.v3.business.plugin.business.IContext;
 import com.yindangu.v3.business.plugin.business.api.httpcommand.FormatType;
 import com.yindangu.v3.business.plugin.business.api.httpcommand.IHttpCommand;
 import com.yindangu.v3.business.plugin.business.api.httpcommand.IHttpContext;
@@ -53,10 +52,9 @@ public class GetLngOrLatByAddrCommand implements IHttpCommand {
             resultData.put("error_msg", error_msg);
             resultData.put("isSuccess", flag);
             resultData.put("value", result);
-            context.newResultVo().setValue(resultData).setValueType(FormatType.Json);
+            IHttpResultVo resultVo = context.newResultVo().setValue(resultData).setValueType(FormatType.Json);
+
+            return resultVo;
         }
-
-
-        return null;
     }
 }

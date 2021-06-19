@@ -57,6 +57,9 @@ public class DateTimeNowRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.DateTimeNow.Function_Desc())
                 .setName(ServerFuncCommonUtils.DateTimeNow.Function_Name())
                 .setEntry(DateTimeNowFunc.class)
+                .setExample("代码示例:DateTimeNow()返回值为\"2011-10-19 12:03:44\"。\n" +
+                        "无参数；\n" +
+                        "返回值为字符串类型。")
                 .setOutput(outputVo);
 
         return pluginBuilder.build();

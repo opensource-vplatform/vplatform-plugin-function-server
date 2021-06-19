@@ -68,6 +68,11 @@ public class FormatRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.Format.Function_Desc())
                 .setName(ServerFuncCommonUtils.Format.Function_Name())
                 .setEntry(FormatFunc.class)
+                .setExample("代码示例:Format(\"ab{0}cd{1}\",\"12\",\"3\") 返回值为\"ab12cd3\"。\n" +
+                        "参数1--模式串(字符串类型)；\n" +
+                        "参数2--拼接串(各种类型)；\n" +
+                        "参数n--拼接串(各种类型)；\n" +
+                        "返回值为字符串。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

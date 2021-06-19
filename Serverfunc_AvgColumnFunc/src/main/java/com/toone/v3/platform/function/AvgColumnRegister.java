@@ -67,6 +67,10 @@ public class AvgColumnRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.AvgColumnFunc.Function_Desc())
                 .setName(ServerFuncCommonUtils.AvgColumnFunc.Function_Name())
                 .setEntry(AvgColumnFunc.class)
+                .setExample("代码示例:AvgColumnFunc(\"BR_IN_PARENT.xiaoshu\",\"price\") 返回实体字段price的平均值。\n" +
+                        "参数1--活动集实体(字符串类型)；\n" +
+                        "参数2--计算平均值的字段名称(字符串类型))；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

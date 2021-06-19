@@ -72,6 +72,18 @@ public class EncryptRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.EncryptFunc.Function_Desc())
                 .setName(ServerFuncCommonUtils.EncryptFunc.Function_Name())
                 .setEntry(EncryptFunc.class)
+                .setExample("代码示例：EncryptFunc(\"12345\",\"md5\",\"xxxx\")，返回值为对应加密方式加密后的字符串。\n" +
+                        " 参数1：需要加密的字符串，字符串类型，必填。默认使用UTF-8编码\n" +
+                        " 参数2：加密算法，字符串类型，必填，不区分大小写。支持以下类型：\n" +
+                        "        md5：基于RFC 1321。安全性一般，性能高，不可逆，返回32位16进制。主要用于一致性验证、数字签名等\n" +
+                        "        SHA-1：基于NIST's FIPS 180-4，安全比md5高，性能比md5慢，不可逆，返回32位16进制。\n" +
+                        "        SHA-256：基于NIST's FIPS 180-4，安全比SHA-1高，性能比SHA-1慢，不可逆，返回64位16进制。\n" +
+                        "        SHA-384：基于NIST's FIPS 180-4，安全比SHA-256高，性能比SHA-256慢，不可逆，返回96位16进制。\n" +
+                        "        SHA-512：基于NIST's FIPS 180-4，安全比SHA-384高，性能比SHA-384慢，不可逆，返回128位16进制。\n" +
+                        "        AES：基于PKCS #5。对称加密，可逆，安全性高，是一种区块加密标准。广泛用于金融财务、在线交易等领域。\n" +
+                        " 参数3：密钥，字符串类型，必填；当且仅当参数2为AES，请填写正确密钥，其他参数任意填写。\n" +
+                        "        AES密钥要求：长度要求为16byte，不足将补0，超过16byte将自动截取。不建议使用中文作为密钥，推荐大小字符以及数字的组合。\n" +
+                        " 返回值类型：加密后的字符串，字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

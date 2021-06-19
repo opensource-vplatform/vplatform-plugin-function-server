@@ -65,6 +65,9 @@ public class SinRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.Sin.Function_Desc())
                 .setName(ServerFuncCommonUtils.Sin.Function_Name())
                 .setEntry(SinFunc.class)
+                .setExample("代码示例:Sin(1)返回值为0.0174524064。\n" +
+                        "参数1--指定的角度(数字类型)；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

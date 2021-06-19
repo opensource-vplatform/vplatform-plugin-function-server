@@ -61,6 +61,9 @@ public class AddThousandBitsRegister implements IRegisterPlugin {
                 .setName(ServerFuncCommonUtils.AddThousandBits.Function_Name())
                 .setDesc(ServerFuncCommonUtils.AddThousandBits.Function_Desc())
                 .setEntry(AddThousandBitsFunc.class)
+                .setExample("代码示例：AddThousandBits(1234567.7654321) 返回值：1,234,567.765,432,1。\n" +
+                        "参数一：需要添加千分位的数字（数字类型）；\n" +
+                        "返回值类型：字符串类型。")
                 .setOutput(output)
                 .addInputParam(input);
 

@@ -62,6 +62,9 @@ public class CheckChineseRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.CheckChinese.Function_Desc())
                 .setName(ServerFuncCommonUtils.CheckChinese.Function_Name())
                 .setEntry(CheckChineseFunc.class)
+                .setExample("代码示例:CheckChinese(\"a你好bc\") 返回值为True。\n" +
+                        "参数1--待检查字符串(字符串类型)；\n" +
+                        "返回值为布尔类型")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

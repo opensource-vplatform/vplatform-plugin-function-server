@@ -57,6 +57,9 @@ public class GetIPAddressRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetIPAddressFunc.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetIPAddressFunc.Function_Name())
                 .setEntry(GetIPAddressFunc.class)
+                .setExample("代码示例:GetIPAddressFunc()，返回当前客户端请求的IP地址字符串，注意返回的是服务器端获取到的请求IP地址，如果使用了代理服务器，则返回代理之前的真实客户端地址。\n" +
+                        "无参数；\n" +
+                        "返回值为字符串。")
                 .setOutput(outputVo);
 
         return pluginBuilder.build();

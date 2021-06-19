@@ -67,6 +67,10 @@ public class EncodeBASE64Register implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.EncodeBASE64.Function_Desc())
                 .setName(ServerFuncCommonUtils.EncodeBASE64.Function_Name())
                 .setEntry(EncodeBASE64Func.class)
+                .setExample("代码示例:EncodeBASE64(\"<!xml></>\",\"utf-8\")，返回值为 \"PCF4bWw+PC8+\"。\n" +
+                        "参数1：所需编码的字符串(字符串类型)；\n" +
+                        "参数2：字符编码（字符串类型）；\n" +
+                        "返回值类型：字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

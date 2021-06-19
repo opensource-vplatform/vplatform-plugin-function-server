@@ -71,6 +71,10 @@ public class MinRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.Min.Function_Desc())
                 .setName(ServerFuncCommonUtils.Min.Function_Name())
                 .setEntry(MinFunc.class)
+                .setExample("代码示例：Min(3,5)返回值为3。\n" +
+                        "参数1--比较值1(数字类型)；\n" +
+                        "参数2--比较值2(数字类型)；\n" +
+                        "返回值类型：数字类型（值小的数）。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

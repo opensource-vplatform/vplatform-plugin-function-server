@@ -74,6 +74,11 @@ public class DateConvertRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.DateConvert.Function_Desc())
                 .setName(ServerFuncCommonUtils.DateConvert.Function_Name())
                 .setEntry(DateConvertFunc.class)
+                .setExample("代码示例:DateConvert(30,\"s\",\"m\")，返回值为0.5。\n" +
+                        "参数1--时间数(数值类型)；\n" +
+                        "参数2--原时间的单位(字符串类型)，s-秒,m-分,H-时,d-日；\n" +
+                        "参数3--目标时间的单位(字符串类型)，s-秒,m-分,H-时,d-日；\n" +
+                        "返回值为数值类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

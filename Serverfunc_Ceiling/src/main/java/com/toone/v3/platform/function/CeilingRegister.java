@@ -10,6 +10,7 @@ import com.yindangu.v3.plugin.vds.reg.api.model.VariableType;
 import com.yindangu.v3.plugin.vds.reg.common.RegVds;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,13 +56,17 @@ public class CeilingRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("返回值")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Ceiling.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Ceiling.Function_Desc())
                 .setName(ServerFuncCommonUtils.Ceiling.Function_Name())
                 .setEntry(CeilingFunc.class)
+                .setExample("代码示例:Ceiling(2.555) 返回值为3。\n" +
+                        "参数1--指定的数(数值类型)；\n" +
+                        "返回值类型：整数类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

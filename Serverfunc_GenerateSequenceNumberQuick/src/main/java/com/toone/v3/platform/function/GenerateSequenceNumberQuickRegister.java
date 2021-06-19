@@ -62,6 +62,9 @@ public class GenerateSequenceNumberQuickRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GenerateSequenceNumberQuick.Function_Desc())
                 .setName(ServerFuncCommonUtils.GenerateSequenceNumberQuick.Function_Name())
                 .setEntry(GenerateSequenceNumberQuickFunc.class)
+                .setExample("GenerateSequenceNumberQuick(\"123456\") 返回值是：\"1\"。\n" +
+                        "参数1：流水号种子，字符串类型。最长128位字符串，建议64位或者更短\n" +
+                        "返回值：流水号，整数类型")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

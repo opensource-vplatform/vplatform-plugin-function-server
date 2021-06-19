@@ -57,13 +57,16 @@ public class ExpRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("结果")
-                .setType(VariableType.Char)
+                .setType(VariableType.Number)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Exp.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Exp.Function_Desc())
                 .setName(ServerFuncCommonUtils.Exp.Function_Name())
                 .setEntry(ExpFunc.class)
+                .setExample("代码示例:Exp(2)返回值为7.38905609893065。\n" +
+                        "参数1--幂（数字类型）；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

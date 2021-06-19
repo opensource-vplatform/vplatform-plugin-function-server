@@ -64,6 +64,9 @@ public class EvalExpressionRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.EvalExpression.Function_Desc())
                 .setName(ServerFuncCommonUtils.EvalExpression.Function_Name())
                 .setEntry(EvalExpressionFunc.class)
+                .setExample("代码示例:EvalExpression(\"@@userName\") 返回系统变量userName的值。 \n" +
+                        "参数1--为字符串表达式。\n" +
+                        "返回值为不定类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

@@ -67,6 +67,10 @@ public class DateToStringRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.DateToString.Function_Desc())
                 .setName(ServerFuncCommonUtils.DateToString.Function_Name())
                 .setEntry(DateToStringFunc.class)
+                .setExample("代码示例:DateToString(\"yyyy-MM-dd HH:mm:ss\",DateTimeNow())，返回值为\"2012-04-19 12:03:44\"。 \n" +
+                        "参数1--格式串(字符串类型)；\n" +
+                        "参数2--时间(时间类型或满足时间格式的字符串类型)；\n" +
+                        "返回值为字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

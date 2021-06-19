@@ -57,6 +57,9 @@ public class GenerateUUIDRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GenerateUUID.Function_Desc())
                 .setName(ServerFuncCommonUtils.GenerateUUID.Function_Name())
                 .setEntry(GenerateUUIDFunc.class)
+                .setExample("代码示例:GenerateUUID()返回一个uuid字符串。\n" +
+                        "无参数；\n" +
+                        "返回值为字符串。")
                 .setOutput(outputVo);
 
         return pluginBuilder.build();

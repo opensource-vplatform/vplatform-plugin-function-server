@@ -61,6 +61,9 @@ public class AsciiToUnicodeRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.AsciiToUnicode.Function_Desc())
                 .setName(ServerFuncCommonUtils.AsciiToUnicode.Function_Name())
                 .setEntry(AsciiToUnicodeFunc.class)
+                .setExample("代码示例:AsciiToUnicode(\"同望Toone\")返回值为\"&#21516;&#26395;&#84;&#111;&#111;&#110;&#101;\"。\n" +
+                        "参数1--字符串(字符串类型)\n" +
+                        "返回值为字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

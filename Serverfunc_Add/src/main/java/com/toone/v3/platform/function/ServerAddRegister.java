@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class ServerAddRegister implements IRegisterPlugin {
 
-    private static final String Component_Code = "Serverfunc_Add";
+    private static final String Component_Code = "Serverfunc_ServerAdd";
     private static final String Component_Version = "3.10.0";
 
     @Override
@@ -65,13 +65,20 @@ public class ServerAddRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("运算和")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.ServerAdd.Function_Code())
                 .setDesc(ServerFuncCommonUtils.ServerAdd.Function_Desc())
                 .setName(ServerFuncCommonUtils.ServerAdd.Function_Name())
                 .setEntry(ServerAddFunc.class)
+                .setExample("代码示例:ServerAdd(arg1,arg2,...,argN,argN+1) 返回值为数字类型。\n" +
+                        "参数1--被加数(数字类型)；\n" +
+                        "参数2--加数(数字类型)；\n" +
+                        "参数N--加数(数字类型)；\n" +
+                        "参数N+1--小数保留位数(数字类型)；\n" +
+                        "返回值为数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

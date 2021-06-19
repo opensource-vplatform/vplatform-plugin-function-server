@@ -72,6 +72,12 @@ public class DatediffRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.Datediff.Function_Desc())
                 .setName(ServerFuncCommonUtils.Datediff.Function_Name())
                 .setEntry(DatediffFunc.class)
+                .setExample("代码示例: Datediff(\"2012-11-25 01:00:32\",\"2012-11-24 05:55:33\",\"d\")，返回值为 0.7951273148148148。\n" +
+                        "参数1--原日期(时间类型或满足时间格式的字符串类型)；\n" +
+                        "参数2--目标日期(时间类型或满足时间格式的字符串类型)；\n" +
+                        "参数3--差值的单位(字符串类型)，s-秒,m-分,H-时,d-日；\n" +
+                        "注：时间间隔=原日期-目标日期\n" +
+                        "返回值为数值类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

@@ -68,6 +68,10 @@ public class ConcatStrRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.ConcatStr.Function_Desc())
                 .setName(ServerFuncCommonUtils.ConcatStr.Function_Name())
                 .setEntry(ConcatStrFunc.class)
+                .setExample("代码示例:ConcatStr(\"hello\",\" \",\"world\") 返回值为\"hello world\"。\n" +
+                        "参数1--字符串(字符串类型)；\n" +
+                        "参数n--字符串(字符串类型)；\n" +
+                        "返回值为字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

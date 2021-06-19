@@ -74,6 +74,17 @@ public class GetConditionColumnValueRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetConditionColumnValue.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetConditionColumnValue.Function_Name())
                 .setEntry(GetConditionColumnValueFunc.class)
+                .setExample("代码示例1：GetConditionColumnValue(\"BR_IN_PARENT.entityCode\",\"name\",\"age=1\")。\n" +
+                        "代码示例2：GetConditionColumnValue(\"BR_VAR_PARENT.entityCode\",\"name\",\"wb='文本'\")。\n" +
+                        "参数1--方法实体编码(字符串类型)，方法输入实体（BR_IN_PARENT.entityCode）、方法变量实体（BR_VAR_PARENT.entityCode）、方法输出实体（BR_OUT_PARENT.entityCode）； \n" +
+                        "参数2--方法实体中某个字段的编码(字符串类型)； \n" +
+                        "参数3--查询条件(字符串类型，如果值是字符串类型，则需要加单引号，参考示例2)； \n" +
+                        "若参数3中的条件值来源变量，则参数3需要用一个变量代替，如：\n" +
+                        "GetConditionColumnValue(\"BR_VAR_PARENT.TableName\",\"name\",BR_VAR_PARENT.cs3)\n" +
+                        "其中BR_VAR_PARENT.cs3的值=ConcatStr(\"name=\",BR_VAR_PARENT.cs3_z)\n" +
+                        "若BR_VAR_PARENT.cs3_z为字符串，拼接参数3时，还需要加上单引号，如：\n" +
+                        "ConcatStr(\"name=\",\"'\",BR_VAR_PARENT.cs3_z,\"'\")\n" +
+                        "返回值类型：与参数二所选字段的类型一致。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

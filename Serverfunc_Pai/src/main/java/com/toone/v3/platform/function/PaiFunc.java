@@ -34,7 +34,7 @@ public class PaiFunc implements IFunction {
         try {
             BigDecimal result = BigDecimal.valueOf(Math.PI);
             outputVo.setSuccess(true);
-            outputVo.put(result.toPlainString());
+            outputVo.put(result);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

@@ -62,6 +62,10 @@ public class CopyFileByFileIdRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.CopyFileByFileId.Function_Desc())
                 .setName(ServerFuncCommonUtils.CopyFileByFileId.Function_Name())
                 .setEntry(CopyFileByFileIdFunc.class)
+                .setExample("代码示例：CopyFileByFileId(\"fileId\")，返回复制后的文件id。 \n" +
+                        "参数1--文件标识id(字符串类型)； \n" +
+                        "返回值为字符串类型。\n" +
+                        "注：如果文件标识id不存在，就返回\"-1\"。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

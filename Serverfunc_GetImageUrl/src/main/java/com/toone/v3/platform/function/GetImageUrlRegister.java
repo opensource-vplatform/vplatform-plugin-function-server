@@ -62,6 +62,9 @@ public class GetImageUrlRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetImageUrl.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetImageUrl.Function_Name())
                 .setEntry(GetImageUrlFunc.class)
+                .setExample("代码示例:GetImageUrl(\"8a819ab551c2421c0151c3b597b80ddf\")，返回值为图片的URL路径。\n" +
+                        "参数1--图片的文件id(字符串类型)；\n" +
+                        "返回值为字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

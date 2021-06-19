@@ -62,6 +62,17 @@ public class GetSerialNumberRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetSerialNumberFunc.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetSerialNumberFunc.Function_Name())
                 .setEntry(GetSerialNumberFunc.class)
+                .setExample("代码示例:GetSerialNumberFunc(\"TableName\",\"ColumnName\",\"20151103--\",\"11\",\"0\",\"0\",\"3\",\"true\",\"true\") 返回值为00000000001。\n" +
+                        "参数1--表名(字符串类型)；\n" +
+                        "参数2--字段名(字符串类型)；\n" +
+                        "参数3--前缀字符串(字符串类型，只用于查询流水号时使用，不包含在返回结果中)；\n" +
+                        "参数4--流水号长度(字符串类型) \n" +
+                        "参数5--补位符(字符串类型，并且长度必须为1)；\n" +
+                        "参数6--查询语句的like值(字符串类型)\n" +
+                        "参数7--截取流水号的起始位置，下标从0开始(字符串类型)\n" +
+                        "参数8--是否从左边截取(字符串类型)\n" +
+                        "参数9--是否重用流水号(字符串类型)\n" +
+                        "返回值为字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

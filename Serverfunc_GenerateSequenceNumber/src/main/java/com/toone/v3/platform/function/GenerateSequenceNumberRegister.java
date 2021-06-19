@@ -62,6 +62,17 @@ public class GenerateSequenceNumberRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GenerateSequenceNumber.Function_Desc())
                 .setName(ServerFuncCommonUtils.GenerateSequenceNumber.Function_Name())
                 .setEntry(GenerateSequenceNumberFunc.class)
+                .setExample("代码示例：GenerateSequenceNumber (\"123456\", \"INC\") 返回值是：\"1\" 。\n" +
+                        "参数1：流水号种子，字符串类型。根据该种子生成流水号，最长128位字符串，建议64位或者更短。\n" +
+                        "参数2：生成模式，字符串类型。\n" +
+                        "支持模式：\n" +
+                        "INC：最大号+1；\n" +
+                        "REUSE：重用废弃的流水号，当没有废号可用时，同INC；\n" +
+                        "ASSIGNERR：用给定的值作为流水号，如果该值已被占用，那么生成失败；\n" +
+                        "ASSIGNINC：用给定的值作为流水号，如果该值已被占用，那么同INC；\n" +
+                        "ASSIGNREUSE：用给定的值作为流水号，如果该值已被占用，那么同REUSE；\n" +
+                        "参数3：需要使用的废弃流水号，整数类型。当且仅当参数2为ASSIGNERR、ASSIGNINC、ASSIGNREUSE才有效。\n" +
+                        "返回值：流水号，整数类型 ")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

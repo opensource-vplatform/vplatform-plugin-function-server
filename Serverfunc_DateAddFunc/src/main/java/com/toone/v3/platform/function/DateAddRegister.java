@@ -72,6 +72,11 @@ public class DateAddRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.DateAddFunc.Function_Desc())
                 .setName(ServerFuncCommonUtils.DateAddFunc.Function_Name())
                 .setEntry(DateAddFunc.class)
+                .setExample("代码示例:DateAddFunc(\"2012-03-05 18:20:30\",30,\"H\")，返回值为\"2012-03-07 00:20:30\"。\n" +
+                        "参数1--时间，格式为yyyy-MM-dd HH:mm:ss(时间类型或满足时间格式的字符串类型)；\n" +
+                        "参数2--增加的时间数(数字类型)；\n" +
+                        "参数3--日期数的单位(字符串类型)，y:年运算 M:月运算 d：日运算 H:小时运算 mi:分运算 s：秒运算\n" +
+                        "返回值为字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

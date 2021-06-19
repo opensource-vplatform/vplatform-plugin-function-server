@@ -51,7 +51,7 @@ public class TanhFunc implements IFunction {
                 outputVo.put(-1);
             } else {
                 BigDecimal result = new BigDecimal(Math.tanh(param1));
-                outputVo.put(result.toPlainString());
+                outputVo.put(result);
             }
 
             outputVo.setSuccess(true);

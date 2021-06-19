@@ -67,6 +67,10 @@ public class DowdloadFileToFileSystemRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.DowdloadFileToFileSystem.Function_Desc())
                 .setName(ServerFuncCommonUtils.DowdloadFileToFileSystem.Function_Name())
                 .setEntry(DowdloadFileToFileSystemFunc.class)
+                .setExample("代码示例：DowdloadFileToFileSystem(\"http://img07.tooopen.com/images/20170316/tooopen_sy_201956178977.jpg\",\"jpg\") \n" +
+                        "参数1：网络文件路径（字符串类型）\n" +
+                        "参数2：文件类型（可不传，不传可能导致无法识别文件类型）（字符串类型）\n" +
+                        "返回值为字符串类型，成功时返回文件id字符串，失败时返回-1字符串。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

@@ -50,13 +50,16 @@ public class PaiRegister implements IRegisterPlugin {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("圆周率")
-                .setType(VariableType.Char)
+                .setType(VariableType.Number)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Pai.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Pai.Function_Desc())
                 .setName(ServerFuncCommonUtils.Pai.Function_Name())
                 .setEntry(PaiFunc.class)
+                .setExample("代码示例:Pai() 返回值为3.141592653589793\n" +
+                        "无参数；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo);
 
         return pluginBuilder.build();

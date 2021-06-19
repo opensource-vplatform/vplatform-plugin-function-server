@@ -57,13 +57,17 @@ public class ABSRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("绝对值")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.ABS.Function_Code())
                 .setDesc(ServerFuncCommonUtils.ABS.Function_Desc())
                 .setName(ServerFuncCommonUtils.ABS.Function_Name())
                 .setEntry(ABSFunc.class)
+                .setExample("代码示例：ABS(-10)，返回10。\n" +
+                        "参数1--指定的数(数字类型)；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

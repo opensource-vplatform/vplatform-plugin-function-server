@@ -56,13 +56,17 @@ public class AcosRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("角度")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Acos.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Acos.Function_Desc())
                 .setEntry(AcosFunc.class)
                 .setName(ServerFuncCommonUtils.Acos.Function_Name())
+                .setExample("代码示例:Acos(1)返回值为0。\n" +
+                        "参数1--指定的角度(小数类型)，取值范围:[-1,1]；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

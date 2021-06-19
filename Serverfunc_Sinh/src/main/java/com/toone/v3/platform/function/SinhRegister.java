@@ -57,13 +57,17 @@ public class SinhRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("双曲正弦值")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Integer, VariableType.Number))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Sinh.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Sinh.Function_Desc())
                 .setName(ServerFuncCommonUtils.Sinh.Function_Name())
                 .setEntry(SinhFunc.class)
+                .setExample("代码示例:Sinh(1)返回值为1.1752011936438。\n" +
+                        "参数1--指定的角度(数字类型)；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

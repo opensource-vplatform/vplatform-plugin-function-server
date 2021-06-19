@@ -55,7 +55,7 @@ public class GetAllParentIdsFunc implements IFunction {
 
             // 判断是否DataView对象
             if (runtimeParams instanceof IDataView) {
-                StringBuilder buf = new StringBuilder(1024);
+                StringBuilder sb = new StringBuilder(1024);
                 IDataView dataView = (IDataView) runtimeParams;
                 List<Map<String, Object>> listMap = dataView.getDatas();
                 boolean self = true;
@@ -67,7 +67,7 @@ public class GetAllParentIdsFunc implements IFunction {
                 String separator = (String) param4;
                 List<String> list = new ArrayList<String>();
                 list.add(id);
-                String str = findParentIds(listMap, list, separator, buf);
+                String str = findParentIds(listMap, list, separator, sb);
                 if (self) {
                     if (str.length() > 0) {
                         str = str + id;
@@ -81,8 +81,7 @@ public class GetAllParentIdsFunc implements IFunction {
                         str = "";
                     }
                 }
-
-                outputVo.put(new StringBuilder(str).reverse().toString());
+                outputVo.put(str);
             } else {
                 outputVo.put("");
             }
@@ -98,8 +97,7 @@ public class GetAllParentIdsFunc implements IFunction {
         return outputVo;
     }
 
-    public static String findParentIds(List<Map<String, Object>> listMap, List<String> ids, String separator, StringBuilder buf) {
-
+    public static String findParentIds(List<Map<String, Object>> listMap, List<String> ids, String separator, StringBuilder sb) {
         List<String> idList = new ArrayList<String>();
         for (int i = 0; i < ids.size(); i++) {
             for (int j = 0; j < listMap.size(); j++) {
@@ -109,16 +107,17 @@ public class GetAllParentIdsFunc implements IFunction {
                         String pid = opid.toString();
                         if (!pid.equals("")) {
                             idList.add(pid);
-                            buf.append(pid).append(separator);
+                            sb.insert(0, pid + separator);
+//                            sb = pid + separator + sb;
                         }
                     }
                 }
             }
         }
         if (idList.size() > 0) {
-            return findParentIds(listMap, idList, separator, buf);
+            return findParentIds(listMap, idList, separator, sb);
         } else {
-            return buf.toString();
+            return sb.toString();
         }
     }
 }

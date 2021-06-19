@@ -67,6 +67,10 @@ public class EndsWithRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.EndsWith.Function_Desc())
                 .setName(ServerFuncCommonUtils.EndsWith.Function_Name())
                 .setEntry(EndsWithFunc.class)
+                .setExample("代码示例:EndsWith(\"V平台\",\"平台\")，返回值为True。\n" +
+                        "参数1--被检查字符串(字符串类型)；\n" +
+                        "参数2--指定的字符串(字符串类型)；\n" +
+                        "返回值为布尔值。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

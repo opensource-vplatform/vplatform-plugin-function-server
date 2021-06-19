@@ -69,6 +69,10 @@ public class GetDateSectionRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetDateSection.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetDateSection.Function_Name())
                 .setEntry(GetDateSectionFunc.class)
+                .setExample("代码示例:GetDateSection(\"2012-09-20\",2)\n" +
+                        "参数1--给定的日期，格式yyyy-MM-dd或者yyyy-MM-dd HH:mm:ss(时间类型或满足时间格式的字符串类型)；\n" +
+                        "参数2--指定要返回的日期部分：0:全部，1:年，2：月，3：日，4：小时，6：分，7：秒；9：星期(整型)；\n" +
+                        "返回值可能为字符串（参数2为 0）或者整型，建议使用时用字符串接收返回值。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

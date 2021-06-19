@@ -67,6 +67,10 @@ public class LogRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.LogFunc.Function_Desc())
                 .setName(ServerFuncCommonUtils.LogFunc.Function_Name())
                 .setEntry(LogFunc.class)
+                .setExample("代码示例:LogFunc(\"aaaa\",\"error\") 返回值为 true。 \n" +
+                        "参数1--日志信息（字符串类型）；\n" +
+                        "参数2--日志类型（\"debug\",\"info\",\"warn\",\"error\"）；\n" +
+                        "返回值为布尔类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

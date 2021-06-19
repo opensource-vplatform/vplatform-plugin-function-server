@@ -57,13 +57,17 @@ public class TanRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("正切值")
-                .setType(VariableType.Number)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Integer, VariableType.Number))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Tan.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Tan.Function_Desc())
                 .setName(ServerFuncCommonUtils.Tan.Function_Name())
                 .setEntry(TanFunc.class)
+                .setExample("代码示例:Tan(1)返回值为0.017455064928217585。\n" +
+                        "参数1--指定的角度(数字类型，不能取 π/2 +kπ,k∈Z)；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

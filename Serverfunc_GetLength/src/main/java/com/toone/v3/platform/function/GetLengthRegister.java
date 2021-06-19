@@ -62,6 +62,9 @@ public class GetLengthRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetLength.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetLength.Function_Name())
                 .setEntry(GetLengthFunc.class)
+                .setExample("代码示例:GetLength(\"asccc\")返回值为5。\n" +
+                        "参数1--指定的字符串(字符串类型)；\n" +
+                        "返回值为整数。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

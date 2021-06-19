@@ -65,6 +65,9 @@ public class CosRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.Cos.Function_Desc())
                 .setName(ServerFuncCommonUtils.Cos.Function_Name())
                 .setEntry(CosFunc.class)
+                .setExample("代码示例:Cos(1)返回值为0.9998476952。\n" +
+                        "参数1--指定的角度(小数类型)；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

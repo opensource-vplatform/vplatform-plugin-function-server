@@ -68,6 +68,13 @@ public class GetLngOrLatByAddrRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetLngOrLatByAddr.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetLngOrLatByAddr.Function_Name())
                 .setEntry(GetLngOrLatByAddrFunc.class)
+                .setExample("代码示例：GetLngOrLatByAddr(\"广东省珠海市港湾大道科技五路19号\",\"lng\")，取相应地址的经度，若第二个参数为lat，则取纬度。\n" +
+                        "参数1：地址（字符串，必填），目前仅限国内地址，地址结构（（省/市/区/街道/门牌号））越完整，地址内容越准确，解析的坐标精度越高。\n" +
+                        "参数2：lng或lat，其中lng为取经度，lat为取纬度（字符串，必填）\n" +
+                        "返回值为数字类型\n" +
+                        "注：使用此函数前，需要在业务系统控制台配置相关参数\n" +
+                        "1.前往控制台（system/console） -- 系统维护 -- 配置管理 -- 百度鹰眼服务 配置ak\n" +
+                        "2.ak的获取：前往百度开放平台创建应用后获取，注意在创建时【应用类型】需选【服务端】（http://lbsyun.baidu.com/apiconsole/key） ")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

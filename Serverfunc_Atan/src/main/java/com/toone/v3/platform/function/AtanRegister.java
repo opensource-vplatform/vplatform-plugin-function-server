@@ -65,6 +65,9 @@ public class AtanRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.Atan.Function_Desc())
                 .setName(ServerFuncCommonUtils.Atan.Function_Name())
                 .setEntry(AtanFunc.class)
+                .setExample("代码示例:Atan(1)返回值为45。\n" +
+                        "参数1--指定的角度(小数类型)；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

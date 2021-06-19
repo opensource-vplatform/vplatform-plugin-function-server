@@ -70,6 +70,11 @@ public class ConvertRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.ConvertFunc.Function_Desc())
                 .setName(ServerFuncCommonUtils.ConvertFunc.Function_Name())
                 .setEntry(ConvertFunc.class)
+                .setExample("代码示例:ConvertFunc(3,2) 返回值为\"3\"。\n" +
+                        "参数1--传入的数据(各种类型)；\n" +
+                        "参数2--转换的类型，1-整数,2-字符串,3-布尔值,4-小数； \n" +
+                        "返回值为不确定的类型，根据参数2的格式而定。\n" +
+                        "注：整数的支持范围是：[-2147483648，2147483647]，小数位数最大支持6位。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

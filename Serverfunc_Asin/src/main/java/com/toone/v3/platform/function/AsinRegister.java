@@ -55,13 +55,17 @@ public class AsinRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("角度")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Asin.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Asin.Function_Desc())
                 .setName(ServerFuncCommonUtils.Asin.Function_Name())
                 .setEntry(AsinFunc.class)
+                .setExample("代码示例:Asin(1)返回值为90。\n" +
+                        "参数1--指定的角度(小数类型)，取值范围:[-1,1]；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

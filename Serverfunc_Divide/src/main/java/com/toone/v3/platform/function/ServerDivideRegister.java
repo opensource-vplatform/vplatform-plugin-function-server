@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class ServerDivideRegister implements IRegisterPlugin {
 
-    private static final String Component_Code = "Serverfunc_Divide";
+    private static final String Component_Code = "Serverfunc_ServerDivide";
     private static final String Component_Version = "3.10.0";
 
     @Override
@@ -70,13 +70,20 @@ public class ServerDivideRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("商")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.ServerDivide.Function_Code())
                 .setDesc(ServerFuncCommonUtils.ServerDivide.Function_Desc())
                 .setName(ServerFuncCommonUtils.ServerDivide.Function_Name())
                 .setEntry(ServerDivideFunc.class)
+                .setExample("代码示例:ServerDivide(arg1,arg2,...,argN,argN+1) 返回值为数字类型。\n" +
+                        "参数1--被除数(数字类型)； \n" +
+                        "参数2--除数(数字类型)；\n" +
+                        "参数N--除数(数字类型)；\n" +
+                        "参数N+1--小数保留位数(数字类型)； \n" +
+                        "返回值为数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

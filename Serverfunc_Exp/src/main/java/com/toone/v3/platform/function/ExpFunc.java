@@ -46,7 +46,7 @@ public class ExpFunc implements IFunction {
             }
 
             outputVo.setSuccess(true);
-            outputVo.put(new BigDecimal(result).toPlainString());
+            outputVo.put(new BigDecimal(result));
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

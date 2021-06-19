@@ -55,13 +55,16 @@ public class FloorRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("整数")
-                .setType(VariableType.Char)
+                .setType(VariableType.Integer)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Floor.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Floor.Function_Desc())
                 .setName(ServerFuncCommonUtils.Floor.Function_Name())
                 .setEntry(FloorFunc.class)
+                .setExample("代码示例：Floor(2.55456)返回值为2。\n" +
+                        "参数1--指定的数(数字类型）；\n" +
+                        "返回值类型：整数类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

@@ -91,13 +91,13 @@ public class DateConvertFunc implements IFunction {
         if (param2 == null) {
             throw new ServerFuncException("函数【" + ServerFuncCommonUtils.DateConvert.Function_Code() + "】的第2个参数必须是枚举值：s：秒、m：分、H：时、d：日，当前值：NULL");
         }
-        String str2 = param2.toString().trim();
+        String str2 = param2.toString().toLowerCase().trim();
         switch (str2) {
             case "s":
                 return time * 1000;
             case "m":
                 return time * 1000 * 60;
-            case "H":
+            case "h":
                 return time * 1000 * 60 * 60;
             case "d":
                 return time * 1000 * 60 * 60 * 24;

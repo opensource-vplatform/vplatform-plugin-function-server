@@ -72,6 +72,11 @@ public class DateSubRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.DateSub.Function_Desc())
                 .setName(ServerFuncCommonUtils.DateSub.Function_Name())
                 .setEntry(DateSubFunc.class)
+                .setExample("代码示例:DateSub(\"2016-11-05 18:20:30\",3,\"M\")返回值为\"2016-08-05 18:20:30\"。\n" +
+                        "参数1--转换的日期(时间类型或满足时间格式的字符串类型)，格式为yyyy-MM-dd HH:mm:ss；\n" +
+                        "参数2--减少的时间数(数字类型)；\n" +
+                        "参数3--时间数的单位(字符串类型)，s-秒,m-分,H-时,d-日,M-月,y-年；\n" +
+                        "返回值为字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

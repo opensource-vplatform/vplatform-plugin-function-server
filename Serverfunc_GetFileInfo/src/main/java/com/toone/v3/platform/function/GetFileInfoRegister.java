@@ -67,6 +67,10 @@ public class GetFileInfoRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetFileInfo.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetFileInfo.Function_Name())
                 .setEntry(GetFileInfoFunc.class)
+                .setExample("代码示例：GetFileInfo(\"8a819ab551c2421c0151c3b597b80ddf\",\"fileName\")。 \n" +
+                        "参数1--文件标识(字符串类型)；\n" +
+                        "参数2--文件信息类型(字符串类型)，其中fileName为文件名，fileSize为文件大小（单位KB），fileType为文件类型扩展名，md5为文件md5码；\n" +
+                        "返回值为字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

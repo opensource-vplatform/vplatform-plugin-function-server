@@ -57,13 +57,17 @@ public class CoshRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("双曲余弦值")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Cosh.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Cosh.Function_Desc())
                 .setName(ServerFuncCommonUtils.Cosh.Function_Name())
                 .setEntry(CoshFunc.class)
+                .setExample("代码示例:Cosh(1)返回值为1.54308063481524。\n" +
+                        "参数1--以弧度为单位的角(数字类型)；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

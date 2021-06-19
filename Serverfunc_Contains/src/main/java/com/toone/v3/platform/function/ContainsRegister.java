@@ -67,6 +67,10 @@ public class ContainsRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.Contains.Function_Desc())
                 .setName(ServerFuncCommonUtils.Contains.Function_Name())
                 .setEntry(ContainsFunc.class)
+                .setExample("代码示例:Contains(\"V平台\",\"平\")，返回值为True。\n" +
+                        "参数1--原字符串(字符串类型)；\n" +
+                        "参数2--指定的字符串(字符串类型)。\n" +
+                        "返回值为布尔值。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

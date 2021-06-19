@@ -57,13 +57,17 @@ public class Log10Register implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("结果")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Integer, VariableType.Number))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Log10.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Log10.Function_Desc())
                 .setName(ServerFuncCommonUtils.Log10.Function_Name())
                 .setEntry(Log10Func.class)
+                .setExample("代码示例:Log10(100) 返回值为2。\n" +
+                        "参数1--指定数字(数字类型，必须大于0)；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

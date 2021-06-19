@@ -72,6 +72,11 @@ public class GetDistanceRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetDistance.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetDistance.Function_Name())
                 .setEntry(GetDistanceFunc.class)
+                .setExample("代码示例：GetDistance(\"BR_IN_PARENT.locationEntity\",\"lng\",\"lat\")，根据经纬度数据顺序集合，自动计算轨迹里程，例如返回轨迹里程为6200.30（单位为米）\n" +
+                        "参数1：实体编码（字符串，必填），必须带前缀，实体可以是方法输入(BR_IN_PARENT.entityCode)、方法输出(BR_OUT_PARENT.entityCode)、方法变量(BR_VAR_PARENT.entityCode)\n" +
+                        "参数2：经度字段编码（字符串，必填）\n" +
+                        "参数3：纬度字段编码（字符串，必填）\n" +
+                        "返回值为数字类型")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

@@ -62,6 +62,9 @@ public class EncodeURIComponentRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.EncodeURIComponent.Function_Desc())
                 .setName(ServerFuncCommonUtils.EncodeURIComponent.Function_Name())
                 .setEntry(EncodeURIComponentFunc.class)
+                .setExample("代码示例:EncodeURIComponent(\"www.baidu.com/s?wd=同望科技\")，返回值为：\"www.baidu.com%2Fs%3Fwd%3D%E5%90%8C%E6%9C%9B%E7%A7%91%E6%8A%80\"。\n" +
+                        "参数1：需要编码的字符串(字符串类型)；\n" +
+                        "返回值类型：字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

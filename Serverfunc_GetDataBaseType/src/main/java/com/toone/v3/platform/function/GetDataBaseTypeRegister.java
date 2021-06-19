@@ -57,6 +57,9 @@ public class GetDataBaseTypeRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetDataBaseType.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetDataBaseType.Function_Name())
                 .setEntry(GetDataBaseTypeFunc.class)
+                .setExample("代码示例:GetDataBaseType()，返回执行系统服务连接的数据库类型（返回值枚举：Mssql2000、Mssql、DB2、Oracle、Mysql、H2、Unknow），其中SqlServer 2000以上版本都返回Mssql，若读取不到数据库类型，则返回Unknow。。 \n" +
+                        "无参数；\n" +
+                        "返回值类型：字符串类型。")
                 .setOutput(outputVo);
 
         return pluginBuilder.build();

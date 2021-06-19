@@ -62,6 +62,9 @@ public class GetFileUrlByFileIdRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetFileUrlByFileId.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetFileUrlByFileId.Function_Name())
                 .setEntry(GetFileUrlByFileIdFunc.class)
+                .setExample("代码示例：GetFileUrlByFileId(\"9f51cb5f88a65347581a0e15e343fca9\")，返回文件url。 \n" +
+                        "参数1--文件id(字符串类型)；\n" +
+                        "返回值类型：字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

@@ -62,6 +62,11 @@ public class GetAgeByIdCardRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetAgeByIdCard.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetAgeByIdCard.Function_Name())
                 .setEntry(GetAgeByIdCardFunc.class)
+                .setExample("代码示例:GetAgeByIdCard(\"身份证号码\")，返回年龄。 \n" +
+                        "参数1--身份证号码(字符串类型)；\n" +
+                        "返回值为数字类型。\n" +
+                        "注：1、当前日期是获取服务器的时间\n" +
+                        "    2、年龄是精确到日来计算的。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

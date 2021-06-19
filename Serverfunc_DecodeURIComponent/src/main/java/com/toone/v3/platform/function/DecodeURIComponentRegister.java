@@ -62,6 +62,9 @@ public class DecodeURIComponentRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.DecodeURIComponent.Function_Desc())
                 .setName(ServerFuncCommonUtils.DecodeURIComponent.Function_Name())
                 .setEntry(DecodeURIComponentFunc.class)
+                .setExample("代码示例:DecodeURIComponent(\"www.baidu.com%2Fs%3Fwd%3D%E5%90%8C%E6%9C%9B%E7%A7%91%E6%8A%80\")，返回值为：\"www.baidu.com/s?wd=同望科技\"。\n" +
+                        "参数1：需要解码的字符串(字符串类型)；\n" +
+                        "返回值类型：字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

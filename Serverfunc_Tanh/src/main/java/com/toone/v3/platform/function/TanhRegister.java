@@ -58,13 +58,16 @@ public class TanhRegister implements IRegisterPlugin {
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("双曲正切值")
                 .setType(VariableType.Range)
-                .setTypeRange(Arrays.asList(VariableType.Char, VariableType.Integer))
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Tanh.Function_Code())
                 .setDesc(ServerFuncCommonUtils.Tanh.Function_Desc())
                 .setName(ServerFuncCommonUtils.Tanh.Function_Name())
                 .setEntry(TanhFunc.class)
+                .setExample("代码示例:Tanh(1)返回值为0.7615941559557649。\n" +
+                        "参数1--指定的角度(数字类型)；\n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

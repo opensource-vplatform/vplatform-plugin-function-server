@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.toone.v3.platform</groupId>
-    <artifactId>Serverfunc_Divide</artifactId>
+    <artifactId>Serverfunc_ServerDivide</artifactId>
     <version>3.10.0</version>
 
-    <name>Serverfunc_Divide</name>
+    <name>Serverfunc_ServerDivide</name>
     <url>https://yindangu.gitbook.io/v-devsuite</url>
 
     <properties>

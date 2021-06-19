@@ -48,22 +48,45 @@ public class GetTableDataRegister implements IRegisterPlugin {
      */
     private IFunctionProfileVo getFunc() {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
-        IFunctionProfileVo.IFunctionInputVo inputVo = pluginBuilder.newInput()
-                .setDesc("正弦值")
-                .setType(VariableType.Number)
+        IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
+                .setDesc("列名")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
+                .setDesc("表名")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo3 = pluginBuilder.newInput()
+                .setDesc("条件")
+                .setType(VariableType.Char)
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
-                .setDesc("角度")
-                .setType(VariableType.Number)
+                .setDesc("结果")
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.GetTableData.Function_Code())
                 .setDesc(ServerFuncCommonUtils.GetTableData.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetTableData.Function_Name())
                 .setEntry(GetTableDataFunc.class)
+                .setExample("代码示例:GetTableData(\"ColumnName\",\"Table1\",\"ID='3'\") 返回值为表Table1中ID=3的行的ColumnName列的值。 \n" +
+                        "参数1--表字段名称（字符串类型）； \n" +
+                        "参数2--表名称（字符串类型）； \n" +
+                        "参数3--过滤条件（字符串类型）； \n" +
+                        "若参数3中的条件值来源变量，则参数3需要用一个变量代替，如：\n" +
+                        "GetTableData(\"ColumnName\",\"Table1,BR_VAR_PARENT.cs2)\n" +
+                        "其中BR_VAR_PARENT.cs2的值=ConcatStr(\"ID==\",BR_VAR_PARENT.cs2_z)\n" +
+                        "若BR_VAR_PARENT.cs2_z为字符串，拼接参数3时，还需要加上单引号，如：\n" +
+                        "ConcatStr(\"ID==\",\"'\",BR_VAR_PARENT.cs2_z,\"'\")\n" +
+                        "返回值为字符串。 \n" +
+                        "注：筛选条件中的字符串需要用单引号引起来。")
                 .setOutput(outputVo)
-                .addInputParam(inputVo);
+                .addInputParam(inputVo1)
+                .addInputParam(inputVo2)
+                .addInputParam(inputVo3);
 
         return pluginBuilder.build();
     }

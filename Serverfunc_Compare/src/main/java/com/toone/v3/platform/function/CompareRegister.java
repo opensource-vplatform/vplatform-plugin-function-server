@@ -72,6 +72,11 @@ public class CompareRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.Compare.Function_Desc())
                 .setName(ServerFuncCommonUtils.Compare.Function_Name())
                 .setEntry(CompareFunc.class)
+                .setExample("代码示例:Compare(\"ab\",\"Ab\",true)，返回值为True。\n" +
+                        "参数1--比较串(字符串类型)；\n" +
+                        "参数2--被比较串(字符串类型)；\n" +
+                        "参数3--是否忽略大小写，true为忽略大小写(布尔类型)；\n" +
+                        "返回值为布尔类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

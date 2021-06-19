@@ -47,8 +47,9 @@ public class ConvertPageNumberFunc implements IFunction {
             } else {
                 throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须为整数类型，参数1：" + param1);
             }
-            if (recordstart <= 0) {
-                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须大于0，参数1：" + param1);
+            // 负数表示不分页，搞不懂什么逻辑，反正历史就这样
+            if (recordstart == 0) {
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数不能为0，参数1：" + param1);
             }
             if (param2 instanceof Double) {
                 pagesize = ((Double) param2).intValue();

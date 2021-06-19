@@ -36,11 +36,17 @@ public class CeilingFunc implements IFunction {
             service.checkParamSize(ServerFuncCommonUtils.Ceiling.Function_Code(), context, 1);
             param = context.getInput(0);
             service.checkParamNull(ServerFuncCommonUtils.Ceiling.Function_Code(), param);
-            service.checkParamNumeric(ServerFuncCommonUtils.Ceiling.Function_Code(), param);
 
-            BigDecimal result = new BigDecimal(Math.ceil(Double.parseDouble(param.toString())));
+            double d;
+            try {
+                d = Double.parseDouble(param.toString());
+            } catch (Exception e) {
+                throw new ServerFuncException("函数【】的第1个参数必须是数字类型，参数1：" + param);
+            }
+
+            BigDecimal result = new BigDecimal(Math.ceil(d));
             outputVo.setSuccess(true);
-            outputVo.put(result.toPlainString());
+            outputVo.put(result);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

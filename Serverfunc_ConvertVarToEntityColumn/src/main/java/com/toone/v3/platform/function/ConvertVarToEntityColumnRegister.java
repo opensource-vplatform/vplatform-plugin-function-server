@@ -77,6 +77,12 @@ public class ConvertVarToEntityColumnRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.ConvertVarToEntityColumn.Function_Desc())
                 .setName(ServerFuncCommonUtils.ConvertVarToEntityColumn.Function_Name())
                 .setEntry(ConvertVarToEntityColumnFunc.class)
+                .setExample("代码示例: ConvertVarToEntityColumn(\"今天;明天;后天\",\"BR_IN_PARENT.entityCode\",\"fieldCode\",\";\")。\n" +
+                        "参数1：来源字符串（字符串类型，必填）；\n" +
+                        "参数2：实体编码（字符串类型，必填，必须带前缀，实体可以是方法输入(BR_IN_PARENT.entityCode)、方法输出(BR_OUT_PARENT.entityCode)、方法变量(BR_VAR_PARENT.entityCode)）；\n" +
+                        "参数3：字段编码（字符串类型，必填）；\n" +
+                        "参数4：参数1中多个数据之间的分隔符（字符串类型，必填）；\n" +
+                        "返回值类型：无返回值。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

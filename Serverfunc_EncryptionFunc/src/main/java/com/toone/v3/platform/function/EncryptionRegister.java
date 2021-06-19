@@ -73,6 +73,10 @@ public class EncryptionRegister implements IRegisterPlugin {
                 .setName(ServerFuncCommonUtils.EncryptionFunc.Function_Name())
                 .setEntry(EncryptionFunc.class)
                 .setDeprecated(true)
+                .setExample("代码示例:EncryptionFunc(\"MD5\",\"eee11\") 返回值为\"cF8FevsV8QeVyD/X1ClR3A==\"。\n" +
+                        "参数1--加密策略(字符串类型)，支持：MD5，Base64，AES；\n" +
+                        "参数2--需要加密的字符串(字符串类型)；\n" +
+                        "返回值为字符串。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)

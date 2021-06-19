@@ -16,8 +16,8 @@ import java.math.BigDecimal;
  * 代码示例:ABS(-10)返回值为10<br>
  * 参数数量:1 参数1--指定的数(数值类型) 返回值为正数<br>
  *
- * @author xugang
- * @date 2021-05-24
+ * @Author xugang
+ * @Date 2021-05-24
  */
 public class ABSFunc implements IFunction {
 
@@ -43,7 +43,7 @@ public class ABSFunc implements IFunction {
             }
 
             BigDecimal valBD = new BigDecimal(param.toString());
-            String result = valBD.abs().stripTrailingZeros().toPlainString();
+            BigDecimal result = valBD.abs().stripTrailingZeros();
 
             outputVo.put(result);
             outputVo.setSuccess(true);

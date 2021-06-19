@@ -3,13 +3,12 @@ package com.toone.v3.platform.function;
 import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
-import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
-import com.yindangu.v3.plugin.vds.reg.api.model.IFunctionProfileVo;
-import com.yindangu.v3.plugin.vds.reg.api.model.IPluginProfileVo;
-import com.yindangu.v3.plugin.vds.reg.api.model.VariableType;
+import com.yindangu.v3.plugin.vds.reg.api.builder.IHttpCommandBuilder;
+import com.yindangu.v3.plugin.vds.reg.api.model.*;
 import com.yindangu.v3.plugin.vds.reg.common.RegVds;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,6 +21,7 @@ public class GetLoactionPlaceRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_GetLoactionPlace";
     private static final String Component_Version = "3.10.0";
+    private static final String Command_Code = "GetLocationPlace";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
@@ -37,6 +37,7 @@ public class GetLoactionPlaceRegister implements IRegisterPlugin {
     public List<IPluginProfileVo> getPluginProfile() {
         List<IPluginProfileVo> plugins = new ArrayList<>();
         plugins.add(getFunc());
+        plugins.add(getCommand());
 
         return plugins;
     }
@@ -48,22 +49,51 @@ public class GetLoactionPlaceRegister implements IRegisterPlugin {
      */
     private IFunctionProfileVo getFunc() {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
-        IFunctionProfileVo.IFunctionInputVo inputVo = pluginBuilder.newInput()
-                .setDesc("正弦值")
-                .setType(VariableType.Number)
+        IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
+                .setDesc("纬度")
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Char))
                 .setRequired(true)
                 .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
+                .setDesc("经度")
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Char))
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo3 = pluginBuilder.newInput()
+                .setDesc("格式")
+                .setType(VariableType.Char)
+                .setRequired(false)
+                .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
-                .setDesc("角度")
-                .setType(VariableType.Number)
+                .setDesc("城市")
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.GetLoactionPlace.Function_Code())
                 .setDesc(ServerFuncCommonUtils.GetLoactionPlace.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetLoactionPlace.Function_Name())
                 .setEntry(GetLoactionPlaceFunc.class)
+                .setExample("代码示例:GetLoactionPlace(22.280539000,113.5719410)，返回值：珠海。\n" +
+                        "参数1--纬度（小数类型）；\n" +
+                        "参数2--经度（小数类型）；\n" +
+                        "返回值类型：字符串类型。")
                 .setOutput(outputVo)
-                .addInputParam(inputVo);
+                .addInputParam(inputVo1)
+                .addInputParam(inputVo2)
+                .addInputParam(inputVo3);
+
+        return pluginBuilder.build();
+    }
+
+    private IHttpCommandProfileVo getCommand() {
+        IHttpCommandBuilder pluginBuilder = RegVds.getPlugin().getHttpCommandPlugin();
+        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
+                .setCode(Command_Code)
+                .setDesc("")
+                .setName("获取城市名称")
+                .setEntry(GetLocationPlaceCommand.class);
 
         return pluginBuilder.build();
     }

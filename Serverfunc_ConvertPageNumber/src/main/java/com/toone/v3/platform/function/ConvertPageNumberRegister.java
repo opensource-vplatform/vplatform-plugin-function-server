@@ -67,6 +67,10 @@ public class ConvertPageNumberRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.ConvertPageNumber.Function_Desc())
                 .setName(ServerFuncCommonUtils.ConvertPageNumber.Function_Name())
                 .setEntry(ConvertPageNumberFunc.class)
+                .setExample("代码示例:ConvertPageNumber(3,4) 返回值为1。\n" +
+                        "参数1--记录开始数(整型)；\n" +
+                        "参数2--分页显示数(整型)；\n" +
+                        "返回值为整数类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

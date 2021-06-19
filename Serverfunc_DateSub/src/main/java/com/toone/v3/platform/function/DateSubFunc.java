@@ -9,6 +9,7 @@ import com.yindangu.v3.business.plugin.business.api.func.IFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,8 +50,31 @@ public class DateSubFunc implements IFunction {
             service.checkParamBlank(funcCode, param1);
 
             // 校验参数2是否为正整数
-            service.checkParamInteger(funcCode, param2, 2);
-            int number = Integer.parseInt(param2.toString());
+//            service.checkParamInteger(funcCode, param2, 2);
+//            int number = Integer.parseInt(param2.toString());
+
+            if(param2 == null){
+                throw new ServerFuncException("函数【" + funcCode + "】的第2个参数不能为空");
+            }
+            if (!(param2 instanceof Integer || param2 instanceof Double)) {
+                throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须为整数类型，参数2：" + param2);
+            }
+
+            // 解析参数为整数类型的数值
+            int number;
+            NumberFormat nf = NumberFormat.getInstance();
+            try {
+                number = Integer.parseInt(nf.format(param2).replace(",", ""));
+            } catch (Exception e) {
+                throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须为整数类型，参数2：" + param2);
+            }
+
+            if (number <= 0) {
+                throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须大于0，参数2：" + param2);
+            }
+
+            number = -number;
+
 
             SimpleDateFormat sdf = service.getSimpleDateFormat(funcCode, param1, 1);
             sdf.setLenient(false);
@@ -60,17 +84,17 @@ public class DateSubFunc implements IFunction {
             Date date = sdf.parse(param1.toString());
             cal.setTime(date);
             String str3 = param3 == null ? "NULL" : param3.toString();
-            if ("h".equals(str3)) {
+            if ("h".equalsIgnoreCase(str3)) {
                 cal.add(Calendar.HOUR, number);
             } else if ("m".equals(str3)) {
                 cal.add(Calendar.MINUTE, number);
-            } else if ("s".equals(str3)) {
+            } else if ("s".equalsIgnoreCase(str3)) {
                 cal.add(Calendar.SECOND, number);
-            } else if ("d".equals(str3)) {
+            } else if ("d".equalsIgnoreCase(str3)) {
                 cal.add(Calendar.DATE, number);
             } else if ("M".equals(str3)) {
                 cal.add(Calendar.MONTH, number);
-            } else if ("y".equals(str3)) {
+            } else if ("y".equalsIgnoreCase(str3)) {
                 cal.add(Calendar.YEAR, number);
             } else {
                 throw new ServerFuncException("函数【" + funcCode + "】的第3个参数必须是枚举值：s:秒、m:分、H：时、d：日、M：月、y：年，当前值：" + str3);

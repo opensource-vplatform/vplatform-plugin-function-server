@@ -67,6 +67,16 @@ public class GetEntityRowCountRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetEntityRowCountFunc.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetEntityRowCountFunc.Function_Name())
                 .setEntry(GetEntityRowCountFunc.class)
+                .setExample("代码示例:GetEntityRowCountFunc(\"BR_IN_PARENT.entityCode\",\"wb='A'\")，返回方法输入实体[entityCode]中字段wb的值是A的记录数。 \n" +
+                        "参数1：实体编码(字符串类型)。实体可以是方法输入(BR_IN_PARENT.entityCode)、方法输出(BR_OUT_PARENT.entityCode)、方法变量(BR_VAR_PARENT.entityCode)；\n" +
+                        "参数2：筛选条件(字符串类型)，其运算结果应该是布尔值。如果该参数省略，则返回实体总记录数；\n" +
+                        "若参数2中的条件值来源变量，则参数2需要用一个变量代替，如：\n" +
+                        "GetEntityRowCountFunc(\"BR_VAR_PARENT.TableName\",BR_VAR_PARENT.cs2)\n" +
+                        "其中BR_VAR_PARENT.cs2的值=ConcatStr(\"name=\",BR_VAR_PARENT.cs2_z)\n" +
+                        "若BR_VAR_PARENT.cs2_z为字符串，拼接参数2时，还需要加上单引号，如：\n" +
+                        "ConcatStr(\"name=\",\"'\",BR_VAR_PARENT.cs2_z,\"'\")\n" +
+                        "返回值类型：整型。 \n" +
+                        "注：筛选条件中的字符串需要用单引号引起来。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);

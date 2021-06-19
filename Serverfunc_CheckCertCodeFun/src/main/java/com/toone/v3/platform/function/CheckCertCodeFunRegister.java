@@ -62,6 +62,9 @@ public class CheckCertCodeFunRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.CheckCertCodeFun.Function_Desc())
                 .setName(ServerFuncCommonUtils.CheckCertCodeFun.Function_Name())
                 .setEntry(CheckCertCodeFunFunc.class)
+                .setExample("代码示例:CheckCertCodeFun(\"EEDS\")，返回值为 True。\n" +
+                        "参数1--原字符串(字符串类型)；\n" +
+                        "返回值为布尔类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo);
 

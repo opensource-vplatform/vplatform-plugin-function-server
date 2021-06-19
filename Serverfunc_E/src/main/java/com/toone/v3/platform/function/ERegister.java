@@ -50,13 +50,17 @@ public class ERegister implements IRegisterPlugin {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("e")
-                .setType(VariableType.Char)
+                .setType(VariableType.Number)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.E.Function_Code())
                 .setDesc(ServerFuncCommonUtils.E.Function_Desc())
                 .setName(ServerFuncCommonUtils.E.Function_Name())
                 .setEntry(EFunc.class)
+                .setExample("\n" +
+                        "代码示例:E() 返回值为2.718281828459045。 \n" +
+                        "无参数； \n" +
+                        "返回值类型：数字类型。")
                 .setOutput(outputVo);
 
         return pluginBuilder.build();

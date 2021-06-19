@@ -69,6 +69,12 @@ public class GetFirstRowColumnValueRegister implements IRegisterPlugin {
                 .setDesc(ServerFuncCommonUtils.GetFirstRowColumnValue.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetFirstRowColumnValue.Function_Name())
                 .setEntry(GetFirstRowColumnValueFunc.class)
+                .setExample("代码示例:\n" +
+                        "界面实体：GetFirstRowColumnValue(\"entity\",\"id\")，返回值为该实体变量首行记录的id字段值。\n" +
+                        "活动集实体：GetFirstRowColumnValue(\"BR_VAR_PARENT.interView\",\"id\")\n" +
+                        "参数1--实体名称。界面实体为字符串类型，其他变量实体需要加上变量的前缀\n" +
+                        "参数2--字段名(字符串类型)；\n" +
+                        "返回值类型：与参数二所选字段的类型一致。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2);
