@@ -40,7 +40,7 @@ public class TruncateFunc implements IFunction {
 
             BigDecimal result =new BigDecimal(param.toString()).setScale(0, BigDecimal.ROUND_DOWN);
 
-            outputVo.put(result.toPlainString());
+            outputVo.put(result);
             outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);

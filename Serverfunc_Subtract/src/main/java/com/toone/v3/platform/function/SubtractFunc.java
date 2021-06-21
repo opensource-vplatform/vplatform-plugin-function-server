@@ -61,7 +61,7 @@ public class SubtractFunc implements IFunction {
                 } else
                     result = result.subtract(tmpNum.multiply(mulValue));
             }
-            result.divide(mulValue, decimalDigit, BigDecimal.ROUND_HALF_UP)
+            String res = result.divide(mulValue, decimalDigit, BigDecimal.ROUND_HALF_UP).toString();
 
             outputVo.put(res);
             outputVo.setSuccess(true);

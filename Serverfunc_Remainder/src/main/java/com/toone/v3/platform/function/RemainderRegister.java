@@ -63,7 +63,7 @@ public class RemainderRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("余数")
-                .setType(VariableType.Integer)
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Remainder.Function_Code())

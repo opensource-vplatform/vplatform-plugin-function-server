@@ -47,7 +47,7 @@ public class SinhFunc implements IFunction {
             BigDecimal result = new BigDecimal(Math.sinh(angle));
 
             outputVo.setSuccess(true);
-            outputVo.put(result);
+            outputVo.put(result.toPlainString());
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

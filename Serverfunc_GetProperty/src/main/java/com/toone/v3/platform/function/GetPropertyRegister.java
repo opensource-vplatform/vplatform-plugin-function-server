@@ -10,6 +10,7 @@ import com.yindangu.v3.plugin.vds.reg.api.model.VariableType;
 import com.yindangu.v3.plugin.vds.reg.common.RegVds;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,22 +49,34 @@ public class GetPropertyRegister implements IRegisterPlugin {
      */
     private IFunctionProfileVo getFunc() {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
-        IFunctionProfileVo.IFunctionInputVo inputVo = pluginBuilder.newInput()
-                .setDesc("正弦值")
-                .setType(VariableType.Number)
+        IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
+                .setDesc("参数1")
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer, VariableType.Text, VariableType.Char, VariableType.Boolean, VariableType.LongDate, VariableType.Date, VariableType.Entity))
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
+                .setDesc("参数2")
+                .setType(VariableType.Char)
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
-                .setDesc("角度")
-                .setType(VariableType.Number)
+                .setDesc("返回值")
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer, VariableType.Text, VariableType.Char, VariableType.Boolean, VariableType.LongDate, VariableType.Date, VariableType.Entity))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.GetProperty.Function_Code())
                 .setDesc(ServerFuncCommonUtils.GetProperty.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetProperty.Function_Name())
                 .setEntry(GetPropertyFunc.class)
+                .setExample("代码示例:GetProperty(\"Entity1\",\"name\")，返回值为该属性值。\n" +
+                        "参数1--对象(字符串类型)；\n" +
+                        "参数2--属性名(字符串类型)；\n" +
+                        "返回值为字符串类型。")
                 .setOutput(outputVo)
-                .addInputParam(inputVo);
+                .addInputParam(inputVo1)
+                .addInputParam(inputVo2);
 
         return pluginBuilder.build();
     }

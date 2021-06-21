@@ -55,7 +55,7 @@ public class TruncateRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("返回值")
-                .setType(VariableType.Char)
+                .setType(VariableType.Integer)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Truncate.Function_Code())

@@ -50,7 +50,7 @@ public class PaiRegister implements IRegisterPlugin {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("圆周率")
-                .setType(VariableType.Number)
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Pai.Function_Code())

@@ -50,7 +50,7 @@ public class ERegister implements IRegisterPlugin {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("e")
-                .setType(VariableType.Number)
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.E.Function_Code())

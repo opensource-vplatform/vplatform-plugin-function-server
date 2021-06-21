@@ -61,7 +61,7 @@ public class ServerAddFunc implements IFunction {
             result = result.divide(mulValue, scal, BigDecimal.ROUND_HALF_UP);
 
             outputVo.setSuccess(true);
-            outputVo.put(result);
+            outputVo.put(result.toString());
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

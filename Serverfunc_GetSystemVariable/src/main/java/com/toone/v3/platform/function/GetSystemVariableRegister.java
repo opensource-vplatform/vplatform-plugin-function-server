@@ -10,6 +10,7 @@ import com.yindangu.v3.plugin.vds.reg.api.model.VariableType;
 import com.yindangu.v3.plugin.vds.reg.common.RegVds;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,13 +50,14 @@ public class GetSystemVariableRegister implements IRegisterPlugin {
     private IFunctionProfileVo getFunc() {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionInputVo inputVo = pluginBuilder.newInput()
-                .setDesc("正弦值")
-                .setType(VariableType.Number)
+                .setDesc("参数")
+                .setType(VariableType.Char)
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
-                .setDesc("角度")
-                .setType(VariableType.Number)
+                .setDesc("返回值")
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer, VariableType.Text, VariableType.Char, VariableType.Boolean, VariableType.LongDate, VariableType.Date, VariableType.Entity))
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.GetSystemVariable.Function_Code())

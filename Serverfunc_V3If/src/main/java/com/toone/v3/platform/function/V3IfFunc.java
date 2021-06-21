@@ -46,9 +46,9 @@ public class V3IfFunc implements IFunction {
             boolean evalFlag = (Boolean) param1;
 
             if (evalFlag) {
-                outputVo.put(param1);
-            } else {
                 outputVo.put(param2);
+            } else {
+                outputVo.put(param3);
             }
 
             outputVo.setSuccess(true);

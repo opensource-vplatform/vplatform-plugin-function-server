@@ -45,7 +45,7 @@ public class ABSFunc implements IFunction {
             BigDecimal valBD = new BigDecimal(param.toString());
             BigDecimal result = valBD.abs().stripTrailingZeros();
 
-            outputVo.put(result);
+            outputVo.put(result.toPlainString());
             outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);

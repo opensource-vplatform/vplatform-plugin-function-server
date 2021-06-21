@@ -61,14 +61,14 @@ public class SqrtFunc implements IFunction {
             //return Math.sqrt(param);
             //处理科学技术法显示问题
             result = new BigDecimal(Math.sqrt(result.doubleValue()));
-//            String rs = result.toPlainString();
-//            //处理小数位数
-//            if (rs.indexOf(".") != -1 && rs.length() > 18) {
-//                String[] rsArr = rs.split("\\.");
-//                rs = rsArr[0] + "." + rsArr[1].substring(0, (17 - rsArr[0].length()));
-//            }
+            String rs = result.toPlainString();
+            //处理小数位数
+            if (rs.indexOf(".") != -1 && rs.length() > 18) {
+                String[] rsArr = rs.split("\\.");
+                rs = rsArr[0] + "." + rsArr[1].substring(0, (17 - rsArr[0].length()));
+            }
 
-            outputVo.put(result);
+            outputVo.put(rs);
             outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);

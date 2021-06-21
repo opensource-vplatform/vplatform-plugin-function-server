@@ -32,9 +32,9 @@ public class PaiFunc implements IFunction {
         IFuncOutputVo outputVo = context.newOutputVo();
         Object param = null;
         try {
-            BigDecimal result = BigDecimal.valueOf(Math.PI);
+            BigDecimal result = new BigDecimal(Math.PI);
             outputVo.setSuccess(true);
-            outputVo.put(result);
+            outputVo.put(result.toPlainString());
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

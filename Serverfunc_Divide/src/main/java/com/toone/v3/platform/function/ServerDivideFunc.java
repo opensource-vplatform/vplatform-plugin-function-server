@@ -54,10 +54,10 @@ public class ServerDivideFunc implements IFunction {
 
                     BigDecimal tmpNum = obj2BigDecimal(param, i);
                     if (tmpNum == null) {
-                        throw new ServerFuncException("函数【" + funcCode + "】的第" + (i+1) + "个参数不能为空或者0");
-//                        outputVo.put("NaN");
-//                        outputVo.setSuccess(false);
-//                        break;
+//                        throw new ServerFuncException("函数【" + funcCode + "】的第" + (i+1) + "个参数不能为空或者0");
+                        outputVo.put("NaN");
+                        outputVo.setSuccess(false);
+                        break;
                     } else if (i == 0) {
                         result = tmpNum;
                     } else {
@@ -65,7 +65,7 @@ public class ServerDivideFunc implements IFunction {
                     }
                 }
                 if (outputVo.isSuccess()) {
-                    outputVo.put(result);
+                    outputVo.put(result.toString());
                 }
             }
         } catch (ServerFuncException e) {

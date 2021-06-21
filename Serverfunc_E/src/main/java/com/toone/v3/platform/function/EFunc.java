@@ -32,7 +32,7 @@ public class EFunc implements IFunction {
         try {
             BigDecimal result = BigDecimal.valueOf(Math.E);
             outputVo.setSuccess(true);
-            outputVo.put(result);
+            outputVo.put(result.toPlainString());
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

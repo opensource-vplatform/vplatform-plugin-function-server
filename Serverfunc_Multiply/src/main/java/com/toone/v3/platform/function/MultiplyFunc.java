@@ -52,10 +52,10 @@ public class MultiplyFunc implements IFunction {
                 BigDecimal tmpNum = obj2BigDecimal(context.getInput(i));
 
                 if (tmpNum == null) {
-                    throw new ServerFuncException("函数【" + funcCode + "】的第" + (i+1) + "个参数不能为空");
-//                    outputVo.put("NaN");
-//                    outputVo.setSuccess(true);
-//                    return outputVo;
+//                    throw new ServerFuncException("函数【" + funcCode + "】的第" + (i+1) + "个参数不能为空");
+                    outputVo.put("NaN");
+                    outputVo.setSuccess(true);
+                    return outputVo;
                 } else if (i == 0) {
                     result = tmpNum.multiply(mulValue);
                     continue;
@@ -64,7 +64,7 @@ public class MultiplyFunc implements IFunction {
             }
             BigDecimal res = result.divide(mulValue.pow(size - 1), decimalDigit, BigDecimal.ROUND_HALF_UP);
 
-            outputVo.put(res);
+            outputVo.put(res.toString());
             outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);

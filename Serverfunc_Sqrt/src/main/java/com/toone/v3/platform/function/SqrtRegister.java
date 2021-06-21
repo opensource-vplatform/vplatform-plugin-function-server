@@ -57,8 +57,7 @@ public class SqrtRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("返回值")
-                .setType(VariableType.Range)
-                .setTypeRange(Arrays.asList(VariableType.Integer, VariableType.Number))
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Sqrt.Function_Code())

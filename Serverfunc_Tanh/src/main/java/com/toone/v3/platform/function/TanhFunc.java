@@ -46,12 +46,12 @@ public class TanhFunc implements IFunction {
             double param1 = Double.parseDouble(param.toString());
             //取临界值
             if (param1 > 19.061547465398) {
-                outputVo.put(1);
+                outputVo.put("1");
             } else if (param1 < -19.061547465398) {
-                outputVo.put(-1);
+                outputVo.put("-1");
             } else {
                 BigDecimal result = new BigDecimal(Math.tanh(param1));
-                outputVo.put(result);
+                outputVo.put(result.toPlainString());
             }
 
             outputVo.setSuccess(true);

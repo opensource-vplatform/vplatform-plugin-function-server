@@ -47,7 +47,7 @@ public class Log10Func implements IFunction {
             BigDecimal result = new BigDecimal(Math.log10(p));
 
             outputVo.setSuccess(true);
-            outputVo.put(result);
+            outputVo.put(result.toPlainString());
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

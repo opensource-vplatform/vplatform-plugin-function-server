@@ -40,7 +40,7 @@ public class CoshFunc implements IFunction {
             BigDecimal result = new BigDecimal(Math.cosh(param1));
 
             outputVo.setSuccess(true);
-            outputVo.put(result);
+            outputVo.put(result.toPlainString());
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

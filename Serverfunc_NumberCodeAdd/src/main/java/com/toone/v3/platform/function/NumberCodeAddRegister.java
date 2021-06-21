@@ -50,7 +50,7 @@ public class NumberCodeAddRegister implements IRegisterPlugin {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
                 .setDesc("参数1")
-                .setType(VariableType.Integer)
+                .setType(VariableType.Char)
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()

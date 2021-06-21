@@ -49,7 +49,7 @@ public class RemainderFunc implements IFunction {
             //return result;
             //处理科学计数法显示问题
             BigDecimal result1 = new BigDecimal(result);
-            outputVo.put(result1);
+            outputVo.put(result1.toPlainString());
             outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);

@@ -41,10 +41,10 @@ public class HasRecordFunc implements IFunction {
                 String sql = String.format("select count(*) as dataCount from %s", param.toString());
                 IDAS das = VDS.getIntance().getDas();
                 IDataView dv = das.find(sql);
-                String dataCount = dv.getDatas().get(0).get("dataCount").toString();
-                outputVo.put(dataCount);
+                Integer dataCount = (Integer)dv.getDatas().get(0).get("dataCount");
+                outputVo.put(dataCount.toString());
             } catch(Exception e) {
-                log.error("函数【】计算失败，参数1：" + param);
+                log.error("函数【" + funcCode + "】计算失败，参数1：" + param);
                 outputVo.put("-1");
             }
 

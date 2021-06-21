@@ -46,7 +46,7 @@ public class CeilingFunc implements IFunction {
 
             BigDecimal result = new BigDecimal(Math.ceil(d));
             outputVo.setSuccess(true);
-            outputVo.put(result);
+            outputVo.put(result.toPlainString());
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

@@ -57,8 +57,7 @@ public class ABSRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("绝对值")
-                .setType(VariableType.Range)
-                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer))
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.ABS.Function_Code())

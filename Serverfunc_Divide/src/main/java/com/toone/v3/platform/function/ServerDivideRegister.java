@@ -70,8 +70,7 @@ public class ServerDivideRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("商")
-                .setType(VariableType.Range)
-                .setTypeRange(Arrays.asList(VariableType.Number, VariableType.Integer))
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.ServerDivide.Function_Code())
