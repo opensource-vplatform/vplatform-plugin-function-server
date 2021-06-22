@@ -41,12 +41,13 @@ public class CopyFileByFileIdFunc implements IFunction {
 
             IAppFileInfo appFileInfo = VDS.getIntance().getFileOperate().copyFile(param.toString().trim());
             if(appFileInfo == null) {
-                outputVo.setMessage("文件id【" + param + "】对应的文件不存在");
-                outputVo.setSuccess(false);
+//                outputVo.setMessage("文件id【" + param + "】对应的文件不存在");
+//                outputVo.setSuccess(false);
+                outputVo.put("-1");
             } else {
-                outputVo.setSuccess(true);
                 outputVo.put(appFileInfo.getId());
             }
+            outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

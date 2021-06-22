@@ -43,8 +43,8 @@ public class DecryptFunc implements IFunction {
             service.checkParamNull(funcCode, param1, param2, param3);
 
             String content = (String) param1;
-            String algorithm = (String) param1;
-            String algorithmKey = (String) param1;
+            String algorithm = (String) param2;
+            String algorithmKey = (String) param3;
 
             if (algorithm.equalsIgnoreCase("aes")) {
                 String res = DecryptUtil.decryptAES(content, algorithmKey);

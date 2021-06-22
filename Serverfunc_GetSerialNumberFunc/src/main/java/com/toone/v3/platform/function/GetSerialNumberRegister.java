@@ -48,20 +48,61 @@ public class GetSerialNumberRegister implements IRegisterPlugin {
      */
     private IFunctionProfileVo getFunc() {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
-        IFunctionProfileVo.IFunctionInputVo inputVo = pluginBuilder.newInput()
-                .setDesc("正弦值")
-                .setType(VariableType.Number)
+        IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
+                .setDesc("表名")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
+                .setDesc("字段名")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo3 = pluginBuilder.newInput()
+                .setDesc("前缀字符串")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo4 = pluginBuilder.newInput()
+                .setDesc("流水号长度")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo5 = pluginBuilder.newInput()
+                .setDesc("补位符")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo6 = pluginBuilder.newInput()
+                .setDesc("查询语句的like值")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo7 = pluginBuilder.newInput()
+                .setDesc("截取流水号的起始位置")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo8 = pluginBuilder.newInput()
+                .setDesc("是否从左边截取")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo9 = pluginBuilder.newInput()
+                .setDesc("是否重用流水号")
+                .setType(VariableType.Char)
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
-                .setDesc("角度")
-                .setType(VariableType.Number)
+                .setDesc("流水号")
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.GetSerialNumberFunc.Function_Code())
                 .setDesc(ServerFuncCommonUtils.GetSerialNumberFunc.Function_Desc())
                 .setName(ServerFuncCommonUtils.GetSerialNumberFunc.Function_Name())
                 .setEntry(GetSerialNumberFunc.class)
+                .setDeprecated(true)
                 .setExample("代码示例:GetSerialNumberFunc(\"TableName\",\"ColumnName\",\"20151103--\",\"11\",\"0\",\"0\",\"3\",\"true\",\"true\") 返回值为00000000001。\n" +
                         "参数1--表名(字符串类型)；\n" +
                         "参数2--字段名(字符串类型)；\n" +
@@ -74,7 +115,15 @@ public class GetSerialNumberRegister implements IRegisterPlugin {
                         "参数9--是否重用流水号(字符串类型)\n" +
                         "返回值为字符串类型。")
                 .setOutput(outputVo)
-                .addInputParam(inputVo);
+                .addInputParam(inputVo1)
+                .addInputParam(inputVo2)
+                .addInputParam(inputVo3)
+                .addInputParam(inputVo4)
+                .addInputParam(inputVo5)
+                .addInputParam(inputVo6)
+                .addInputParam(inputVo7)
+                .addInputParam(inputVo8)
+                .addInputParam(inputVo9);
 
         return pluginBuilder.build();
     }

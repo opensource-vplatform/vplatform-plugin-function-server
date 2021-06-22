@@ -48,14 +48,24 @@ public class GenerateSequenceNumberRegister implements IRegisterPlugin {
      */
     private IFunctionProfileVo getFunc() {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
-        IFunctionProfileVo.IFunctionInputVo inputVo = pluginBuilder.newInput()
-                .setDesc("正弦值")
-                .setType(VariableType.Number)
+        IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
+                .setDesc("流水号种子")
+                .setType(VariableType.Char)
                 .setRequired(true)
                 .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
+                .setDesc("生成模式")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo3 = pluginBuilder.newInput()
+                .setDesc("需要使用的废弃流水号")
+                .setType(VariableType.Integer)
+                .setRequired(false)
+                .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
-                .setDesc("角度")
-                .setType(VariableType.Number)
+                .setDesc("流水号")
+                .setType(VariableType.Integer)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.GenerateSequenceNumber.Function_Code())
@@ -74,7 +84,9 @@ public class GenerateSequenceNumberRegister implements IRegisterPlugin {
                         "参数3：需要使用的废弃流水号，整数类型。当且仅当参数2为ASSIGNERR、ASSIGNINC、ASSIGNREUSE才有效。\n" +
                         "返回值：流水号，整数类型 ")
                 .setOutput(outputVo)
-                .addInputParam(inputVo);
+                .addInputParam(inputVo1)
+                .addInputParam(inputVo2)
+                .addInputParam(inputVo3);
 
         return pluginBuilder.build();
     }

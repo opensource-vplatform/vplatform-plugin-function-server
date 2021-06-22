@@ -97,7 +97,7 @@ public class VRestoreJsonToEntityFunc implements IFunction {
      */
     public String CheckStringNull(Object object, int index) {
         String result = "";
-        if (object != null && object.toString().equals("")) {
+        if (object != null && !object.toString().equals("")) {
             result = object.toString();
         } else {
             throw new ServerFuncException("函数【" + funcCode + "】的第" + (index + 1) + "个参数不能为空");

@@ -56,17 +56,17 @@ public class ServerDivideFunc implements IFunction {
                     if (tmpNum == null) {
 //                        throw new ServerFuncException("函数【" + funcCode + "】的第" + (i+1) + "个参数不能为空或者0");
                         outputVo.put("NaN");
-                        outputVo.setSuccess(false);
-                        break;
+                        outputVo.setSuccess(true);
+                        return outputVo;
                     } else if (i == 0) {
                         result = tmpNum;
                     } else {
                         result = result.divide(tmpNum, decimalDigit, BigDecimal.ROUND_HALF_UP);
                     }
                 }
-                if (outputVo.isSuccess()) {
-                    outputVo.put(result.toString());
-                }
+
+                outputVo.put(result.toString());
+                outputVo.setSuccess(true);
             }
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);

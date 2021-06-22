@@ -49,7 +49,7 @@ public class AcosFunc implements IFunction {
             if (param1 > 1 || param1 < -1)
                 throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Acos.Function_Code() + "】的第1个参数必须必须在1到-1之间");
 
-            BigDecimal result = BigDecimal.valueOf(service.radianToAngle(Math.acos(param1)));
+            BigDecimal result = new BigDecimal(service.radianToAngle(Math.acos(param1)));
             result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
 
             outputVo.setSuccess(true);

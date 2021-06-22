@@ -3,6 +3,7 @@ package com.toone.v3.platform.function;
 import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.toone.v3.platform.function.common.exception.ServerFuncException;
 import com.yindangu.v3.business.VDS;
+import com.yindangu.v3.business.jdbc.api.model.ColumnType;
 import com.yindangu.v3.business.jdbc.api.model.IColumn;
 import com.yindangu.v3.business.metadata.api.IDataObject;
 import com.yindangu.v3.business.metadata.api.IDataView;
@@ -10,11 +11,13 @@ import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFunction;
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.StringReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -108,9 +111,9 @@ public class VRestoreXMLToEntityFunc implements IFunction {
                                 try {
                                     vColumn = dataView.getMetadata().getColumn(map);
                                     if (vColumn != null) {
-                                        String nowType = vColumn.getColumnType().toString();
-                                        String targetType = types.get(map).toString();
-                                        if (nowType.equals(targetType)) {
+                                        ColumnType nowType = vColumn.getColumnType();
+                                        ColumnType targetType = ColumnType.getColumnTypeByOldChar(types.get(map).toString());
+                                        if (nowType == targetType) {
                                             Object value = data.get(map);
                                             if (value == null || value.toString().equals("")) {
                                                 dataObject.set(vColumn.getColumnName(), null);
@@ -177,8 +180,7 @@ public class VRestoreXMLToEntityFunc implements IFunction {
     public static Map<String, Map<String, List<Map<String, Object>>>> parseActionXMLToTableDataMap(String actionXML) {
         Document doc = null;
         try {
-            SAXReader reader = new SAXReader();
-            doc = reader.read(actionXML);
+            doc = parse(actionXML);
         } catch (Exception e) {
             throw new RuntimeException("[WorkFlowXMLToTableData.evaluate]actionXML数据有误，请验证:" + actionXML, e);
         }
@@ -239,6 +241,15 @@ public class VRestoreXMLToEntityFunc implements IFunction {
             return tableDatasMap;
         }
         return null;
+    }
+
+    public static Document parse(String xmldocumentstr) throws DocumentException {
+        SAXReader reader = new SAXReader();
+        reader.setEncoding("utf-8");
+        StringReader str_reader = new StringReader(xmldocumentstr);
+        Document document = reader.read(str_reader);
+        str_reader.close();
+        return document;
     }
 
     /**

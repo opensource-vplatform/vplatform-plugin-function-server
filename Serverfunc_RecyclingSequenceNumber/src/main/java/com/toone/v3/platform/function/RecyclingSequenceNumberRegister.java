@@ -48,14 +48,19 @@ public class RecyclingSequenceNumberRegister implements IRegisterPlugin {
      */
     private IFunctionProfileVo getFunc() {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
-        IFunctionProfileVo.IFunctionInputVo inputVo = pluginBuilder.newInput()
-                .setDesc("正弦值")
-                .setType(VariableType.Number)
+        IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
+                .setDesc("流水号种子")
+                .setType(VariableType.Char)
+                .setRequired(true)
+                .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
+                .setDesc("需要废弃的流水号")
+                .setType(VariableType.Integer)
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
-                .setDesc("角度")
-                .setType(VariableType.Number)
+                .setDesc("返回值")
+                .setType(VariableType.Char)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.RecyclingSequenceNumber.Function_Code())
@@ -67,7 +72,8 @@ public class RecyclingSequenceNumberRegister implements IRegisterPlugin {
                         "参数2：需要废弃的流水号，整数类型。\n" +
                         "返回值类型：无返回值。")
                 .setOutput(outputVo)
-                .addInputParam(inputVo);
+                .addInputParam(inputVo1)
+                .addInputParam(inputVo2);
 
         return pluginBuilder.build();
     }

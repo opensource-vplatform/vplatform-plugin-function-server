@@ -43,7 +43,7 @@ public class SinhFunc implements IFunction {
 
             service.checkParamNumeric(funcCode, param);
 
-            double angle = Double.parseDouble(param.toString());
+            Double angle = Double.parseDouble(param.toString());
             BigDecimal result = new BigDecimal(Math.sinh(angle));
 
             outputVo.setSuccess(true);

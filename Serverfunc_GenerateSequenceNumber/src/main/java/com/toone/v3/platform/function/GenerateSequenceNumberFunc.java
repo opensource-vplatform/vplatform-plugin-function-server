@@ -6,6 +6,7 @@ import com.yindangu.v3.business.VDS;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFunction;
+import com.yindangu.v3.business.sequence.api.ISerialNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,18 +37,58 @@ public class GenerateSequenceNumberFunc implements IFunction {
     @Override
     public IFuncOutputVo evaluate(IFuncContext context) {
         IFuncOutputVo outputVo = context.newOutputVo();
-        Object param = null;
+        Object param1 = null;
+        Object param2 = null;
+        Object param3 = null;
         try {
-            ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
+            int size = context.getInputSize();
+            if(size == 2) {
+                param1 = context.getInput(0);
+                param2 = context.getInput(1);
+            } else if(size == 3) {
+                param1 = context.getInput(0);
+                param2 = context.getInput(1);
+                param3 = context.getInput(2);
 
+            } else {
+                throw new ServerFuncException("函数【" + funcCode + "】需要2个或者3个参数，当前参数个数：" + size);
+            }
+
+            String key = stringParse(param1);
+            String model = stringParse(param2);
+            Integer abandonNumber = size>2 ? integerParse(stringParse(param3)) : null;
+
+            if (key==null || model==null) {
+                throw new ServerFuncException("函数【" + funcCode + "】的参数1、参数2不得为空。");
+            }
+
+            ISerialNumber serialNumber = VDS.getIntance().getSerialNumber(key);
+
+            int number = serialNumber.generateSequenceNumber(ISerialNumber.Model.parse(model), abandonNumber);
+
+            outputVo.put(number);
+            outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + funcCode + "】计算有误，参值1：" + param + ", " + e.getMessage());
-            log.error("函数【" + funcCode + "】计算失败", e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，参值1：" + param1 + "，参数2：" + param2 + "，参数3：" + param3 + ", " + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，参值1：" + param1 + "，参数2：" + param2 + "，参数3：" + param3, e);
         }
         return outputVo;
+    }
+
+    private String stringParse(Object obj) {
+        return (obj == null) ? null : obj.toString();
+    }
+
+    private Integer integerParse(String s) {
+        try {
+            return (s == null) ? null : Integer.valueOf(s);
+        } catch (NumberFormatException e) {
+            log.warn("函数【" + funcCode + "】String转integer发生错误，忽略该参数 msg={}", e.getMessage());
+            return null;
+        }
     }
 }

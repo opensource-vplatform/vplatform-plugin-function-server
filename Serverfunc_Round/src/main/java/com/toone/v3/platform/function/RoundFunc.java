@@ -40,14 +40,18 @@ public class RoundFunc implements IFunction {
             param2 = context.getInput(1);
             service.checkParamNull(funcCode, param1, param2);
 
-            if (!isNumeric(param1.toString())) {
+            try {
+                Double.parseDouble(param1.toString());
+            } catch(Exception e) {
                 throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param1);
             }
 
-            if(!isInteger(param2.toString())) {
+            int scale;
+            try {
+                scale = Integer.parseInt(param2.toString());
+            } catch(Exception e) {
                 throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须是整数类型，参数2：" + param2);
             }
-            int scale = Integer.parseInt(param2.toString());
             if (scale < 0) {
                 throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须是非负整数，参数2：" + param2);
             }
@@ -67,13 +71,13 @@ public class RoundFunc implements IFunction {
         return outputVo;
     }
 
-    public boolean isNumeric(String str){
-        String regex = "^(-?[1-9]\\d*\\.?\\d*)|(-?0\\.\\d*[1-9])|(-?[0])|(-?[0]\\.\\d*)$";
-        return str.matches(regex);
-    }
-
-    public boolean isInteger(String str){
-        String regex = "^\\+?[1-9][0-9]*$";
-        return str.matches(regex);
-    }
+//    public boolean isNumeric(String str){
+//        String regex = "^(-?[1-9]\\d*\\.?\\d*)|(-?0\\.\\d*[1-9])|(-?[0])|(-?[0]\\.\\d*)$";
+//        return str.matches(regex);
+//    }
+//
+//    public boolean isInteger(String str){
+//        String regex = "^\\+?[1-9][0-9]*$";
+//        return str.matches(regex);
+//    }
 }

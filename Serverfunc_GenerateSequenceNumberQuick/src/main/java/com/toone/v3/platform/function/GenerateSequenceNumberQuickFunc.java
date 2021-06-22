@@ -6,6 +6,7 @@ import com.yindangu.v3.business.VDS;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFunction;
+import com.yindangu.v3.business.sequence.api.ISerialNumber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class GenerateSequenceNumberQuickFunc implements IFunction {
 
     // 函数编码
-    private String funcCode = ServerFuncCommonUtils.GenerateSequenceNumberQuick.Function_Code();
+    private final String funcCode = ServerFuncCommonUtils.GenerateSequenceNumberQuick.Function_Code();
     private final static Logger log = LoggerFactory.getLogger(GenerateSequenceNumberQuickFunc.class);
 
     @Override
@@ -31,14 +32,22 @@ public class GenerateSequenceNumberQuickFunc implements IFunction {
         Object param = null;
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
+            service.checkParamSize(funcCode, context, 1);
+            param = context.getInput(0);
 
+            String key = (String) param;
+            ISerialNumber serialNumber = VDS.getIntance().getSerialNumber(key);
+            int number = serialNumber.generateSequenceNumberQuick();
+
+            outputVo.put(number);
+            outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
             outputVo.setMessage("函数【" + funcCode + "】计算有误，参值1：" + param + ", " + e.getMessage());
-            log.error("函数【" + funcCode + "】计算失败", e);
+            log.error("函数【" + funcCode + "】计算失败，参值1：" + param, e);
         }
         return outputVo;
     }

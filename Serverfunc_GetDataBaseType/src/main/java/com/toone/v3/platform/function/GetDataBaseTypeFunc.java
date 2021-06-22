@@ -3,6 +3,7 @@ package com.toone.v3.platform.function;
 import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.toone.v3.platform.function.common.exception.ServerFuncException;
 import com.yindangu.v3.business.VDS;
+import com.yindangu.v3.business.jdbc.api.model.DatabaseType;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFunction;
@@ -29,16 +30,16 @@ public class GetDataBaseTypeFunc implements IFunction {
     @Override
     public IFuncOutputVo evaluate(IFuncContext context) {
         IFuncOutputVo outputVo = context.newOutputVo();
-        Object param = null;
         try {
-            ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
-
+            DatabaseType type = VDS.getIntance().getDatabaseTypeService().getType();
+            outputVo.put(type.toString());
+            outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + funcCode + "】计算有误，参值1：" + param + ", " + e.getMessage());
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，" + e.getMessage());
             log.error("函数【" + funcCode + "】计算失败", e);
         }
         return outputVo;
