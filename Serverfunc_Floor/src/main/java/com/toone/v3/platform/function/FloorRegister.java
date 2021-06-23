@@ -56,6 +56,7 @@ public class FloorRegister implements IRegisterPlugin {
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("整数")
                 .setType(VariableType.Char)
+                .setDesignType(VariableType.Integer)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Floor.Function_Code())

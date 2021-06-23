@@ -64,6 +64,7 @@ public class PowRegister implements IRegisterPlugin {
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("结果")
                 .setType(VariableType.Char)
+                .setDesignType(VariableType.Number)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Pow.Function_Code())

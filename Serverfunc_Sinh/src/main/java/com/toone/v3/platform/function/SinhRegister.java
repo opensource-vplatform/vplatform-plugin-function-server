@@ -58,6 +58,7 @@ public class SinhRegister implements IRegisterPlugin {
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("双曲正弦值")
                 .setType(VariableType.Char)
+                .setDesignType(VariableType.Number)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Sinh.Function_Code())

@@ -58,6 +58,7 @@ public class CoshRegister implements IRegisterPlugin {
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("双曲余弦值")
                 .setType(VariableType.Char)
+                .setDesignType(VariableType.Number)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Cosh.Function_Code())

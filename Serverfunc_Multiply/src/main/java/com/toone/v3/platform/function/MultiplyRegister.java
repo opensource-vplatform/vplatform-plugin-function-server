@@ -71,6 +71,7 @@ public class MultiplyRegister implements IRegisterPlugin {
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("积")
                 .setType(VariableType.Char)
+                .setDesignType(VariableType.Number)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.ServerMultiply.Function_Code())

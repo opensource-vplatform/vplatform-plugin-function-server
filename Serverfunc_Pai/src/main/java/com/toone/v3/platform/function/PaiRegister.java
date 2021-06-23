@@ -51,6 +51,7 @@ public class PaiRegister implements IRegisterPlugin {
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("圆周率")
                 .setType(VariableType.Char)
+                .setDesignType(VariableType.Number)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Pai.Function_Code())

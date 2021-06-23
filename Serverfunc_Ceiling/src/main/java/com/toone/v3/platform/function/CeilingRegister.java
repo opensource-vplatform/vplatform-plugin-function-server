@@ -57,6 +57,7 @@ public class CeilingRegister implements IRegisterPlugin {
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("返回值")
                 .setType(VariableType.Char)
+                .setDesignType(VariableType.Integer)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.Ceiling.Function_Code())

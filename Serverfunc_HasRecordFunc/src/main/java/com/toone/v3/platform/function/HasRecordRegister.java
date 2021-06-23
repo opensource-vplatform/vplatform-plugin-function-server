@@ -56,6 +56,7 @@ public class HasRecordRegister implements IRegisterPlugin {
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("记录数")
                 .setType(VariableType.Char)
+                .setDesignType(VariableType.Integer)
                 .build();
         pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
                 .setCode(ServerFuncCommonUtils.HasRecord.Function_Code())
