@@ -71,6 +71,16 @@ public class VConvertEntityToXMLFunc implements IFunction {
         return outputVo;
     }
 
+    /** H2状态字段 */
+    private static String	H2_STATE_FIELD	= "H_2_S_T_A_T_E";
+    /** H2保存旧id的字段 */
+    private static String	H2_ORGID_FIELD	= "H_2_O_R_G_I_D";
+    /** H2保存来源SQL的字段,来源SQL的hashcode值 */
+    private static String	H2_SOURCE_FIELD	= "H_2_S_O_U_R_C_E";
+    /** H2保存来源pk的字段,来源pk的hashcode值 */
+    private static String	H2_PK_FIELD		= "H_2_P_K";
+    /** 租户字段 */
+    private static String H2_TenantID_Field="V3_TenantID";
     /**
      * 表信息转换成xml
      *
@@ -86,6 +96,9 @@ public class VConvertEntityToXMLFunc implements IFunction {
             Set<String> columnNames = dataView.getMetadata().getColumnNames();
             List<IColumn> fieldSet = new ArrayList<>();
             for (String name : columnNames) {
+                if(H2_STATE_FIELD.equalsIgnoreCase(name) || H2_ORGID_FIELD.equalsIgnoreCase(name) || H2_SOURCE_FIELD.equalsIgnoreCase(name) || H2_PK_FIELD.equalsIgnoreCase(name) || H2_TenantID_Field.equalsIgnoreCase(name)) {
+                    continue;
+                }
                 fieldSet.add(dataView.getMetadata().getColumn(name));
             }
 //            ArrayList<VColumn> fieldSet = ((IH2MetaData)dataView.getMeta()).getNoHiddenColumns();

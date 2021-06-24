@@ -57,7 +57,7 @@ public class LogFunc implements IFunction {
                     break;
                 default:
                     outputVo.put(false);
-                    log.error("函数【】的第二个参数必须符合枚举：debug、info、warn、error，参数2：" + param2);
+                    log.error("函数【" + funcCode + "】的第二个参数必须符合枚举：debug、info、warn、error，参数2：" + param2);
             }
 
             outputVo.setSuccess(true);

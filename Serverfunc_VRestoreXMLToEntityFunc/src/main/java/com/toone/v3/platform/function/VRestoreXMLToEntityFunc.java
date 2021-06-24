@@ -160,7 +160,7 @@ public class VRestoreXMLToEntityFunc implements IFunction {
      * @param descript 参数描述
      * @return
      */
-    public String CheckStringNull(Object object, String descript) {
+    private String CheckStringNull(Object object, String descript) {
         String result = "";
         if (object != null && !object.toString().equals("")) {
             result = object.toString();
@@ -177,7 +177,7 @@ public class VRestoreXMLToEntityFunc implements IFunction {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static Map<String, Map<String, List<Map<String, Object>>>> parseActionXMLToTableDataMap(String actionXML) {
+    private Map<String, Map<String, List<Map<String, Object>>>> parseActionXMLToTableDataMap(String actionXML) {
         Document doc = null;
         try {
             doc = parse(actionXML);
@@ -243,7 +243,7 @@ public class VRestoreXMLToEntityFunc implements IFunction {
         return null;
     }
 
-    public static Document parse(String xmldocumentstr) throws DocumentException {
+    private Document parse(String xmldocumentstr) throws DocumentException {
         SAXReader reader = new SAXReader();
         reader.setEncoding("utf-8");
         StringReader str_reader = new StringReader(xmldocumentstr);
@@ -259,7 +259,7 @@ public class VRestoreXMLToEntityFunc implements IFunction {
      * @return
      */
     @SuppressWarnings("unchecked")
-    private static Element getActionData(Document doc) {
+    private Element getActionData(Document doc) {
         if (null == doc) {
             return null;
         }
@@ -282,7 +282,7 @@ public class VRestoreXMLToEntityFunc implements IFunction {
      * @return
      */
     @SuppressWarnings("unchecked")
-    private static List<Element> getDatas(Element tableDataEle) {
+    private List<Element> getDatas(Element tableDataEle) {
         if (null == tableDataEle) {
             return null;
         }
@@ -308,7 +308,7 @@ public class VRestoreXMLToEntityFunc implements IFunction {
      * @return
      */
     @SuppressWarnings("unchecked")
-    private static List<Element> getTypes(Element tableDataEle) {
+    private List<Element> getTypes(Element tableDataEle) {
         if (null == tableDataEle) {
             return null;
         }

@@ -10,6 +10,7 @@ import com.yindangu.v3.plugin.vds.reg.api.model.VariableType;
 import com.yindangu.v3.plugin.vds.reg.common.RegVds;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,7 +56,8 @@ public class FormatRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
                 .setDesc("拼接串")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Entity, VariableType.Integer, VariableType.Char, VariableType.Number, VariableType.Date, VariableType.LongDate, VariableType.Boolean, VariableType.Text))
                 .setRequired(true)
                 .setStartIndex(1)
                 .build();

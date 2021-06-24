@@ -39,13 +39,18 @@ public class CopyFileByFileIdFunc implements IFunction {
 
             service.checkParamBlank(funcCode, param);
 
-            IAppFileInfo appFileInfo = VDS.getIntance().getFileOperate().copyFile(param.toString().trim());
-            if(appFileInfo == null) {
-//                outputVo.setMessage("文件id【" + param + "】对应的文件不存在");
-//                outputVo.setSuccess(false);
+            boolean contains = VDS.getIntance().getFileOperate().containsFile(param.toString());
+            if(!contains) {
                 outputVo.put("-1");
             } else {
-                outputVo.put(appFileInfo.getId());
+                IAppFileInfo appFileInfo = VDS.getIntance().getFileOperate().copyFile(param.toString().trim());
+                if(appFileInfo == null) {
+    //                outputVo.setMessage("文件id【" + param + "】对应的文件不存在");
+    //                outputVo.setSuccess(false);
+                    outputVo.put("-1");
+                } else {
+                    outputVo.put(appFileInfo.getId());
+                }
             }
             outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
