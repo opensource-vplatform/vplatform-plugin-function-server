@@ -36,23 +36,22 @@ public class DateToStringFunc implements IFunction {
         Object param2 = null;
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
-
             service.checkParamSize(funcCode, context, 2);
-
             param1 = context.getInput(0);
             param2 = context.getInput(1);
 
-            service.checkParamBlank(funcCode, param1, param2);
-
-            SimpleDateFormat sdf = service.getSimpleDateFormat(funcCode, param2, 2);
-
-            Date date = sdf.parse(param2.toString());
+//            service.checkParamBlank(funcCode, param1, param2);
             try {
+                SimpleDateFormat sdf = service.getSimpleDateFormat(funcCode, param2, 2);
+                Date date = sdf.parse(param2.toString());
                 String result = new SimpleDateFormat(param1.toString()).format(date);
                 outputVo.setSuccess(true);
                 outputVo.put(result);
             } catch (Exception e) {
-                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数不符合时间格式要求，当前值：" + param1.toString());
+//                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数不符合时间格式要求，当前值：" + param1.toString());
+                // 兼容历史
+                outputVo.put("");
+                outputVo.setSuccess(true);
             }
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);

@@ -34,24 +34,22 @@ public class DateTimeToUnixtimestampFunc implements IFunction {
         Object param = null;
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
-
             service.checkParamSize(funcCode, context, 1);
-
             param = context.getInput(0);
+//            service.checkParamBlank(funcCode, param);
 
-            service.checkParamBlank(funcCode, param);
-
-            Date date;
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                date = sdf.parse(param.toString());
+                Date date = sdf.parse(param.toString());
+                long second = date.getTime() / 1000;
+                outputVo.put(second + "");
             } catch (Exception e) {
-                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须满足格式：yyyy-MM-dd HH:mm:ss，当前值：" + param.toString());
+//                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须满足格式：yyyy-MM-dd HH:mm:ss，当前值：" + param.toString());
+                // 兼容历史
+                outputVo.put("");
             }
-            long second = date.getTime() / 1000;
 
             outputVo.setSuccess(true);
-            outputVo.put(second + "");
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());

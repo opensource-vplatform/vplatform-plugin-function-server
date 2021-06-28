@@ -46,10 +46,10 @@ public class UnixtimestampToDateTimeFunc implements IFunction {
                 param1 = stamp;
                 param2 = format;
             } else {
-                throw new ServerFuncException("函数【】只能存在1个或者2个参数，当前参数个数：" + size);
+                throw new ServerFuncException("函数【" + funcCode + "】只能存在1个或者2个参数，当前参数个数：" + size);
             }
             if(stamp == null || stamp.equals("")) {
-                throw new ServerFuncException("函数【】的第1个参数不能为空");
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数不能为空");
             }
             if(format == null || "".equals(format)) {
                 format = "yyyy-MM-dd HH:mm:ss";

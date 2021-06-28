@@ -44,10 +44,16 @@ public class GetDateSectionFunc implements IFunction {
             service.checkParamBlank(funcCode, param1, param2);
             String strDate = param1.toString();
 
-            SimpleDateFormat sdf = service.getSimpleDateFormat(funcCode, strDate, 1);
-            final Date date = sdf.parse(strDate);
-            final Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
+            Calendar calendar = Calendar.getInstance();
+            Date date = null;
+            try {
+                SimpleDateFormat sdf = service.getSimpleDateFormat(funcCode, strDate, 1);
+                date = sdf.parse(strDate);
+                calendar.setTime(date);
+            } catch(Exception e) {
+                // 兼容历史
+                calendar.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("1990-01-01 00:00:00"));
+            }
             int dateSection;
             try {
                 dateSection = Integer.parseInt(param2.toString());
