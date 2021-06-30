@@ -46,10 +46,11 @@ public class DateAddFunc implements IFunction {
             param3 = context.getInput(2);
 
             // 校验参数2是否为正整数
-            service.checkParamInteger(funcCode, param2, 2);
+            service.checkParamNull(funcCode, param1, param2);
 
             SimpleDateFormat sdf = service.getSimpleDateFormat(funcCode, param1.toString(), 1);
-            int amount = Integer.parseInt(param2.toString());
+            Double amountD = Double.parseDouble(param2.toString());
+            int amount = amountD.intValue();
             int field = getDateType(funcCode, param3.toString(), 3);
 
             // 增加日期
