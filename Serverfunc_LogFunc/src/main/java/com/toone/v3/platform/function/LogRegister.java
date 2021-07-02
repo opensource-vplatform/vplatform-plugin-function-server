@@ -73,7 +73,7 @@ public class LogRegister implements IRegisterPlugin {
                         "返回值为布尔类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
-                .addInputParam(inputVo2);
+                .addInputParam(inputVo2).setConfigPath("./config.xml");
 
         return pluginBuilder.build();
     }

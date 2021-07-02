@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 /**
  * 格式转换，将指定值转换成指定格式返回。<br>
@@ -44,10 +45,11 @@ public class ConvertFunc implements IFunction {
 
             // 1-整数,2-字符串,3-布尔值,4-小数
             int type;
+            NumberFormat nf = NumberFormat.getInstance();
             try {
-                type = (int) param2;
+                type = Integer.parseInt(nf.format(param2).replace(",", ""));
             } catch (Exception e) {
-                throw new ServerFuncException("");
+                throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须是整数，参数2：" + param2);
             }
 
             String str = param1.toString().trim();
@@ -55,14 +57,14 @@ public class ConvertFunc implements IFunction {
                 case 1: // 转换为整数,传入数据必须是数字
                     if (str.equals("")) {
                         outputVo.put(0);
-                    } else if (service.isNumeric(param1.toString())) {
+                    } else if (isNumber(param1.toString())) {
                         BigDecimal temp_bd = new BigDecimal(param1.toString());
                         if (temp_bd.longValue() > Integer.MAX_VALUE || temp_bd.longValue() < Integer.MIN_VALUE) {
                             throw new ServerFuncException("函数【" + funcCode + "】的第1个参数的数值大小超过支持范围，数值支持的范围是：[" + Integer.MIN_VALUE + "，" + Integer.MAX_VALUE + "]，参数1：" + param1);
                         }
                         outputVo.put(temp_bd.intValue());
                     } else {
-                        throw new ServerFuncException("函数【" + funcCode + "】的参数不正确，参数1：" + param1 + "参数2：" + param2 + "，转换为整数，参数1必须是数字");
+                        throw new ServerFuncException("函数【" + funcCode + "】的参数不正确，参数1：" + param1 + "，参数2：" + param2 + "，转换为整数，参数1必须是数字");
                     }
                     break;
                 case 2: // 转换为字符串,传入数据不为空即可
@@ -81,7 +83,7 @@ public class ConvertFunc implements IFunction {
                 case 4: // 转换小数
                     if ("".equals(str)) {
                         outputVo.put(0.0d);
-                    } else if (service.isNumeric(str)) {
+                    } else if (isNumber(str)) {
                         BigDecimal temp_bd = new BigDecimal(str);
                         if (str.contains(".")) {
                             String[] tmp_string_array = str.split("\\.");
@@ -99,7 +101,7 @@ public class ConvertFunc implements IFunction {
                         }
                         outputVo.put(temp_bd.doubleValue());
                     } else {
-                        throw new ServerFuncException("函数【" + funcCode + "】的参数不正确，参数1：" + param1 + "参数2：" + param2 + "，转换为整数，参数1必须是数字");
+                        throw new ServerFuncException("函数【" + funcCode + "】的参数不正确，参数1：" + param1 + "，参数2：" + param2 + "，转换为整数，参数1必须是数字");
                     }
                     break;
                 default:
@@ -116,5 +118,14 @@ public class ConvertFunc implements IFunction {
             log.error("函数【" + funcCode + "】计算失败，参数1：" + param1 + "，参数2：" + param2, e);
         }
         return outputVo;
+    }
+
+    private boolean isNumber(String str) {
+        try {
+            new BigDecimal(str);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
     }
 }

@@ -1,13 +1,16 @@
 package com.toone.v3.platform.function;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.toone.v3.platform.function.common.exception.ServerFuncException;
 import com.yindangu.v3.business.VDS;
+import com.yindangu.v3.business.console.api.IConsoleManager;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFunction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.yindangu.v3.business.preferencesmanager.api.IPreferencesManager;
 
 /**
  * 打日志信息到控制台上。<br>
@@ -32,27 +35,52 @@ public class LogFunc implements IFunction {
         Object param1 = null;
         Object param2 = null;
         try {
-            ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
+            VDS vds = VDS.getIntance();
+            ServerFuncCommonUtils service = vds.getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
             service.checkParamSize(funcCode, context, 2);
             param1 = context.getInput(0);
             param2 = context.getInput(1);
             service.checkParamNull(funcCode, param1, param2);
 
+            //2021-07-01，taoyz，增加配置，增加控制台输出
+            IPreferencesManager preferencesManager = vds.getPreferencesManager();
+            String outputToConsole = preferencesManager.getProperty("com.toone.v3.platform", "Serverfunc_LogFunc", funcCode, "outputToConsole");
+            boolean outputToConsoleBoolean = false;
+            if(outputToConsole!=null && "true".equalsIgnoreCase(outputToConsole)){
+                outputToConsoleBoolean = true;
+            }
+
+            IConsoleManager consoleManager = vds.getConsoleManager();
+
+            String msg = param1.toString();
+
             switch (param2.toString()) {
                 case "debug":
-                    log.debug(param1.toString());
+                    log.debug(msg);
+                    if(outputToConsoleBoolean){
+                        consoleManager.output("Debug:"+msg);
+                    }
                     outputVo.put(true);
                     break;
                 case "info":
-                    log.info(param1.toString());
+                    log.info(msg);
+                    if(outputToConsoleBoolean){
+                        consoleManager.output("Info:"+msg);
+                    }
                     outputVo.put(true);
                     break;
                 case "warn":
-                    log.warn(param1.toString());
+                    log.warn(msg);
+                    if(outputToConsoleBoolean){
+                        consoleManager.output("Warn:"+msg);
+                    }
                     outputVo.put(true);
                     break;
                 case "error":
-                    log.error(param1.toString());
+                    log.error(msg);
+                    if(outputToConsoleBoolean){
+                        consoleManager.output("Error:"+msg);
+                    }
                     outputVo.put(true);
                     break;
                 default:
