@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 public class ReplaceFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.ReplaceFunc.Function_Code();
+    private final static String funcCode = ReplaceRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ReplaceFunc.class);
 
     @Override

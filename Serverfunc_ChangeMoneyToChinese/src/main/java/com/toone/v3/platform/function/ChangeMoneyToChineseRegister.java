@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -23,12 +22,17 @@ public class ChangeMoneyToChineseRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_ChangeMoneyToChinese";
     private static final String Component_Version = "3.10.0";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "ChangeMoneyToChinese";
+    private static final String Plugin_Name = "将人民币金额转成中文大写";
+    private static final String Plugin_Desc = "将人民币金额转成中文大写。";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -59,10 +63,10 @@ public class ChangeMoneyToChineseRegister implements IRegisterPlugin {
                 .setDesc("大写金额")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code())
-                .setDesc(ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Desc())
-                .setName(ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(ChangeMoneyToChineseFunc.class)
                 .setExample("代码示例:ChangeMoneyToChinese(998.1314)，返回值是为：\"玖佰玖拾捌元壹角叁分壹厘肆毫\" 。\n" +
                         "参数1：要转换的金额(数字类型)；\n" +

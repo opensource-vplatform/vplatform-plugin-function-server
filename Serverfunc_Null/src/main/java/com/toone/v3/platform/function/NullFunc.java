@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 public class NullFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Null.Function_Code();
+    private final static String funcCode = NullRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(NullFunc.class);
 
     @Override

@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class GetAllParentIdsRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_GetAllParentIds";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "GetAllParentIds";
+    private static final String Plugin_Name = "根据树节点id查出它所有的父节点集合组装成约定的字符串";
+    private static final String Plugin_Desc = "根据树节点id查出它所有的父节点集合组装成约定的字符串。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -72,10 +76,10 @@ public class GetAllParentIdsRegister implements IRegisterPlugin {
                 .setDesc("结果")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.GetAllParentIds.Function_Code())
-                .setDesc(ServerFuncCommonUtils.GetAllParentIds.Function_Desc())
-                .setName(ServerFuncCommonUtils.GetAllParentIds.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(GetAllParentIdsFunc.class)
                 .setExample("代码示例: GetAllParentIds(\"a\",\"BR_IN_PARENT.entityCode\",True,\";\")，id为a，父节点有b、c，分隔符为;，若包含自身节点，则返回b;c;a，若不包含自身节点，则返回b;c，返回节点顺序为从高到低。\n" +
                         "参数1--节点id值（字符串类型）； \n" +

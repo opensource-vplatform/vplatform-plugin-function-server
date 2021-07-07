@@ -31,7 +31,7 @@ import java.util.Map;
 public class MinColumnFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.MinColumn.Function_Code();
+    private final static String funcCode = MinColumnRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(MinColumnFunc.class);
 
     @Override

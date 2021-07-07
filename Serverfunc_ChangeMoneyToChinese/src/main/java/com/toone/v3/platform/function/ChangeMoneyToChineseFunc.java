@@ -26,6 +26,7 @@ import java.math.BigDecimal;
  */
 public class ChangeMoneyToChineseFunc implements IFunction {
 
+    private final static String funcCode = ChangeMoneyToChineseRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ChangeMoneyToChineseFunc.class);
 
     @Override
@@ -35,24 +36,24 @@ public class ChangeMoneyToChineseFunc implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
-            service.checkParamSize(ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code(), context, 1);
+            service.checkParamSize(funcCode, context, 1);
             param = context.getInput(0);
-            service.checkParamNull(ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code(), param);
+            service.checkParamNull(funcCode, param);
 
             Double number;
             BigDecimal result = new BigDecimal(param.toString());
             try {
                 number = Double.parseDouble(result.toPlainString());
             } catch(Exception e) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
             double maxNum = 999999999999999.9999;
             if (number < 0) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code() + "】暂不支持负数，参数1：" + param);
+                throw new ServerFuncException("函数【" + funcCode + "】暂不支持负数，参数1：" + param);
             }
             if (number >= maxNum) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code() + "】参数1：" + param + "，超过能处理的最大值：" + maxNum);
+                throw new ServerFuncException("函数【" + funcCode + "】参数1：" + param + "，超过能处理的最大值：" + maxNum);
             }
 
             String[] cnNums = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
@@ -127,8 +128,8 @@ public class ChangeMoneyToChineseFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code() + "】计算有误，参数1：" + param + "，" + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.ChangeMoneyToChinese.Function_Code() + "】计算失败，参数1：" + param, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + param + "，" + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，参数1：" + param, e);
         }
         return outputVo;
     }

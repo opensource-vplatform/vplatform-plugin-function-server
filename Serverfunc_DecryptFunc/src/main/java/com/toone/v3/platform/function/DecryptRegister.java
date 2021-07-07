@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class DecryptRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_DecryptFunc";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "DecryptFunc";
+    private static final String Plugin_Name = "对字符串进行解密";
+    private static final String Plugin_Desc = "对字符串进行解密。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -67,10 +71,10 @@ public class DecryptRegister implements IRegisterPlugin {
                 .setDesc("返回值")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.DecryptFunc.Function_Code())
-                .setDesc(ServerFuncCommonUtils.DecryptFunc.Function_Desc())
-                .setName(ServerFuncCommonUtils.DecryptFunc.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(DecryptFunc.class)
                 .setExample(" 代码示例：DecryptFunc(\"12345\",\"AES\",\"xxxx\")，返回值为解密后的字符串。\n" +
                         " 参数1：需要解密的字符串，字符串类型，必填。默认使用UTF-8编码\n" +

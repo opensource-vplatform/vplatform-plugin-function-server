@@ -32,7 +32,7 @@ import java.util.HashMap;
 public class GetEntityRowCountFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetEntityRowCountFunc.Function_Code();
+    private final static String funcCode = GetEntityRowCountRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetEntityRowCountFunc.class);
 
     @Override

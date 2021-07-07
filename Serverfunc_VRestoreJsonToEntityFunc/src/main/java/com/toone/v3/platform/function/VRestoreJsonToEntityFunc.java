@@ -29,7 +29,7 @@ import java.util.Map;
 public class VRestoreJsonToEntityFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.VRestoreJsonToEntityFunc.Function_Code();
+    private final static String funcCode = VRestoreJsonToEntityRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(VRestoreJsonToEntityFunc.class);
 
     @Override

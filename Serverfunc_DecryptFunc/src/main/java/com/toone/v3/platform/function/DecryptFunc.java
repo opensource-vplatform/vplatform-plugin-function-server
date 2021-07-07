@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 public class DecryptFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.DecryptFunc.Function_Code();
+    private final static String funcCode = DecryptRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(DecryptFunc.class);
 
     @Override

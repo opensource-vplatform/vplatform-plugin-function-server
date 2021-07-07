@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class GetDataBaseTypeRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_GetDataBaseType";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "GetDataBaseType";
+    private static final String Plugin_Name = "获取服务连接的数据库类型";
+    private static final String Plugin_Desc = "获取服务连接的数据库类型。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -52,10 +56,10 @@ public class GetDataBaseTypeRegister implements IRegisterPlugin {
                 .setDesc("数据库类型")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.GetDataBaseType.Function_Code())
-                .setDesc(ServerFuncCommonUtils.GetDataBaseType.Function_Desc())
-                .setName(ServerFuncCommonUtils.GetDataBaseType.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(GetDataBaseTypeFunc.class)
                 .setExample("代码示例:GetDataBaseType()，返回执行系统服务连接的数据库类型（返回值枚举：Mssql2000、Mssql、DB2、Oracle、Mysql、H2、Unknow），其中SqlServer 2000以上版本都返回Mssql，若读取不到数据库类型，则返回Unknow。。 \n" +
                         "无参数；\n" +

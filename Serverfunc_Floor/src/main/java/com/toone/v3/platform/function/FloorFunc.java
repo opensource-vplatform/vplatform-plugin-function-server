@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 public class FloorFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Floor.Function_Code();
+    private final static String funcCode = FloorRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(FloorFunc.class);
 
     @Override
@@ -43,7 +43,7 @@ public class FloorFunc implements IFunction {
             try {
                 param1 = Double.parseDouble(param.toString());
             } catch(Exception e) {
-                throw new ServerFuncException("函数【】的第1个参数必须是数字类型，当前值：" + param);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，当前值：" + param);
             }
 
             BigDecimal result = new BigDecimal(Math.floor(param1));

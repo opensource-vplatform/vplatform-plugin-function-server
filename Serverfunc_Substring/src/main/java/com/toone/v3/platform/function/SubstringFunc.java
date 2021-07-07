@@ -26,7 +26,7 @@ import java.text.NumberFormat;
 public class SubstringFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Substring.Function_Code();
+    private final static String funcCode = SubstringRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(SubstringFunc.class);
 
     @Override

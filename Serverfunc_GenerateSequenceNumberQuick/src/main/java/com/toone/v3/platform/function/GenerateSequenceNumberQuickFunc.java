@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class GenerateSequenceNumberQuickFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GenerateSequenceNumberQuick.Function_Code();
+    private final static String funcCode = GenerateSequenceNumberQuickRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GenerateSequenceNumberQuickFunc.class);
 
     @Override

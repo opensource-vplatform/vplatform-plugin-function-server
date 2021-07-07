@@ -36,7 +36,7 @@ import java.net.MalformedURLException;
 public class UploadToFtpFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.UploadToFtp.Function_Code();
+    private final static String funcCode = UploadToFtpRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(UploadToFtpFunc.class);
 
     @Override

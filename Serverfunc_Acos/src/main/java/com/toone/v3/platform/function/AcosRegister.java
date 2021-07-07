@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
  */
 public class AcosRegister implements IRegisterPlugin {
 
+    private final static String Group_Id = "com.toone.v3.platform";
     private final static String Component_Code = "Serverfunc_Acos";
     private static final String Component_Version = "3.10.0";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "Acos";
+    private static final String Plugin_Name = "反余弦";
+    private static final String Plugin_Desc = "反余弦，返回余弦值为指定值的角度。";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin().getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -59,11 +63,11 @@ public class AcosRegister implements IRegisterPlugin {
                 .setType(VariableType.Char)
                 .setDesignType(VariableType.Number)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.Acos.Function_Code())
-                .setDesc(ServerFuncCommonUtils.Acos.Function_Desc())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(AcosFunc.class)
-                .setName(ServerFuncCommonUtils.Acos.Function_Name())
                 .setExample("代码示例:Acos(1)返回值为0。\n" +
                         "参数1--指定的角度(小数类型)，取值范围:[-1,1]；\n" +
                         "返回值类型：数字类型。")

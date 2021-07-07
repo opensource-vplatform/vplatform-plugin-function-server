@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 public class EncryptFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.EncryptFunc.Function_Code();
+    private final static String funcCode = EncryptRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(EncryptFunc.class);
 
     @Override

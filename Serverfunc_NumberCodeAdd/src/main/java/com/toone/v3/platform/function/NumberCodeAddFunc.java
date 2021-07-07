@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 public class NumberCodeAddFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.NumberCodeAdd.Function_Code();
+    private final static String funcCode = NumberCodeAddRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(NumberCodeAddFunc.class);
 
     @Override

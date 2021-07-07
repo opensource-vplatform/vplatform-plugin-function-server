@@ -25,7 +25,7 @@ import java.security.MessageDigest;
 public class StandardMD5EncryptFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.StandardMD5Encrypt.Function_Code();
+    private final static String funcCode = StandardMD5EncryptRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(StandardMD5EncryptFunc.class);
 
     @Override
@@ -46,7 +46,7 @@ public class StandardMD5EncryptFunc implements IFunction {
                 param2 = context.getInput(1);
                 param3 = context.getInput(2);
             } else {
-                throw new ServerFuncException("函数【】需要1个或者2个或者3个参数，当前参数个数：" + size);
+                throw new ServerFuncException("函数【" + funcCode + "】需要1个或者2个或者3个参数，当前参数个数：" + size);
             }
             String desVal = param1 == null ? "" : param1.toString();
             String unit = "32";

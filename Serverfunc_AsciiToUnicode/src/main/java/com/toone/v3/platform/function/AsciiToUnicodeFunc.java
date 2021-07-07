@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
  */
 public class AsciiToUnicodeFunc implements IFunction {
 
+    private static final String funcCode = AsciiToUnicodeRegister.Plugin_Code;
     private static final Logger log = LoggerFactory.getLogger(AsciiToUnicodeFunc.class);
 
     @Override
@@ -32,17 +33,17 @@ public class AsciiToUnicodeFunc implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
-            service.checkParamSize(ServerFuncCommonUtils.AsciiToUnicode.Function_Code(), context, 1);
+            service.checkParamSize(funcCode, context, 1);
 
             param = context.getInput(0);
 
-            service.checkParamNull(ServerFuncCommonUtils.AsciiToUnicode.Function_Code(), param, 1);
+            service.checkParamNull(funcCode, param, 1);
 
             String result;
             if(param instanceof String) {
                 result = toUnicode((String )param);
             } else {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.AsciiToUnicode.Function_Code() + "】的第1个参数类型必须为字符串");
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数类型必须为字符串");
             }
             outputVo.setSuccess(true);
             outputVo.put(result);
@@ -51,8 +52,8 @@ public class AsciiToUnicodeFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.AsciiToUnicode.Function_Code() + "】计算有误，参数1：" + param + "，" + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.AsciiToUnicode.Function_Code() + "】计算失败，请检查入参值：" + param, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + param + "，" + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，请检查入参值：" + param, e);
         }
 
         return outputVo;

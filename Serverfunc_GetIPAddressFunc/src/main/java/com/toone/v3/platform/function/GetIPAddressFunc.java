@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class GetIPAddressFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetIPAddressFunc.Function_Code();
+    private final static String funcCode = GetIPAddressRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetIPAddressFunc.class);
 
     @Override

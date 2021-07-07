@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 public class GenerateSequenceNumberFunc implements IFunction {
 
     // 函数编码
-    private String funcCode = ServerFuncCommonUtils.GenerateSequenceNumber.Function_Code();
+    private final static String funcCode = GenerateSequenceNumberRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GenerateSequenceNumberFunc.class);
 
     @Override

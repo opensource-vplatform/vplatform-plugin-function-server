@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class ChineseToUnicodeFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.ChineseToUnicode.Function_Code();
+    private final String funcCode = ChineseToUnicodeRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ChineseToUnicodeFunc.class);
 
     @Override

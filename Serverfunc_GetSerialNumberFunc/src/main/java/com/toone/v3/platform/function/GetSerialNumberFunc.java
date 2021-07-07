@@ -38,7 +38,7 @@ import java.util.Map;
 public class GetSerialNumberFunc implements IFunction {
 
     // 函数编码
-    private String funcCode = ServerFuncCommonUtils.GetSerialNumberFunc.Function_Code();
+    private final static String funcCode = GetSerialNumberRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetSerialNumberFunc.class);
 
     @Override

@@ -26,7 +26,7 @@ import java.text.NumberFormat;
  */
 public class ConvertFunc implements IFunction {
 
-    private final String funcCode = ServerFuncCommonUtils.ConvertFunc.Function_Code();
+    private final static String funcCode = ConvertRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ConvertFunc.class);
 
     @Override

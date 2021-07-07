@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 public class DivremFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Divrem.Function_Code();
+    private final static String funcCode = DivremRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(DivremFunc.class);
 
     @Override

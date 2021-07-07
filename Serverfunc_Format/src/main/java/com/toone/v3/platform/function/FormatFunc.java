@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class FormatFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Format.Function_Code();
+    private final static String funcCode = FormatRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(FormatFunc.class);
 
     @Override

@@ -21,6 +21,8 @@ import org.slf4j.LoggerFactory;
  * @Date 2021/5/31 10:58
  */
 public class CheckCertCodeFunFunc implements IFunction {
+
+    private final static String funcCode = CheckCertCodeFunRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(CheckCertCodeFunFunc.class);
 
     @Override
@@ -30,11 +32,11 @@ public class CheckCertCodeFunFunc implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
-            service.checkParamSize(ServerFuncCommonUtils.CheckCertCodeFun.Function_Code(), context, 1);
+            service.checkParamSize(funcCode, context, 1);
             param = context.getInput(0);
 
             if (!(param instanceof String)) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.CheckCertCodeFun.Function_Code() + "】的第1个参数必须为字符串，参数1：" + param);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须为字符串，参数1：" + param);
             }
 
             ISession session = VDS.getIntance().getSessionManager().getCurrentSession();
@@ -55,8 +57,8 @@ public class CheckCertCodeFunFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.CheckCertCodeFun.Function_Code() + "】计算有误，参数1：" + param + ", " + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.CheckCertCodeFun.Function_Code() + "】计算失败，参数1：" + param, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + param + ", " + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，参数1：" + param, e);
         }
         return outputVo;
     }

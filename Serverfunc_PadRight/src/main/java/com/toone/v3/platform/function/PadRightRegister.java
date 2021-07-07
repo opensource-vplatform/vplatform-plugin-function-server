@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class PadRightRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_PadRight";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "PadRight";
+    private static final String Plugin_Name = "右侧填充";
+    private static final String Plugin_Desc = "检查指定字符串长度是否达到指定长度,未达到则用指定字符在末尾填充,返回填充好的字符串。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -67,10 +71,10 @@ public class PadRightRegister implements IRegisterPlugin {
                 .setDesc("返回值")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.PadRight.Function_Code())
-                .setDesc(ServerFuncCommonUtils.PadRight.Function_Desc())
-                .setName(ServerFuncCommonUtils.PadRight.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(PadRightFunc.class)
                 .setExample("代码示例:PadRight(\"abc\",5,\"1\")，返回值为\"abc11\"。\n" +
                         "参数1--原字符串(字符串类型)；\n" +

@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
  */
 public class CheckChineseFunc implements IFunction {
 
+    private final static String funcCode = CheckChineseRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(CheckChineseFunc.class);
 
     @Override
@@ -38,7 +39,7 @@ public class CheckChineseFunc implements IFunction {
             param = context.getInput(0);
 
             if (param == null || !(param instanceof String)) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.CheckChinese.Function_Code() + "】的第1个参数必须为字符串类型，且不能为null，参数1：" + param);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须为字符串类型，且不能为null，参数1：" + param);
             }
 
             if(isContainsChinese((String) param)) {
@@ -53,8 +54,8 @@ public class CheckChineseFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.CheckChinese.Function_Code() + "】计算有误，参数1：" + param + ", " + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.CheckChinese.Function_Code() + "】计算失败，参数1：" + param, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + param + ", " + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，参数1：" + param, e);
         }
         return outputVo;
     }

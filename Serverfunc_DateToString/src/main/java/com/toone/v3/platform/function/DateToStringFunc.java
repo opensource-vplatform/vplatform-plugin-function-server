@@ -26,7 +26,7 @@ import java.util.Date;
 public class DateToStringFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.DateToString.Function_Code();
+    private final static String funcCode = DateToStringRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(DateToStringFunc.class);
 
     @Override

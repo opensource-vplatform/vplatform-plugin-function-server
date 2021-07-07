@@ -29,6 +29,7 @@ import java.math.BigDecimal;
  */
 public class ServerAddFunc implements IFunction {
 
+    private final static String funcCode = ServerAddRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ServerAddFunc.class);
 
     @Override
@@ -40,12 +41,12 @@ public class ServerAddFunc implements IFunction {
 
             int size = context.getInputSize();
             if(size < 3) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.ServerAdd.Function_Code() + "】至少需要3个参数，当前参数个数：" + size);
+                throw new ServerFuncException("函数【" + funcCode + "】至少需要3个参数，当前参数个数：" + size);
             }
 
             Object lastParam = context.getInput(size - 1);
             if(!(lastParam instanceof Integer)) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.ServerAdd.Function_Code() + "】最后一个参数不能为空，且必须是整数，当前值：" + lastParam);
+                throw new ServerFuncException("函数【" + funcCode + "】最后一个参数不能为空，且必须是整数，当前值：" + lastParam);
             }
             int scal = (Integer) lastParam;
 
@@ -67,8 +68,8 @@ public class ServerAddFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.ServerAdd.Function_Code() + "】计算有误，msg=" + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.ServerAdd.Function_Code() + "】计算失败", e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，msg=" + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败", e);
         }
         return outputVo;
     }
@@ -118,7 +119,7 @@ public class ServerAddFunc implements IFunction {
         try {
             return new BigDecimal(val);
         } catch (Exception e) {
-            throw new ServerFuncException("函数【" + ServerFuncCommonUtils.ServerAdd.Function_Code() + "】第" + (index+1) + "个参数不正确，要求参数为数值类型，实际参数为"
+            throw new ServerFuncException("函数【" + funcCode + "】第" + (index+1) + "个参数不正确，要求参数为数值类型，实际参数为"
                     + val);
         }
     }

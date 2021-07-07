@@ -26,7 +26,7 @@ import java.text.NumberFormat;
 public class PadLeftFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.PadLeft.Function_Code();
+    private final static String funcCode = PadLeftRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(PadLeftFunc.class);
 
     @Override

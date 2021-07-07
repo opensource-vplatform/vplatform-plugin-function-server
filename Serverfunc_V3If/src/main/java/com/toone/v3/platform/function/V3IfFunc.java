@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 public class V3IfFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.V3If.Function_Code();
+    private final static String funcCode = V3IfRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(V3IfFunc.class);
 
     @Override

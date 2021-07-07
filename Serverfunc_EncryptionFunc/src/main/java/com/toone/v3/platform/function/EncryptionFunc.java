@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 public class EncryptionFunc implements IFunction {
 
     // 函数编码
-    private String funcCode = ServerFuncCommonUtils.EncryptionFunc.Function_Code();
+    private final static String funcCode = EncryptionRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(EncryptionFunc.class);
 
     @Override

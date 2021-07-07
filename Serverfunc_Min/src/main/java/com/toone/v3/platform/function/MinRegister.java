@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -22,13 +21,18 @@ import java.util.List;
 public class MinRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_Min";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "Min";
+    private static final String Plugin_Name = "求两数最小值";
+    private static final String Plugin_Desc = "返回两个数字中较小的一个。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -66,10 +70,10 @@ public class MinRegister implements IRegisterPlugin {
                 .setType(VariableType.Range)
                 .setTypeRange(Arrays.asList(VariableType.Integer, VariableType.Number))
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.Min.Function_Code())
-                .setDesc(ServerFuncCommonUtils.Min.Function_Desc())
-                .setName(ServerFuncCommonUtils.Min.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(MinFunc.class)
                 .setExample("代码示例：Min(3,5)返回值为3。\n" +
                         "参数1--比较值1(数字类型)；\n" +

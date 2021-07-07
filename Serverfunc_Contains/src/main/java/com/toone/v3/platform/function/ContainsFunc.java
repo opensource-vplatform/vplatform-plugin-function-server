@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ContainsFunc implements IFunction {
 
-    private final String funcCode = ServerFuncCommonUtils.Contains.Function_Code();
+    private final String funcCode = ContainsRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ContainsFunc.class);
 
     @Override
@@ -41,7 +41,7 @@ public class ContainsFunc implements IFunction {
             if (param1 == null) {
                 str1 = "";
             } else if (!(param1 instanceof String)) {
-                throw new ServerFuncException("函数【】的第1个参数必须是字符串类型，参数1：" + param1);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是字符串类型，参数1：" + param1);
             } else {
                 str1 = (String) param1;
             }
@@ -49,7 +49,7 @@ public class ContainsFunc implements IFunction {
             if (param2 == null) {
                 str2 = "";
             } else if (!(param2 instanceof String)) {
-                throw new ServerFuncException("函数【】的第2个参数必须是字符串类型，参数1：" + param2);
+                throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须是字符串类型，参数1：" + param2);
             } else {
                 str2 = (String) param2;
             }

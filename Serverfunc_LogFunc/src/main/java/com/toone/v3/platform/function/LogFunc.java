@@ -1,5 +1,6 @@
 package com.toone.v3.platform.function;
 
+import com.yindangu.v3.business.vds.IVDS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +28,7 @@ import com.yindangu.v3.business.preferencesmanager.api.IPreferencesManager;
 public class LogFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.LogFunc.Function_Code();
+    private final static String funcCode = LogRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(LogFunc.class);
 
     @Override
@@ -41,47 +42,32 @@ public class LogFunc implements IFunction {
             service.checkParamSize(funcCode, context, 2);
             param1 = context.getInput(0);
             param2 = context.getInput(1);
-            service.checkParamNull(funcCode, param1, param2);
-
-            //2021-07-01，taoyz，增加配置，增加控制台输出
-            IPreferencesManager preferencesManager = vds.getPreferencesManager();
-            String outputToConsole = preferencesManager.getProperty("com.toone.v3.platform", "Serverfunc_LogFunc", funcCode, "outputToConsole");
-            boolean outputToConsoleBoolean = false;
-            if(outputToConsole!=null && "true".equalsIgnoreCase(outputToConsole)){
-                outputToConsoleBoolean = true;
-            }
-
-            IConsoleManager consoleManager = vds.getConsoleManager();
+            //兼容处理null的问题，null不要抛错了
+            //service.checkParamNull(funcCode, param1, param2);
+            param1 = param1==null? "" : param1;
+            param2 = param2==null? "info" : param2;
 
             String msg = param1.toString();
 
             switch (param2.toString()) {
                 case "debug":
                     log.debug(msg);
-                    if(outputToConsoleBoolean){
-                        consoleManager.output("Debug:"+msg);
-                    }
+                    outPutToConsole(vds, "Debug:"+msg);
                     outputVo.put(true);
                     break;
                 case "info":
                     log.info(msg);
-                    if(outputToConsoleBoolean){
-                        consoleManager.output("Info:"+msg);
-                    }
+                    outPutToConsole(vds, "Info:"+msg);
                     outputVo.put(true);
                     break;
                 case "warn":
                     log.warn(msg);
-                    if(outputToConsoleBoolean){
-                        consoleManager.output("Warn:"+msg);
-                    }
+                    outPutToConsole(vds, "Warn:"+msg);
                     outputVo.put(true);
                     break;
                 case "error":
                     log.error(msg);
-                    if(outputToConsoleBoolean){
-                        consoleManager.output("Error:"+msg);
-                    }
+                    outPutToConsole(vds, "Error:"+msg);
                     outputVo.put(true);
                     break;
                 default:
@@ -100,5 +86,25 @@ public class LogFunc implements IFunction {
             log.error("函数【" + funcCode + "】计算失败，参数1：" + param1 + "，参数2：" + param2, e);
         }
         return outputVo;
+    }
+
+    private void outPutToConsole(IVDS vds, String message){
+        try{
+            //2021-07-01，taoyz，增加配置，增加控制台输出
+            IPreferencesManager preferencesManager = vds.getPreferencesManager();
+            String outputToConsole = preferencesManager.getProperty("com.toone.v3.platform", "Serverfunc_LogFunc", funcCode, "outputToConsole");
+            boolean outputToConsoleBoolean = false;
+            if(outputToConsole!=null && "true".equalsIgnoreCase(outputToConsole)){
+                outputToConsoleBoolean = true;
+            }
+
+            if(outputToConsoleBoolean){
+                IConsoleManager consoleManager = vds.getConsoleManager();
+                consoleManager.output(message);
+            }
+        }catch(Throwable e){
+            //忽略
+            log.warn("信息输出到控制台失败。msg="+message);
+        }
     }
 }

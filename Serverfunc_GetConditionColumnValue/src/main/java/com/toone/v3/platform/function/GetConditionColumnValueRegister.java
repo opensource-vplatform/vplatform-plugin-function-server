@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -22,13 +21,18 @@ import java.util.List;
 public class GetConditionColumnValueRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_GetConditionColumnValue";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "GetConditionColumnValue";
+    private static final String Plugin_Name = "按照条件获取对应的实体的字段信息";
+    private static final String Plugin_Desc = "1、根据条件查询指定数据源中某个字段的值 2、如果该条件下返回多条记录，则取第一条记录的值。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -69,10 +73,10 @@ public class GetConditionColumnValueRegister implements IRegisterPlugin {
                 .setType(VariableType.Range)
                 .setTypeRange(Arrays.asList(VariableType.Char, VariableType.Number, VariableType.Integer, VariableType.Text, VariableType.Date,VariableType.LongDate, VariableType.Entity, VariableType.Boolean))
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.GetConditionColumnValue.Function_Code())
-                .setDesc(ServerFuncCommonUtils.GetConditionColumnValue.Function_Desc())
-                .setName(ServerFuncCommonUtils.GetConditionColumnValue.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(GetConditionColumnValueFunc.class)
                 .setExample("代码示例1：GetConditionColumnValue(\"BR_IN_PARENT.entityCode\",\"name\",\"age=1\")。\n" +
                         "代码示例2：GetConditionColumnValue(\"BR_VAR_PARENT.entityCode\",\"name\",\"wb='文本'\")。\n" +

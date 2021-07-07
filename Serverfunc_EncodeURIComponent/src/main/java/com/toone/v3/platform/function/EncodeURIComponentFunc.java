@@ -24,7 +24,7 @@ import java.net.URLEncoder;
 public class EncodeURIComponentFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.EncodeURIComponent.Function_Code();
+    private final static String funcCode = EncodeURIComponentRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(EncodeURIComponentFunc.class);
 
     @Override

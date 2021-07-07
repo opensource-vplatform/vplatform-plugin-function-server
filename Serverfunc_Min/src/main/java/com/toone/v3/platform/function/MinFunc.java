@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 public class MinFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Min.Function_Code();
+    private final static String funcCode = MinRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(MinFunc.class);
 
     @Override

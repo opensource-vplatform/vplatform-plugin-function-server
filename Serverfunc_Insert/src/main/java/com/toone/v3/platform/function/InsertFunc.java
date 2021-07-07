@@ -26,7 +26,7 @@ import java.text.NumberFormat;
 public class InsertFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Insert.Function_Code();
+    private final static String funcCode = InsertRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(InsertFunc.class);
 
     @Override

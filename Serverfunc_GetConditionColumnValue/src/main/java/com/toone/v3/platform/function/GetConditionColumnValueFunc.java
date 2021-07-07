@@ -35,7 +35,7 @@ import java.util.List;
 public class GetConditionColumnValueFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetConditionColumnValue.Function_Code();
+    private final static String funcCode = GetConditionColumnValueRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetConditionColumnValueFunc.class);
 
     @Override

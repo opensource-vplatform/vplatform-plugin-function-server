@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class ConvertVarToEntityColumnFunc implements IFunction {
 
-    private final String funcCode = ServerFuncCommonUtils.ConvertVarToEntityColumn.Function_Code();
+    private final static String funcCode = ConvertVarToEntityColumnRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ConvertVarToEntityColumnFunc.class);
 
     @Override

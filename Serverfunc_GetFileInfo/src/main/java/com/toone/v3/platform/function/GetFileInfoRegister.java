@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class GetFileInfoRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_GetFileInfo";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "GetFileInfo";
+    private static final String Plugin_Name = "获取文件信息";
+    private static final String Plugin_Desc = "根据文件id获取文件信息。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -62,10 +66,10 @@ public class GetFileInfoRegister implements IRegisterPlugin {
                 .setDesc("文件信息")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.GetFileInfo.Function_Code())
-                .setDesc(ServerFuncCommonUtils.GetFileInfo.Function_Desc())
-                .setName(ServerFuncCommonUtils.GetFileInfo.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(GetFileInfoFunc.class)
                 .setExample("代码示例：GetFileInfo(\"8a819ab551c2421c0151c3b597b80ddf\",\"fileName\")。 \n" +
                         "参数1--文件标识(字符串类型)；\n" +

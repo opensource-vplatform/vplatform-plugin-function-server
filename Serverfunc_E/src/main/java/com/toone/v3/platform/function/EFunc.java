@@ -23,7 +23,7 @@ import java.math.BigDecimal;
 public class EFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.E.Function_Code();
+    private final static String funcCode = ERegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(EFunc.class);
 
     @Override

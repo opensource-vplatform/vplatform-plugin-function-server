@@ -26,7 +26,7 @@ import java.text.NumberFormat;
 public class IndexOfFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.IndexOf.Function_Code();
+    private final static String funcCode = IndexOfRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(IndexOfFunc.class);
 
     @Override

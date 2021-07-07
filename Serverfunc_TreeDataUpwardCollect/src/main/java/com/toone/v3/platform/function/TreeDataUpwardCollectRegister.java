@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class TreeDataUpwardCollectRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_TreeDataUpwardCollect";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "TreeDataUpwardCollect";
+    private static final String Plugin_Name = "树数据根据权重向根节点汇总";
+    private static final String Plugin_Desc = "树数据根据权重向根节点汇总。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -72,10 +76,10 @@ public class TreeDataUpwardCollectRegister implements IRegisterPlugin {
                 .setDesc("返回值")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.TreeDataUpwardCollect.Function_Code())
-                .setDesc(ServerFuncCommonUtils.TreeDataUpwardCollect.Function_Desc())
-                .setName(ServerFuncCommonUtils.TreeDataUpwardCollect.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(TreeDataUpwardCollectFunc.class)
                 .setExample("代码示例:TreeDataUpwardCollect(\"BR_IN_PARENT.workEntity\",\"ca,cb,cc\",\"weight\",\"type:1,pidField:PID,treeCodeField:InnerCode,orderField:orderNo,isLeafField:isLeaf,busiFilterField:busCode\")。\n" +
                         "参数1--实体编码(字符串类型)，方法输入实体（BR_IN_PARENT.entityCode）、方法变量实体（BR_VAR_PARENT.entityCode）、方法输出实体（BR_OUT_PARENT.entityCode）；\n" +

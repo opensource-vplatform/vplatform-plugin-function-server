@@ -29,7 +29,7 @@ import java.util.Date;
 public class DateSubFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.DateSub.Function_Code();
+    private final static String funcCode = DateSubRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(DateSubFunc.class);
 
     @Override

@@ -30,7 +30,7 @@ import java.util.Map;
 public class VConvertEntityToJsonFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.VConvertEntityToJsonFunc.Function_Code();
+    private final static String funcCode = VConvertEntityToJsonRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(VConvertEntityToJsonFunc.class);
 
     @Override

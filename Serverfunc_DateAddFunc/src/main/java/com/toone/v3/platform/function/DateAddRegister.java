@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class DateAddRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_DateAddFunc";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "DateAddFunc";
+    private static final String Plugin_Name = "将指定日期加上一定的时间间隔后的时间字符串";
+    private static final String Plugin_Desc = "将时间加上一定的时间间隔，返回计算后的时间字符串。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -67,10 +71,10 @@ public class DateAddRegister implements IRegisterPlugin {
                 .setDesc("时间")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.DateAddFunc.Function_Code())
-                .setDesc(ServerFuncCommonUtils.DateAddFunc.Function_Desc())
-                .setName(ServerFuncCommonUtils.DateAddFunc.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(DateAddFunc.class)
                 .setExample("代码示例:DateAddFunc(\"2012-03-05 18:20:30\",30,\"H\")，返回值为\"2012-03-07 00:20:30\"。\n" +
                         "参数1--时间，格式为yyyy-MM-dd HH:mm:ss(时间类型或满足时间格式的字符串类型)；\n" +

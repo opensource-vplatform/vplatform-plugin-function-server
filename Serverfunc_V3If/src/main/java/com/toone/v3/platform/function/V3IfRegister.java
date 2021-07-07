@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -22,13 +21,18 @@ import java.util.List;
 public class V3IfRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_V3If";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "V3If";
+    private static final String Plugin_Name = "三元运算函数";
+    private static final String Plugin_Desc = "先计算条件表达式的结果，再根据结果返回参数值；结果为true,则返回第1个参数，否则返回第2个参数。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -71,10 +75,10 @@ public class V3IfRegister implements IRegisterPlugin {
                 .setType(VariableType.Range)
                 .setTypeRange(Arrays.asList(VariableType.Entity, VariableType.Integer, VariableType.Char, VariableType.Number, VariableType.Date, VariableType.LongDate, VariableType.Boolean, VariableType.Text))
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.V3If.Function_Code())
-                .setDesc(ServerFuncCommonUtils.V3If.Function_Desc())
-                .setName(ServerFuncCommonUtils.V3If.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(V3IfFunc.class)
                 .setExample("代码示例:V3If(1==1,20,30) 返回值为 20。\n" +
                         "参数1--条件表达式（布尔类型）；\n" +

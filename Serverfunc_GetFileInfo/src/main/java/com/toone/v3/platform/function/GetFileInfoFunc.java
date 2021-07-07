@@ -29,7 +29,7 @@ import java.security.MessageDigest;
 public class GetFileInfoFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetFileInfo.Function_Code();
+    private final static String funcCode = GetFileInfoRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetFileInfoFunc.class);
 
     @Override

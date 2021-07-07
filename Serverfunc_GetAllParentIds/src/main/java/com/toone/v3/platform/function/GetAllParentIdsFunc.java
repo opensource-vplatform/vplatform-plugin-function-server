@@ -30,7 +30,7 @@ import java.util.Map;
 public class GetAllParentIdsFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetAllParentIds.Function_Code();
+    private final static String funcCode = GetAllParentIdsRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetAllParentIdsFunc.class);
 
     @Override

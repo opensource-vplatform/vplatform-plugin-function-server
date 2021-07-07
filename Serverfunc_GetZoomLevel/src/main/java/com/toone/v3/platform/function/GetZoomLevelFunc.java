@@ -22,7 +22,7 @@ import java.util.Map;
 public class GetZoomLevelFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetZoomLevel.Function_Code();
+    private final static String funcCode = GetZoomLevelRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetZoomLevelFunc.class);
 
     @Override

@@ -26,7 +26,7 @@ import java.math.BigDecimal;
 public class MultiplyFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.ServerMultiply.Function_Code();
+    private final static String funcCode = MultiplyRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(MultiplyFunc.class);
 
     @Override

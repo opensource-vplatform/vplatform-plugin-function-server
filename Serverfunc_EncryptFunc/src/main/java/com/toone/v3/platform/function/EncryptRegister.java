@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class EncryptRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_EncryptFunc";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "EncryptFunc";
+    private static final String Plugin_Name = "对字符串进行加密";
+    private static final String Plugin_Desc = "对字符串进行加密。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -67,10 +71,10 @@ public class EncryptRegister implements IRegisterPlugin {
                 .setDesc("加密后的值")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.EncryptFunc.Function_Code())
-                .setDesc(ServerFuncCommonUtils.EncryptFunc.Function_Desc())
-                .setName(ServerFuncCommonUtils.EncryptFunc.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(EncryptFunc.class)
                 .setExample("代码示例：EncryptFunc(\"12345\",\"md5\",\"xxxx\")，返回值为对应加密方式加密后的字符串。\n" +
                         " 参数1：需要加密的字符串，字符串类型，必填。默认使用UTF-8编码\n" +

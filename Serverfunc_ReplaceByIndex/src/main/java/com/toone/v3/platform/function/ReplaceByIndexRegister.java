@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class ReplaceByIndexRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_ReplaceByIndex";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "ReplaceByIndex";
+    private static final String Plugin_Name = "字符串替换";
+    private static final String Plugin_Desc = "按位置替换字符串。替换位于指定位置范围的字符串。索引超出指定范围的不变,beginIndex < endIndex并且为有效范围才替换。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -72,10 +76,10 @@ public class ReplaceByIndexRegister implements IRegisterPlugin {
                 .setDesc("返回值")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.ReplaceByIndex.Function_Code())
-                .setDesc(ServerFuncCommonUtils.ReplaceByIndex.Function_Desc())
-                .setName(ServerFuncCommonUtils.ReplaceByIndex.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(ReplaceByIndexFunc.class)
                 .setExample("代码示例: ReplaceByIndex(\"abcdefg\",\"12345\",0,3)，返回:\"12345defg\"。\n" +
                         "参数1:原始字符串（必填）；\n" +

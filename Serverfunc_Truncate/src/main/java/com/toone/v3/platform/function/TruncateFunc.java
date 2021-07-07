@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 public class TruncateFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Truncate.Function_Code();
+    private final static String funcCode = TruncateRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(TruncateFunc.class);
 
     @Override

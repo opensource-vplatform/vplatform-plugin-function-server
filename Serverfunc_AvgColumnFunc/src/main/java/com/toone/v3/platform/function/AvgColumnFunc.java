@@ -26,6 +26,7 @@ import java.util.Map;
  */
 public class AvgColumnFunc implements IFunction {
 
+    private final static String funcCode = AvgColumnRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(AvgColumnFunc.class);
 
     @Override
@@ -36,11 +37,11 @@ public class AvgColumnFunc implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
-            service.checkParamSize(ServerFuncCommonUtils.AvgColumnFunc.Function_Code(), context, 2);
+            service.checkParamSize(funcCode, context, 2);
             param1 = context.getInput(0);
             param2 = context.getInput(1);
 
-            service.checkParamNull(ServerFuncCommonUtils.AvgColumnFunc.Function_Code(), param1, param2);
+            service.checkParamNull(funcCode, param1, param2);
 
             IDataView dv;
             if(param1 instanceof IDataView) {
@@ -48,7 +49,7 @@ public class AvgColumnFunc implements IFunction {
             } else if(param1 instanceof String) {
                 dv = VDS.getIntance().getFormulaEngine().eval(param1.toString());
             } else {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.AvgColumnFunc.Function_Code() + "】的第一个参数必须是字符串类型或者实体类型，当前值：" + param1);
+                throw new ServerFuncException("函数【" + funcCode + "】的第一个参数必须是字符串类型或者实体类型，当前值：" + param1);
             }
 
             String columnName = param2.toString();
@@ -64,7 +65,7 @@ public class AvgColumnFunc implements IFunction {
                     if(value instanceof Double || value instanceof Integer || value instanceof java.math.BigDecimal){
                         sum =sum + Double.parseDouble(value.toString());
                     }else{
-                        throw new ServerFuncException("函数【" + ServerFuncCommonUtils.AvgColumnFunc.Function_Code() + "】的第2个参数对应的字段值必须是数字类型，参数2：" + param2);
+                        throw new ServerFuncException("函数【" + funcCode + "】的第2个参数对应的字段值必须是数字类型，参数2：" + param2);
                     }
                 }
                 count++;
@@ -81,8 +82,8 @@ public class AvgColumnFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.AvgColumnFunc.Function_Code() + "】计算有误，参数1：" + param1 + "，参数2：" + param2 + "，" + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.AvgColumnFunc.Function_Code() + "】计算失败，参数1：" + param1 + "，参数2：" + param2, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + param1 + "，参数2：" + param2 + "，" + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，参数1：" + param1 + "，参数2：" + param2, e);
         }
 
         return outputVo;

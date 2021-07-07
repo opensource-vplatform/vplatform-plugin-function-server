@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CopyFileByFileIdFunc implements IFunction {
 
-    private final String funcCode = ServerFuncCommonUtils.CopyFileByFileId.Function_Code();
+    private final static String funcCode = CopyFileByFileIdRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(CopyFileByFileIdFunc.class);
 
     @Override

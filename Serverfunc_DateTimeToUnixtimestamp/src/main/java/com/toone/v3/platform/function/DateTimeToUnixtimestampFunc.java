@@ -25,7 +25,7 @@ import java.util.Date;
 public class DateTimeToUnixtimestampFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.DateTimeToUnixtimestamp.Function_Code();
+    private final static String funcCode = DateTimeToUnixtimestampRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(DateTimeToUnixtimestampFunc.class);
 
     @Override

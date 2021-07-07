@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class TrimEndFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.TrimEnd.Function_Code();
+    private final static String funcCode = TrimEndRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(TrimEndFunc.class);
 
     @Override

@@ -23,6 +23,7 @@ import java.math.BigDecimal;
  */
 public class AcosFunc implements IFunction {
 
+    private static final String funcCode = AcosRegister.Plugin_Code;
     private static final Logger log = LoggerFactory.getLogger(AcosFunc.class);
 
     @Override
@@ -33,21 +34,21 @@ public class AcosFunc implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
-            service.checkParamSize(ServerFuncCommonUtils.Acos.Function_Code(), context, 1);
+            service.checkParamSize(funcCode, context, 1);
 
             param = context.getInput(0);
 
-            service.checkParamNull(ServerFuncCommonUtils.Acos.Function_Code(), param);
+            service.checkParamNull(funcCode, param);
 
             double param1;
             try {
                 param1 = Double.parseDouble(param.toString());
             } catch(Exception e) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Acos.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
             if (param1 > 1 || param1 < -1)
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Acos.Function_Code() + "】的第1个参数必须必须在1到-1之间");
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须必须在1到-1之间");
 
             BigDecimal result = new BigDecimal(service.radianToAngle(Math.acos(param1)));
             result = result.setScale(10, BigDecimal.ROUND_HALF_UP);
@@ -59,8 +60,8 @@ public class AcosFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.Acos.Function_Code() + "】计算有误，参数1：" + param + "，" + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.Acos.Function_Code() + "】计算失败，请检查入参值：" + param, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + param + "，" + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，请检查入参值：" + param, e);
         }
 
         return outputVo;

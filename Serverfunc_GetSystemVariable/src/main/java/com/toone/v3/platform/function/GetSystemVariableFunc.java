@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 public class GetSystemVariableFunc implements IFunction {
 
     // 函数编码
-    private String funcCode = ServerFuncCommonUtils.GetSystemVariable.Function_Code();
+    private final static String funcCode = GetSystemVariableRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetSystemVariableFunc.class);
 
     @Override

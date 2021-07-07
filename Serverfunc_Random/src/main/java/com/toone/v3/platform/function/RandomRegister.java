@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -22,13 +21,18 @@ import java.util.List;
 public class RandomRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_Random";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "Random";
+    private static final String Plugin_Name = "随机数";
+    private static final String Plugin_Desc = "返回指定区间的随机数。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -71,10 +75,10 @@ public class RandomRegister implements IRegisterPlugin {
                 .setType(VariableType.Range)
                 .setTypeRange(Arrays.asList(VariableType.Integer, VariableType.Number))
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.Random.Function_Code())
-                .setDesc(ServerFuncCommonUtils.Random.Function_Desc())
-                .setName(ServerFuncCommonUtils.Random.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(RandomFunc.class)
                 .setExample("代码示例：Random(1.5,2.5,3)返回值为1.508。\n" +
                         "参数1--随机区域的最小值(数字类型)；\n" +

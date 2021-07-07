@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class ConvertVarToEntityColumnRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_ConvertVarToEntityColumn";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "ConvertVarToEntityColumn";
+    private static final String Plugin_Name = "将字符串的值添加到实体中指定的字段";
+    private static final String Plugin_Desc = "将字符串的值添加到实体中指定的字段。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -72,10 +76,10 @@ public class ConvertVarToEntityColumnRegister implements IRegisterPlugin {
                 .setType(VariableType.Char)
                 .setDesc("返回值")
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.ConvertVarToEntityColumn.Function_Code())
-                .setDesc(ServerFuncCommonUtils.ConvertVarToEntityColumn.Function_Desc())
-                .setName(ServerFuncCommonUtils.ConvertVarToEntityColumn.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(ConvertVarToEntityColumnFunc.class)
                 .setExample("代码示例: ConvertVarToEntityColumn(\"今天;明天;后天\",\"BR_IN_PARENT.entityCode\",\"fieldCode\",\";\")。\n" +
                         "参数1：来源字符串（字符串类型，必填）；\n" +

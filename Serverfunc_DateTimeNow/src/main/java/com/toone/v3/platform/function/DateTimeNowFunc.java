@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 public class DateTimeNowFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.DateTimeNow.Function_Code();
+    private final static String funcCode = DateTimeNowRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(DateTimeNowFunc.class);
 
     @Override

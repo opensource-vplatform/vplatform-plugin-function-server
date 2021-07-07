@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 public class Log10Func implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Log10.Function_Code();
+    private final static String funcCode = Log10Register.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(Log10Func.class);
 
     @Override

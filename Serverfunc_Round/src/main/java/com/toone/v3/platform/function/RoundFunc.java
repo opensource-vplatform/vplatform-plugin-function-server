@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 public class RoundFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Round.Function_Code();
+    private final static String funcCode = RoundRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(RoundFunc.class);
 
     @Override

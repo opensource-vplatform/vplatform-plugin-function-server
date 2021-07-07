@@ -24,7 +24,7 @@ import java.net.URLDecoder;
 public class DecodeURIComponentFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.DecodeURIComponent.Function_Code();
+    private final static String funcCode = DecodeURIComponentRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(DecodeURIComponentFunc.class);
 
     @Override

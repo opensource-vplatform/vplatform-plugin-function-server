@@ -28,7 +28,7 @@ import java.math.BigDecimal;
 public class ServerDivideFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.ServerDivide.Function_Code();
+    private final static String funcCode = ServerDivideRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ServerDivideFunc.class);
 
     @Override

@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 public class SqrtFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Sqrt.Function_Code();
+    private final static String funcCode = SqrtRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(SqrtFunc.class);
 
     @Override

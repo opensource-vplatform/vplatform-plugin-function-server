@@ -33,7 +33,7 @@ import java.util.Set;
 public class VConvertEntityToXMLFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.VConvertEntityToXMLFunc.Function_Code();
+    private final static String funcCode = VConvertEntityToXMLRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(VConvertEntityToXMLFunc.class);
 
     @Override

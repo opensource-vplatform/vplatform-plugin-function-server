@@ -32,7 +32,7 @@ import java.net.URL;
 public class DowdloadFileToFileSystemFunc implements IFunction {
 
     // 函数编码
-    private String funcCode = ServerFuncCommonUtils.DowdloadFileToFileSystem.Function_Code();
+    private final static String funcCode = DowdloadFileToFileSystemRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(DowdloadFileToFileSystemFunc.class);
 
     @Override

@@ -26,7 +26,7 @@ import java.util.Map;
 public class GetTableDataFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetTableData.Function_Code();
+    private final static String funcCode = GetTableDataRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetTableDataFunc.class);
 
     @Override

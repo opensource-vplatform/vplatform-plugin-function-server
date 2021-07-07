@@ -22,6 +22,7 @@ import java.math.BigDecimal;
  */
 public class AddThousandBitsFunc implements IFunction {
 
+    private final static String funcCode = AddThousandBitsRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(AddThousandBitsFunc.class);
 
     @Override
@@ -31,10 +32,10 @@ public class AddThousandBitsFunc implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
-            service.checkParamSize(ServerFuncCommonUtils.AddThousandBits.Function_Code(), context, 1);
+            service.checkParamSize(funcCode, context, 1);
             param = context.getInput(0);
             if(!(param instanceof Number)) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.AddThousandBits.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
             BigDecimal source = new BigDecimal(param.toString());
@@ -63,8 +64,8 @@ public class AddThousandBitsFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.AddThousandBits.Function_Code() + "】计算有误，参数1：" + param + "，" + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.AddThousandBits.Function_Code() + "】计算失败，参数1：" + param, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + param + "，" + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，参数1：" + param, e);
         }
 
         return outputVo;

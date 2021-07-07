@@ -28,7 +28,7 @@ import java.util.*;
 public class TreeDataUpwardCollectFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.TreeDataUpwardCollect.Function_Code();
+    private final static String funcCode = TreeDataUpwardCollectRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(TreeDataUpwardCollectFunc.class);
 
     @Override

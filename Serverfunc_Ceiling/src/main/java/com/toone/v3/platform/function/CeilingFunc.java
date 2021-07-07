@@ -24,6 +24,7 @@ import java.math.BigDecimal;
  */
 public class CeilingFunc implements IFunction {
 
+    private final static String funcCode = CeilingRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(CeilingFunc.class);
 
     @Override
@@ -33,15 +34,15 @@ public class CeilingFunc implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
-            service.checkParamSize(ServerFuncCommonUtils.Ceiling.Function_Code(), context, 1);
+            service.checkParamSize(funcCode, context, 1);
             param = context.getInput(0);
-            service.checkParamNull(ServerFuncCommonUtils.Ceiling.Function_Code(), param);
+            service.checkParamNull(funcCode, param);
 
             double d;
             try {
                 d = Double.parseDouble(param.toString());
             } catch (Exception e) {
-                throw new ServerFuncException("函数【】的第1个参数必须是数字类型，参数1：" + param);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
             BigDecimal result = new BigDecimal(Math.ceil(d));
@@ -52,8 +53,8 @@ public class CeilingFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.Ceiling.Function_Code() + "】计算有误，请检查入参数1：" + param + "，" + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.Ceiling.Function_Code() + "】计算失败，参数1：" + param, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，请检查入参数1：" + param + "，" + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，参数1：" + param, e);
         }
         return outputVo;
     }

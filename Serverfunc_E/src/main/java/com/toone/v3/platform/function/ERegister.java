@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class ERegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_E";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "E";
+    private static final String Plugin_Name = "e";
+    private static final String Plugin_Desc = "返回自然对数的底数。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -53,10 +57,10 @@ public class ERegister implements IRegisterPlugin {
                 .setType(VariableType.Char)
                 .setDesignType(VariableType.Number)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.E.Function_Code())
-                .setDesc(ServerFuncCommonUtils.E.Function_Desc())
-                .setName(ServerFuncCommonUtils.E.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(EFunc.class)
                 .setExample("\n" +
                         "代码示例:E() 返回值为2.718281828459045。 \n" +

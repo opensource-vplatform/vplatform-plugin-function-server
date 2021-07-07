@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
  */
 public class CompareFunc implements IFunction {
 
+    private final static String funcCode = CompareRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(CompareFunc.class);
 
     @Override
@@ -32,7 +33,7 @@ public class CompareFunc implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
-            service.checkParamSize(ServerFuncCommonUtils.Compare.Function_Code(), context, 3);
+            service.checkParamSize(funcCode, context, 3);
 
             param1 = context.getInput(0);
             param2 = context.getInput(1);
@@ -43,20 +44,20 @@ public class CompareFunc implements IFunction {
             if (param1 == null) {
                 str1 = "";
             } else if (!(param1 instanceof String)) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Compare.Function_Code() + "】的第1个参数必须是字符串类型，参数1：" + param1);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是字符串类型，参数1：" + param1);
             } else {
                 str1 = (String) param1;
             }
             if (param2 == null) {
                 str2 = "";
             } else if (!(param2 instanceof String)) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Compare.Function_Code() + "】的第2个参数必须是字符串类型，参数2：" + param2);
+                throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须是字符串类型，参数2：" + param2);
             } else {
                 str2 = (String) param2;
             }
             boolean ignoreCase;
             if (!(param3 instanceof Boolean)) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Compare.Function_Code() + "】的第3个参数必须是布尔类型，参数3：" + param3);
+                throw new ServerFuncException("函数【" + funcCode + "】的第3个参数必须是布尔类型，参数3：" + param3);
             } else {
                 ignoreCase = (boolean) param3;
             }
@@ -73,8 +74,8 @@ public class CompareFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.Compare.Function_Code() + "】计算有误，参数1：" + param1 + "，参数2：" + param2 + "，参数3：" + param3 + ", " + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.Compare.Function_Code() + "】计算失败，参数1：" + param1 + "，参数2：" + param2 + "，参数3：" + param3, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + param1 + "，参数2：" + param2 + "，参数3：" + param3 + ", " + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，参数1：" + param1 + "，参数2：" + param2 + "，参数3：" + param3, e);
         }
         return outputVo;
     }

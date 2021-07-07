@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class GetImageUrlFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetImageUrl.Function_Code();
+    private final static String funcCode = GetImageUrlRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetImageUrlFunc.class);
 
     @Override

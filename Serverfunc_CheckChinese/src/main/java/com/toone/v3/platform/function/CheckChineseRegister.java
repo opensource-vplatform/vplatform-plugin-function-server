@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -22,12 +21,17 @@ public class CheckChineseRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_CheckChinese";
     private static final String Component_Version = "3.10.0";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "CheckChinese";
+    private static final String Plugin_Name = "中文检查";
+    private static final String Plugin_Desc = "检查指定字符串是否包含中文字符。";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -57,10 +61,10 @@ public class CheckChineseRegister implements IRegisterPlugin {
                 .setDesc("是否包含中文")
                 .setType(VariableType.Boolean)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.CheckChinese.Function_Code())
-                .setDesc(ServerFuncCommonUtils.CheckChinese.Function_Desc())
-                .setName(ServerFuncCommonUtils.CheckChinese.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(CheckChineseFunc.class)
                 .setExample("代码示例:CheckChinese(\"a你好bc\") 返回值为True。\n" +
                         "参数1--待检查字符串(字符串类型)；\n" +

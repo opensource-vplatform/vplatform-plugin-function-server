@@ -21,6 +21,7 @@ import java.math.BigDecimal;
  */
 public class ABSFunc implements IFunction {
 
+    private final static String funcCode = ABSRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ABSFunc.class);
 
     @Override
@@ -31,15 +32,15 @@ public class ABSFunc implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
             // 校验参数个数
-            service.checkParamSize(ServerFuncCommonUtils.ABS.Function_Code(), context, 1);
+            service.checkParamSize(funcCode, context, 1);
 
             param = context.getInput(0);
 
             // 校验参数是否为null
-            service.checkParamNull(ServerFuncCommonUtils.ABS.Function_Code(), param);
+            service.checkParamNull(funcCode, param);
 
             if(!isNumeric(param.toString())) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.ABS.Function_Code() + "】的第1个参数必须为数字类型，参数1：" + param);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须为数字类型，参数1：" + param);
             }
 
             BigDecimal valBD = new BigDecimal(param.toString());
@@ -52,8 +53,8 @@ public class ABSFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.ABS.Function_Code() + "】计算有误，参数1：" + param + "，" + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.ABS.Function_Code() + "】计算失败，请检查入参值：" + param, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + param + "，" + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，请检查入参值：" + param, e);
         }
 
         return outputVo;

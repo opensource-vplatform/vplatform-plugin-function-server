@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 public class UnicodeToAsciiFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.UnicodeToAscii.Function_Code();
+    private final static String funcCode = UnicodeToAsciiRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(UnicodeToAsciiFunc.class);
 
     @Override

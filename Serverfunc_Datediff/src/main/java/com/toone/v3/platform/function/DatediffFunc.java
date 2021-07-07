@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 public class DatediffFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Datediff.Function_Code();
+    private final static String funcCode = DatediffRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(DatediffFunc.class);
 
     @Override

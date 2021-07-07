@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class UploadToFtpRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_UploadToFtp";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "UploadToFtp";
+    private static final String Plugin_Name = "系统文件上传到ftp";
+    private static final String Plugin_Desc = "系统文件上传到ftp。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -87,10 +91,10 @@ public class UploadToFtpRegister implements IRegisterPlugin {
                 .setDesc("返回值")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.UploadToFtp.Function_Code())
-                .setDesc(ServerFuncCommonUtils.UploadToFtp.Function_Desc())
-                .setName(ServerFuncCommonUtils.UploadToFtp.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(UploadToFtpFunc.class)
                 .setExample("代码示例:UploadToFtp(\"6b4a71d391adfbd27313e583dc3bd44b\",\"www.url.com\",21,\"user\",\"pwd\",\"ftp/test\",\"test.docx\")\n" +
                         "参数1--文件系统中待上传的文件id(字符串类型)\n" +

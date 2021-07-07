@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class GetSerialNumberRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_GetSerialNumberFunc";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "GetSerialNumberFunc";
+    private static final String Plugin_Name = "流水号函数";
+    private static final String Plugin_Desc = "根据前缀，取出表里的最大流水号加1后，补齐位数返回字符串。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -97,10 +101,10 @@ public class GetSerialNumberRegister implements IRegisterPlugin {
                 .setDesc("流水号")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.GetSerialNumberFunc.Function_Code())
-                .setDesc(ServerFuncCommonUtils.GetSerialNumberFunc.Function_Desc())
-                .setName(ServerFuncCommonUtils.GetSerialNumberFunc.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(GetSerialNumberFunc.class)
                 .setDeprecated(true)
                 .setExample("代码示例:GetSerialNumberFunc(\"TableName\",\"ColumnName\",\"20151103--\",\"11\",\"0\",\"0\",\"3\",\"true\",\"true\") 返回值为00000000001。\n" +

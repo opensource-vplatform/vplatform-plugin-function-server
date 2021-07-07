@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class EndsWithFunc implements IFunction {
 
     // 函数编码
-    private String funcCode = ServerFuncCommonUtils.EndsWith.Function_Code();
+    private final static String funcCode = EndsWithRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(EndsWithFunc.class);
 
     @Override

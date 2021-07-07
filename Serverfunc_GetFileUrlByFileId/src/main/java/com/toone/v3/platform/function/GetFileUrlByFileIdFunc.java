@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class GetFileUrlByFileIdFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetFileUrlByFileId.Function_Code();
+    private final static String funcCode = GetFileUrlByFileIdRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetFileUrlByFileIdFunc.class);
 
     @Override

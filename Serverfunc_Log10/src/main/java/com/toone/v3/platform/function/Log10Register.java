@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -22,13 +21,18 @@ import java.util.List;
 public class Log10Register implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_Log10";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "Log10";
+    private static final String Plugin_Name = "求10的底";
+    private static final String Plugin_Desc = "返回指定数字以 10 为底的对数。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -60,10 +64,10 @@ public class Log10Register implements IRegisterPlugin {
                 .setType(VariableType.Char)
                 .setDesignType(VariableType.Number)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.Log10.Function_Code())
-                .setDesc(ServerFuncCommonUtils.Log10.Function_Desc())
-                .setName(ServerFuncCommonUtils.Log10.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(Log10Func.class)
                 .setExample("代码示例:Log10(100) 返回值为2。\n" +
                         "参数1--指定数字(数字类型，必须大于0)；\n" +

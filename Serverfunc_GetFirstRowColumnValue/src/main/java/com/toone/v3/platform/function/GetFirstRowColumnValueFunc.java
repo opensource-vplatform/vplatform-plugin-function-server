@@ -29,7 +29,7 @@ import java.util.List;
 public class GetFirstRowColumnValueFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetFirstRowColumnValue.Function_Code();
+    private final static String funcCode = GetFirstRowColumnValueRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetFirstRowColumnValueFunc.class);
 
     @Override

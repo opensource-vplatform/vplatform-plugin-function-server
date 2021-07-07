@@ -29,7 +29,7 @@ import java.util.Map;
 public class GetDistanceFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetDistance.Function_Code();
+    private final static String funcCode = GetDistanceRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetDistanceFunc.class);
 
     @Override

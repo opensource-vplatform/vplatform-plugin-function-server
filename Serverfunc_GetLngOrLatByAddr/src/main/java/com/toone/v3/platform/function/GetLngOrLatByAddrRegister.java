@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.business.plugin.business.api.httpcommand.IHttpCommand;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
@@ -20,6 +19,11 @@ import java.util.List;
 public class GetLngOrLatByAddrRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_GetLngOrLatByAddr";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "GetLngOrLatByAddr";
+    private static final String Plugin_Name = "根据地址获取经度或纬度";
+    private static final String Plugin_Desc = "根据地址获取经度或纬度。";
     private static final String Component_Version = "3.10.0";
     private static final String Command_Code = "GetLngOrLatByAddr";
 
@@ -27,7 +31,7 @@ public class GetLngOrLatByAddrRegister implements IRegisterPlugin {
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -63,10 +67,10 @@ public class GetLngOrLatByAddrRegister implements IRegisterPlugin {
                 .setDesc("返回值")
                 .setType(VariableType.Number)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.GetLngOrLatByAddr.Function_Code())
-                .setDesc(ServerFuncCommonUtils.GetLngOrLatByAddr.Function_Desc())
-                .setName(ServerFuncCommonUtils.GetLngOrLatByAddr.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(GetLngOrLatByAddrFunc.class)
                 .setExample("代码示例：GetLngOrLatByAddr(\"广东省珠海市港湾大道科技五路19号\",\"lng\")，取相应地址的经度，若第二个参数为lat，则取纬度。\n" +
                         "参数1：地址（字符串，必填），目前仅限国内地址，地址结构（（省/市/区/街道/门牌号））越完整，地址内容越准确，解析的坐标精度越高。\n" +
@@ -84,7 +88,7 @@ public class GetLngOrLatByAddrRegister implements IRegisterPlugin {
 
     private IHttpCommandProfileVo getCommand() {
         IHttpCommandBuilder pluginBuilder = RegVds.getPlugin().getHttpCommandPlugin();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
+        pluginBuilder.setAuthor(Plugin_Author)
                 .setCode(Command_Code)
                 .setDesc("")
                 .setName("获取经纬度")

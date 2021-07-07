@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -22,13 +21,18 @@ import java.util.List;
 public class MultiplyRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_ServerMultiply";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "ServerMultiply";
+    private static final String Plugin_Name = "乘法";
+    private static final String Plugin_Desc = "1. 对数值做乘法运算\r\n2. 最后一位参数为小数保留位数\r\n3. 结果按照保留小数位数进行四舍五入";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -73,10 +77,10 @@ public class MultiplyRegister implements IRegisterPlugin {
                 .setType(VariableType.Char)
                 .setDesignType(VariableType.Number)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.ServerMultiply.Function_Code())
-                .setDesc(ServerFuncCommonUtils.ServerMultiply.Function_Desc())
-                .setName(ServerFuncCommonUtils.ServerMultiply.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(MultiplyFunc.class)
                 .setExample("代码示例:ServerMultiply(arg1,arg2,...,argN,argN+1) 返回值为数字类型。\n" +
                         "参数1--被乘数(数字类型)；\n" +

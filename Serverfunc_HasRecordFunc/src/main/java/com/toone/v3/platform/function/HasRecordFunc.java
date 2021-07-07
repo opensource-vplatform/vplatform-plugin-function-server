@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 public class HasRecordFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.HasRecord.Function_Code();
+    private final static String funcCode = HasRecordRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(HasRecordFunc.class);
 
     @Override

@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 public class RecyclingSequenceNumberFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.RecyclingSequenceNumber.Function_Code();
+    private final static String funcCode = RecyclingSequenceNumberRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(RecyclingSequenceNumberFunc.class);
 
     @Override

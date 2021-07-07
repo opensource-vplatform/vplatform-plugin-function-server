@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,11 +20,16 @@ public class AddThousandBitsRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_AddThousandBits";
     private static final String Component_Version = "3.10.0";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "AddThousandBits";
+    private static final String Plugin_Name = "给数字添加千分位";
+    private static final String Plugin_Desc = "给数字添加千分位。";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin().getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -56,10 +60,10 @@ public class AddThousandBitsRegister implements IRegisterPlugin {
                 .setDesc("带千分位的字符串")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.AddThousandBits.Function_Code())
-                .setName(ServerFuncCommonUtils.AddThousandBits.Function_Name())
-                .setDesc(ServerFuncCommonUtils.AddThousandBits.Function_Desc())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setName(Plugin_Name)
+                .setDesc(Plugin_Desc)
                 .setEntry(AddThousandBitsFunc.class)
                 .setExample("代码示例：AddThousandBits(1234567.7654321) 返回值：1,234,567.765,432,1。\n" +
                         "参数一：需要添加千分位的数字（数字类型）；\n" +

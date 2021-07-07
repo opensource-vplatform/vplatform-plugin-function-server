@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 public class TanFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Tan.Function_Code();
+    private final static String funcCode = TanRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(TanFunc.class);
 
     @Override

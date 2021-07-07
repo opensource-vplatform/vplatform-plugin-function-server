@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -22,13 +21,18 @@ import java.util.List;
 public class ConvertRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_ConvertFunc";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "ConvertFunc";
+    private static final String Plugin_Name = "格式转换，将指定值转换成指定格式返回";
+    private static final String Plugin_Desc = "格式转换，将指定值转换成指定格式返回。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -65,10 +69,10 @@ public class ConvertRegister implements IRegisterPlugin {
                 .setType(VariableType.Range)
                 .setTypeRange(Arrays.asList(VariableType.Boolean, VariableType.Integer, VariableType.Number, VariableType.Char))
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.ConvertFunc.Function_Code())
-                .setDesc(ServerFuncCommonUtils.ConvertFunc.Function_Desc())
-                .setName(ServerFuncCommonUtils.ConvertFunc.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(ConvertFunc.class)
                 .setExample("代码示例:ConvertFunc(3,2) 返回值为\"3\"。\n" +
                         "参数1--传入的数据(各种类型)；\n" +

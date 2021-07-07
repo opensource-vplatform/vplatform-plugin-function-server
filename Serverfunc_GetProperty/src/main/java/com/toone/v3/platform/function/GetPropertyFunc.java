@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 public class GetPropertyFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetProperty.Function_Code();
+    private final static String funcCode = GetPropertyRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetPropertyFunc.class);
 
     @Override

@@ -26,7 +26,7 @@ import java.text.NumberFormat;
 public class RemoveFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.Remove.Function_Code();
+    private final static String funcCode = RemoveRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(RemoveFunc.class);
 
     @Override

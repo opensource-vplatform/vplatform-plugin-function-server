@@ -17,6 +17,7 @@ import java.math.BigDecimal;
  */
 public class CoshFunc implements IFunction {
 
+    private final static String funcCode = CoshRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(CoshFunc.class);
 
     @Override
@@ -26,7 +27,7 @@ public class CoshFunc implements IFunction {
 
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
-            service.checkParamSize(ServerFuncCommonUtils.Cosh.Function_Code(), context, 1);
+            service.checkParamSize(funcCode, context, 1);
 
             param = context.getInput(0);
 
@@ -34,7 +35,7 @@ public class CoshFunc implements IFunction {
             try {
                 param1 = Double.parseDouble(param.toString());
             } catch(Exception e) {
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.Cosh.Function_Code() + "】的第1个参数必须是数字类型，参数1：" + param);
+                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param);
             }
 
             BigDecimal result = new BigDecimal(Math.cosh(param1));
@@ -46,8 +47,8 @@ public class CoshFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.Cosh.Function_Code() + "】计算有误，请检查入参值：" + param + ", " + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.Cosh.Function_Code() + "】计算失败，请检查入参值：" + param, e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，请检查入参值：" + param + ", " + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败，请检查入参值：" + param, e);
         }
 
         return outputVo;

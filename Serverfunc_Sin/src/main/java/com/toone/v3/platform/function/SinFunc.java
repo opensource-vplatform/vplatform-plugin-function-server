@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 public class SinFunc implements IFunction {
 
     // 函数编码
-    private String funcCode = ServerFuncCommonUtils.Sin.Function_Code();
+    private final static String funcCode = SinRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(SinFunc.class);
 
     @Override

@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class IsNullOrEmptyFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.IsNullOrEmptyFunc.Function_Code();
+    private final static String funcCode = IsNullOrEmptyRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(IsNullOrEmptyFunc.class);
 
     @Override

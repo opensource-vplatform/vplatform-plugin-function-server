@@ -23,7 +23,7 @@ import java.util.Date;
 public class ShortDateNowFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.ShortDateNow.Function_Code();
+    private final static String funcCode = ShortDateNowRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ShortDateNowFunc.class);
 
     @Override

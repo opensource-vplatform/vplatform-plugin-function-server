@@ -35,7 +35,7 @@ import java.net.MalformedURLException;
 public class DownloadFromFtpFunc implements IFunction {
 
     // 函数编码
-    private String funcCode = ServerFuncCommonUtils.DownloadFromFtp.Function_Code();
+    private final static String funcCode = DownloadFromFtpRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(DownloadFromFtpFunc.class);
 
     @Override

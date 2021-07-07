@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class ConcatStrFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.ConcatStr.Function_Code();
+    private final static String funcCode = ConcatStrRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ConcatStrFunc.class);
 
     @Override
@@ -53,8 +53,8 @@ public class ConcatStrFunc implements IFunction {
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + ServerFuncCommonUtils.ConcatStr.Function_Code() + "】计算有误，msg=" + e.getMessage());
-            log.error("函数【" + ServerFuncCommonUtils.ConcatStr.Function_Code() + "】计算失败", e);
+            outputVo.setMessage("函数【" + funcCode + "】计算有误，msg=" + e.getMessage());
+            log.error("函数【" + funcCode + "】计算失败", e);
         }
         return outputVo;
     }

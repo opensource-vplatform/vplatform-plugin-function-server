@@ -30,7 +30,7 @@ import java.util.Map;
 public class ListToStringFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.ListToStringFunc.Function_Code();
+    private final static String funcCode = ListToStringRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ListToStringFunc.class);
 
     @Override

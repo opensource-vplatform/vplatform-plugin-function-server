@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class GetDistanceRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_GetDistance";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "GetDistance";
+    private static final String Plugin_Name = "获取轨迹里程";
+    private static final String Plugin_Desc = "根据经纬度数据顺序集合，自动计算轨迹里程。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -67,10 +71,10 @@ public class GetDistanceRegister implements IRegisterPlugin {
                 .setDesc("里程")
                 .setType(VariableType.Number)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.GetDistance.Function_Code())
-                .setDesc(ServerFuncCommonUtils.GetDistance.Function_Desc())
-                .setName(ServerFuncCommonUtils.GetDistance.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(GetDistanceFunc.class)
                 .setExample("代码示例：GetDistance(\"BR_IN_PARENT.locationEntity\",\"lng\",\"lat\")，根据经纬度数据顺序集合，自动计算轨迹里程，例如返回轨迹里程为6200.30（单位为米）\n" +
                         "参数1：实体编码（字符串，必填），必须带前缀，实体可以是方法输入(BR_IN_PARENT.entityCode)、方法输出(BR_OUT_PARENT.entityCode)、方法变量(BR_VAR_PARENT.entityCode)\n" +

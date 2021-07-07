@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class IsWhiteOrSpaceFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.IsWhiteOrSpace.Function_Code();
+    private final static String funcCode = IsWhiteOrSpaceRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(IsWhiteOrSpaceFunc.class);
 
     @Override

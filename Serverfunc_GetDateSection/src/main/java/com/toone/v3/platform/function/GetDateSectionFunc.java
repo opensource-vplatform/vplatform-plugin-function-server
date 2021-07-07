@@ -27,7 +27,7 @@ import java.util.Date;
 public class GetDateSectionFunc implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.GetDateSection.Function_Code();
+    private final static String funcCode = GetDateSectionRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetDateSectionFunc.class);
 
     @Override

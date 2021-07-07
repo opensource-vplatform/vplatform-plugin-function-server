@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class IsEmptyRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_IsEmpty";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "IsEmpty";
+    private static final String Plugin_Name = "检查是否为空值";
+    private static final String Plugin_Desc = "检查输入的参数是否为空串，为空返回True。";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -57,10 +61,10 @@ public class IsEmptyRegister implements IRegisterPlugin {
                 .setDesc("结果")
                 .setType(VariableType.Boolean)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.IsEmpty.Function_Code())
-                .setDesc(ServerFuncCommonUtils.IsEmpty.Function_Desc())
-                .setName(ServerFuncCommonUtils.IsEmpty.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(IsEmptyFunc.class)
                 .setExample("代码示例:IsEmpty(\"\")返回值为True。\n" +
                         "参数1--被检查的字符串(可以是实体字段,控件值,变量等但是必须数据类型要为字符串类型)\n" +

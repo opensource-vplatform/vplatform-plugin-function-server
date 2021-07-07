@@ -26,7 +26,7 @@ import java.io.UnsupportedEncodingException;
 public class EncodeBASE64Func implements IFunction {
 
     // 函数编码
-    private final String funcCode = ServerFuncCommonUtils.EncodeBASE64.Function_Code();
+    private final static String funcCode = EncodeBASE64Register.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(EncodeBASE64Func.class);
 
     @Override

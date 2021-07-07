@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ConvertPageNumberFunc implements IFunction {
 
-    private final String funcCode = ServerFuncCommonUtils.ConvertPageNumber.Function_Code();
+    private final static String funcCode = ConvertPageNumberRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(ConvertPageNumberFunc.class);
 
     @Override

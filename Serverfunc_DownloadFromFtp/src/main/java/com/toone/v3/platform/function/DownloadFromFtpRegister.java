@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -21,13 +20,18 @@ import java.util.List;
 public class DownloadFromFtpRegister implements IRegisterPlugin {
 
     private static final String Component_Code = "Serverfunc_DownloadFromFtp";
+    private final static String Group_Id = "com.toone.v3.platform";
+    private final static String Plugin_Author = "同望科技";
+    public static final String Plugin_Code = "DownloadFromFtp";
+    private static final String Plugin_Name = "从ftp下载文件";
+    private static final String Plugin_Desc = "从ftp下载文件到文件服务中， 返回文件id";
     private static final String Component_Version = "3.10.0";
 
     @Override
     public IComponentProfileVo getComponentProfile() {
         return RegVds.getPlugin()
                 .getComponentProfile()
-                .setGroupId(ServerFuncCommonUtils.Group_Id)
+                .setGroupId(Group_Id)
                 .setCode(Component_Code)
                 .setVersion(Component_Version)
                 .build();
@@ -82,10 +86,10 @@ public class DownloadFromFtpRegister implements IRegisterPlugin {
                 .setDesc("文件ID")
                 .setType(VariableType.Char)
                 .build();
-        pluginBuilder.setAuthor(ServerFuncCommonUtils.Plugin_Author)
-                .setCode(ServerFuncCommonUtils.DownloadFromFtp.Function_Code())
-                .setDesc(ServerFuncCommonUtils.DownloadFromFtp.Function_Desc())
-                .setName(ServerFuncCommonUtils.DownloadFromFtp.Function_Name())
+        pluginBuilder.setAuthor(Plugin_Author)
+                .setCode(Plugin_Code)
+                .setDesc(Plugin_Desc)
+                .setName(Plugin_Name)
                 .setEntry(DownloadFromFtpFunc.class)
                 .setExample("码示例:DownloadFromFtp(\"test.docx\",\"www.url.com\",21,\"user\",\"pwd\",\"ftp/test\")\n" +
                         "参数1--ftp文件名(字符串类型)\n" +
