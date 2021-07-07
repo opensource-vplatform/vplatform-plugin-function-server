@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.toone.v3.platform.function.common.exception.ServerFuncException;
+import com.yindangu.v3.business.vds.IVDS;
 import com.yindangu.v3.business.VDS;
 import com.yindangu.v3.business.console.api.IConsoleManager;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
@@ -35,7 +36,7 @@ public class LogFunc implements IFunction {
         Object param1 = null;
         Object param2 = null;
         try {
-            VDS vds = VDS.getIntance();
+            IVDS vds = VDS.getIntance();
             ServerFuncCommonUtils service = vds.getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
             service.checkParamSize(funcCode, context, 2);
             param1 = context.getInput(0);
