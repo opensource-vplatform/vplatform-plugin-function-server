@@ -34,7 +34,7 @@ public class CheckChineseFunc implements IFunction {
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
-            service.checkParamSize(ServerFuncCommonUtils.CheckChinese.Function_Code(), context, 1);
+            service.checkParamSize(funcCode, context, 1);
 
             param = context.getInput(0);
 

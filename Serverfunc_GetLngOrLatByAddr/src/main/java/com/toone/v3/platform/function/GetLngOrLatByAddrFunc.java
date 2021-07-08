@@ -41,7 +41,7 @@ import java.util.Map;
 public class GetLngOrLatByAddrFunc implements IFunction {
 
     // 函数编码
-    private final static String funcCode = Plugin_Code
+    private final static String funcCode = GetLngOrLatByAddrRegister.Plugin_Code;
     private final static Logger log = LoggerFactory.getLogger(GetLngOrLatByAddrFunc.class);
 
     @Override

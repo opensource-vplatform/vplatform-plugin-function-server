@@ -25,15 +25,8 @@ public class ServerAddRegister implements IRegisterPlugin {
     private final static String Plugin_Author = "同望科技";
     public static final String Plugin_Code = "ServerAdd";
     private static final String Plugin_Name = "加法";
-    private static final String Plugin_Desc = "1. 对数值做加法运算
-2. 最后一位参数为小数保留位数 
-3. 结果按照保留小数位数进行四舍五入";
+    private static final String Plugin_Desc = "1. 对数值做加法运算\r\n2. 最后一位参数为小数保留位\r\n3. 结果按照保留小数位数进行四舍五入";
     private static final String Component_Version = "3.10.0";
-    private final static String Group_Id = "com.toone.v3.platform";
-    private final static String Plugin_Author = "同望科技";
-    public static final String Plugin_Code = "ServerAdd";
-    private static final String Plugin_Name = "加法";
-    private static final String Plugin_Desc = "1. 对数值做加法运算\r\n2. 最后一位参数为小数保留位数 \r\n3. 结果按照保留小数位数进行四舍五入";
 
     @Override
     public IComponentProfileVo getComponentProfile() {

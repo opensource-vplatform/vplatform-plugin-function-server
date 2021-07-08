@@ -69,7 +69,7 @@ public class DateConvertFunc implements IFunction {
     private double toUnit(double time, Object param3) throws ServerFuncException {
         //s-秒,m-分,H-时,d-日；
         if (param3 == null) {
-            throw new ServerFuncException("函数【" + ServerFuncCommonUtils.DateConvert.Function_Code() + "】的第3个参数必须是枚举值：s：秒、m：分、H：时、d：日，当前值：NULL");
+            throw new ServerFuncException("函数【" + funcCode + "】的第3个参数必须是枚举值：s：秒、m：分、H：时、d：日，当前值：NULL");
         }
         String str3 = param3.toString().trim().toLowerCase();
         switch (str3) {
@@ -82,14 +82,14 @@ public class DateConvertFunc implements IFunction {
             case "d":
                 return time / (1000 * 60 * 60 * 24);
             default:
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.DateConvert.Function_Code() + "】的第3个参数必须是枚举值：s：秒、m：分、H：时、d：日，当前值：" + str3);
+                throw new ServerFuncException("函数【" + funcCode + "】的第3个参数必须是枚举值：s：秒、m：分、H：时、d：日，当前值：" + str3);
         }
     }
 
     private double toMillis(double time, Object param2) throws ServerFuncException {
         //s-秒,m-分,H-时,d-日；
         if (param2 == null) {
-            throw new ServerFuncException("函数【" + ServerFuncCommonUtils.DateConvert.Function_Code() + "】的第2个参数必须是枚举值：s：秒、m：分、H：时、d：日，当前值：NULL");
+            throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须是枚举值：s：秒、m：分、H：时、d：日，当前值：NULL");
         }
         String str2 = param2.toString().toLowerCase().trim();
         switch (str2) {
@@ -102,7 +102,7 @@ public class DateConvertFunc implements IFunction {
             case "d":
                 return time * 1000 * 60 * 60 * 24;
             default:
-                throw new ServerFuncException("函数【" + ServerFuncCommonUtils.DateConvert.Function_Code() + "】的第2个参数必须是枚举值：s：秒、m：分、H：时、d：日，当前值：" + str2);
+                throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须是枚举值：s：秒、m：分、H：时、d：日，当前值：" + str2);
         }
     }
 }
