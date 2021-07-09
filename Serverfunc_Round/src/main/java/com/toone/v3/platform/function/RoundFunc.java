@@ -40,23 +40,35 @@ public class RoundFunc implements IFunction {
             param2 = context.getInput(1);
             service.checkParamNull(funcCode, param1, param2);
 
-            try {
-                Double.parseDouble(param1.toString());
-            } catch(Exception e) {
-                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param1);
+            if(!(param1 instanceof Number)){ //提高性能
+	            try {
+	                Double.parseDouble(param1.toString());
+	            } catch(Exception e) {
+	                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param1);
+	            }
             }
-
             int scale;
             try {
-                scale = Integer.parseInt(param2.toString());
+            	if(param2 instanceof Number) {
+            		scale = ((Number)param2).intValue();
+            	}
+            	else {
+            		scale = Integer.parseInt(param2.toString());
+            	}
             } catch(Exception e) {
                 throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须是整数类型，参数2：" + param2);
             }
             if (scale < 0) {
                 throw new ServerFuncException("函数【" + funcCode + "】的第2个参数必须是非负整数，参数2：" + param2);
             }
-
-            BigDecimal result = new BigDecimal(param1.toString()).setScale(scale, BigDecimal.ROUND_HALF_UP);
+            BigDecimal result ;
+            if(param1 instanceof BigDecimal) {
+            	result = (BigDecimal)param1; 
+            }
+            else {
+            	result = new BigDecimal(param1.toString());
+            }
+            result.setScale(scale, BigDecimal.ROUND_HALF_UP);
 
             outputVo.put(result);
             outputVo.setSuccess(true);

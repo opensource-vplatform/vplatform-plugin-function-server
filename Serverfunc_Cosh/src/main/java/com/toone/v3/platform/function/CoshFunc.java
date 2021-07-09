@@ -33,7 +33,12 @@ public class CoshFunc implements IFunction {
 
             double param1;
             try {
-                param1 = Double.parseDouble(param.toString());
+            	if(param instanceof Number) {
+            		param1 = ((Number)param).doubleValue();
+            	}
+            	else {
+            		param1 = Double.parseDouble(param.toString());
+            	}
             } catch(Exception e) {
                 throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param);
             }
