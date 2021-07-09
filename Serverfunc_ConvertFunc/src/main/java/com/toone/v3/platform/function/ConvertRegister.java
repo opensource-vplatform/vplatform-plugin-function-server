@@ -56,7 +56,7 @@ public class ConvertRegister implements IRegisterPlugin {
         IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
                 .setDesc("转换对象")
                 .setType(VariableType.Range)
-                .setTypeRange(Arrays.asList(VariableType.Boolean, VariableType.Integer, VariableType.Number, VariableType.Char))
+                .setTypeRange(Arrays.asList(VariableType.Boolean, VariableType.Integer, VariableType.Number, VariableType.Char, VariableType.Date, VariableType.LongDate, VariableType.Text))
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
