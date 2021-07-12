@@ -68,9 +68,8 @@ public class RoundFunc implements IFunction {
             else {
             	result = new BigDecimal(param1.toString());
             }
-            result.setScale(scale, BigDecimal.ROUND_HALF_UP);
-
-            outputVo.put(result);
+            BigDecimal rs = result.setScale(scale, BigDecimal.ROUND_HALF_UP);
+            outputVo.put(rs);
             outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
