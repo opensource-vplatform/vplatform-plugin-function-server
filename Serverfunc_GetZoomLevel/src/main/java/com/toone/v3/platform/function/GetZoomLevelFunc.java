@@ -101,6 +101,7 @@ public class GetZoomLevelFunc implements IFunction {
                 Integer key = Integer.parseInt(map.getKey());
                 if (key > dis) {
                     outputVo.put(map.getValue());
+                    break;
                 }
             }
             outputVo.setSuccess(true);
