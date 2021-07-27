@@ -33,12 +33,17 @@ public class ReplaceFunc implements IFunction {
         Object param1 = null;
         Object param2 = null;
         Object param3 = null;
+        boolean isReg = false;
         try {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
-            service.checkParamSize(funcCode, context, 3);
+            int size = context.getInputSize();
+            if(size < 3 || size > 4) {
+                throw new ServerFuncException("函数【" + funcCode + "】需要3个或者4个参数，当前参数个数：" + size);
+            }
             param1 = context.getInput(0);
             param2 = context.getInput(1);
             param3 = context.getInput(2);
+            isReg = size == 4 ? ((Boolean) context.getInput(3)) : false;
 
             if (!(param1 instanceof String)) {
                 throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是字符串类型，参数1：" + param1);
@@ -54,7 +59,7 @@ public class ReplaceFunc implements IFunction {
             String str2 = (String) param2;
             String str3 = (String) param3;
 
-            String s = str.replace(str2, str3);
+            String s = isReg ? str.replaceAll(str2, str3) : str.replace(str2, str3);
 
             outputVo.put(s);
             outputVo.setSuccess(true);

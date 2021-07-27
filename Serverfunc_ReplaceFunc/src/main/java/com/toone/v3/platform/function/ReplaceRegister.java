@@ -67,6 +67,11 @@ public class ReplaceRegister implements IRegisterPlugin {
                 .setType(VariableType.Char)
                 .setRequired(true)
                 .build();
+        IFunctionProfileVo.IFunctionInputVo inputVo4 = pluginBuilder.newInput()
+                .setDesc("是否正则替换")
+                .setType(VariableType.Boolean)
+                .setRequired(false)
+                .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("返回值")
                 .setType(VariableType.Char)
@@ -80,11 +85,13 @@ public class ReplaceRegister implements IRegisterPlugin {
                         "参数1--原字符串(字符串类型)；\n" +
                         "参数2--模式串(字符串类型)；\n" +
                         "参数3--替代串(字符串类型)；\n" +
+                        "参数4--是否正则替换(布尔类型，true-正则替换，false-普通替换)，该参数不填时按照普通替换；\n" +
                         "返回值为字符串类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)
-                .addInputParam(inputVo3);
+                .addInputParam(inputVo3)
+                .addInputParam(inputVo4);
 
         return pluginBuilder.build();
     }
