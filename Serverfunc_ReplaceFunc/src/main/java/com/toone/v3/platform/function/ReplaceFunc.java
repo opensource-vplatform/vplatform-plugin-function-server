@@ -59,7 +59,7 @@ public class ReplaceFunc implements IFunction {
             String str2 = (String) param2;
             String str3 = (String) param3;
 
-            String s = isReg ? str.replaceAll(str2, str3) : str.replace(str2, str3);
+            String s = isReg ? str.replaceAll(str2, chRegex(str3)) : str.replace(str2, str3);
 
             outputVo.put(s);
             outputVo.setSuccess(true);
@@ -72,5 +72,54 @@ public class ReplaceFunc implements IFunction {
             log.error("函数【" + funcCode + "】计算失败，参数1：" + param1 + "，参数2：" + param2 + "，参数3：" + param3, e);
         }
         return outputVo;
+    }
+
+    private String chRegex(String x) {
+        //^$.?+*|[](){}\
+        if(x.contains("\\")) {
+            x = x.replaceAll("\\\\","\\\\\\\\");
+        }
+        if(x.contains("^")) {
+            x = x.replaceAll("\\^","\\\\\\^");
+        }
+        if(x.contains("$")) {
+            x = x.replaceAll("\\$","\\\\\\$");
+        }
+        if(x.contains(".")) {
+            x = x.replaceAll("\\.","\\\\\\.");
+        }
+        if(x.contains("?")) {
+            x = x.replaceAll("\\?","\\\\\\?");
+        }
+        if(x.contains("+")) {
+            x = x.replaceAll("\\+","\\\\\\+");
+        }
+        if(x.contains("*")) {
+            x = x.replaceAll("\\*","\\\\\\*");
+        }
+        if(x.contains("|")) {
+            x = x.replaceAll("\\|","\\\\\\|");
+        }
+        if(x.contains("{")) {
+            x = x.replaceAll("\\{","\\\\\\{");
+        }
+        if(x.contains("}")) {
+            x = x.replaceAll("\\}","\\\\\\}");
+        }
+        if(x.contains("(")) {
+            x = x.replaceAll("\\(","\\\\\\(");
+        }
+        if(x.contains(")")) {
+            x = x.replaceAll("\\)","\\\\\\)");
+        }
+        if(x.contains("[")) {
+            x = x.replaceAll("\\[","\\\\\\[");
+        }
+        if(x.contains("]")) {
+            x = x.replaceAll("\\]","\\\\\\]");
+        }
+
+
+        return x;
     }
 }
