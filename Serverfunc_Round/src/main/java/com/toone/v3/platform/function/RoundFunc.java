@@ -39,14 +39,14 @@ public class RoundFunc implements IFunction {
             param1 = context.getInput(0);
             param2 = context.getInput(1);
             service.checkParamNull(funcCode, param1, param2);
-
+/*
             if(!(param1 instanceof Number)){ //提高性能
 	            try {
 	                Double.parseDouble(param1.toString());
 	            } catch(Exception e) {
 	                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param1);
 	            }
-            }
+            }*/
             int scale;
             try {
             	if(param2 instanceof Number) {
@@ -66,7 +66,11 @@ public class RoundFunc implements IFunction {
             	result = (BigDecimal)param1; 
             }
             else {
-            	result = new BigDecimal(param1.toString());
+            	try {
+            		result = new BigDecimal(param1.toString());
+            	} catch(Exception e) {
+	                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数必须是数字类型，参数1：" + param1);
+	            }
             }
             BigDecimal rs = result.setScale(scale, BigDecimal.ROUND_HALF_UP);
             outputVo.put(rs);
