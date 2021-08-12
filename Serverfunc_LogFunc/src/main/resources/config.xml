@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config title="后端日志函数配置">
+	<property key="outputToConsole" type="BOOLEAN" des="信息是否输出到控制台，默认值false">false</property>
+</config>
