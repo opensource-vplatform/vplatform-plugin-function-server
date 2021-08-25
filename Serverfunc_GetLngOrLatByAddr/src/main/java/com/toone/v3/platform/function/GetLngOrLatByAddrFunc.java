@@ -136,7 +136,8 @@ public class GetLngOrLatByAddrFunc implements IFunction {
         if (ak == null || ak.trim().equals("")) {
             throw new ServerFuncException("百度ak值不正确，请到控制台检查配置.");
         }
-        String url = String.format("http://api.map.baidu.com/geocoder/v2/?"
+        String url1 = getURL();
+        String url = String.format(url1 + "/?"
                 + "ak=%s&output=json&address=%s", ak, address);
         URL myURL = null;
         URLConnection httpsConn = null;
@@ -194,6 +195,21 @@ public class GetLngOrLatByAddrFunc implements IFunction {
             return ak.toString();
         } catch (Exception e) {
             throw new ServerFuncException("获取配置信息百度ak配置失败", e);
+        }
+    }
+
+    private String getURL() {
+        try {
+            IPreferencesManager preferencesManager = VDS.getIntance().getPreferencesManager();
+            Field field = preferencesManager.getClass().getDeclaredField("manager");
+            field.setAccessible(true);
+            Object tooneManager = field.get(preferencesManager);
+            Method getPropertyValue = tooneManager.getClass().getMethod("getPropertyValue", String.class, String.class, String.class, String.class);
+            Object url = getPropertyValue.invoke(tooneManager, "com.toone.v3.platform-Webrule_BaiduTrace", "baidutrace", "", "baidu_geocoding_address");
+
+            return url.toString();
+        } catch (Exception e) {
+            throw new ServerFuncException("获取配置信息百度baidu_geocoding_address配置失败", e);
         }
     }
 }
