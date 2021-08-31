@@ -125,20 +125,18 @@ public class DownloadFromFtpFunc implements IFunction {
             }
             ftpClient.logout();
         } catch (Exception e) {
-            e.printStackTrace();
+           throw new RuntimeException("下载ftp文件失败：" + e.getMessage(), e);
         } finally {
             if (ftpClient.isConnected()) {
                 try {
                     ftpClient.disconnect();
                 } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
             if (null != os) {
                 try {
                     os.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }
@@ -157,12 +155,11 @@ public class DownloadFromFtpFunc implements IFunction {
             ftpClient.login(ftpUID, ftpPWD); // 登录ftp服务器
             int replyCode = ftpClient.getReplyCode(); // 是否成功登录服务器
             if (!FTPReply.isPositiveCompletion(replyCode)) {
-                throw new ServerFuncException("登录服务器失败！请检查服务器地址、账号以及密码！");
+//                throw new ServerFuncException("登录服务器失败！请检查服务器地址、账号以及密码！");
+                throw new RuntimeException("登录ftp服务器失败，状态码：" + replyCode);
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException("初始化ftp客户端异常：" + e.getMessage(), e);
         }
     }
 }
