@@ -7,6 +7,7 @@ import com.yindangu.v3.business.file.api.model.IAppFileInfo;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFunction;
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -115,8 +116,8 @@ public class UploadToFtpFunc implements IFunction {
             ftpClient.setFileType(ftpClient.BINARY_FILE_TYPE);
             CreateDirecroty(ftpFilePath, ftpClient);
             //ftpClient.makeDirectory(ftpFilePath);
-            ftpClient.changeWorkingDirectory(ftpFilePath);
-            ftpClient.storeFile(ftpFileName, inputStream);
+//            ftpClient.changeWorkingDirectory(ftpFilePath);
+            ftpClient.storeFile(new String(ftpFileName.getBytes(), FTP.DEFAULT_CONTROL_ENCODING), inputStream);
             inputStream.close();
             ftpClient.logout();
             flag = true;
@@ -145,7 +146,7 @@ public class UploadToFtpFunc implements IFunction {
     private FTPClient initFtpClient(String ftpServerAdd, Integer ftpPort, String ftpUID,
                                     String ftpPWD) {
         FTPClient ftpClient = new FTPClient();
-        ftpClient.setControlEncoding("utf-8");
+        ftpClient.setControlEncoding(FTP.DEFAULT_CONTROL_ENCODING);
         try {
             ftpClient.connect(ftpServerAdd, ftpPort); // 连接ftp服务器
             ftpClient.login(ftpUID, ftpPWD); // 登录ftp服务器
@@ -179,8 +180,8 @@ public class UploadToFtpFunc implements IFunction {
             String path = "";
             String paths = "";
             while (true) {
-                String subDirectory = new String(ftpFilePath.substring(start, end)
-                        .getBytes("GBK"), "iso-8859-1");
+//                String subDirectory = new String(ftpFilePath.substring(start, end).getBytes("GBK"), "iso-8859-1");
+                String subDirectory = new String(ftpFilePath.substring(start, end).getBytes(), FTP.DEFAULT_CONTROL_ENCODING);
                 path = path + "/" + subDirectory;
                 if (!existFile(path, ftpClient)) {
                     if (makeDirectory(subDirectory, ftpClient)) {

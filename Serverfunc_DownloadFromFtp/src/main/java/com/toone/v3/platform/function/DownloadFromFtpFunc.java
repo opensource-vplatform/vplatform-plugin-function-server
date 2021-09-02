@@ -51,12 +51,12 @@ public class DownloadFromFtpFunc implements IFunction {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
             service.checkParamSize(funcCode, context, 6);
-            param1 = context.getInput(1);
-            param2 = context.getInput(2);
-            param3 = context.getInput(3);
-            param4 = context.getInput(4);
-            param5 = context.getInput(5);
-            param6 = context.getInput(6);
+            param1 = context.getInput(0);
+            param2 = context.getInput(1);
+            param3 = context.getInput(2);
+            param4 = context.getInput(3);
+            param5 = context.getInput(4);
+            param6 = context.getInput(5);
             service.checkParamBlank(funcCode, param1, param2, param3, param4, param5, param6);
 
             // 所要下载的文件名
@@ -99,7 +99,7 @@ public class DownloadFromFtpFunc implements IFunction {
         OutputStream os = null;
         FTPClient ftpClient = null;
         try {
-            initFtpClient(ftpServerAdd, ftpPort, ftpUID, ftpPWD);
+            ftpClient = initFtpClient(ftpServerAdd, ftpPort, ftpUID, ftpPWD);
             // 切换FTP目录
             ftpClient.changeWorkingDirectory(pathname);
             FTPFile[] ftpFiles = ftpClient.listFiles();
@@ -127,7 +127,7 @@ public class DownloadFromFtpFunc implements IFunction {
         } catch (Exception e) {
            throw new RuntimeException("下载ftp文件失败：" + e.getMessage(), e);
         } finally {
-            if (ftpClient.isConnected()) {
+            if (ftpClient != null && ftpClient.isConnected()) {
                 try {
                     ftpClient.disconnect();
                 } catch (IOException e) {
@@ -146,7 +146,7 @@ public class DownloadFromFtpFunc implements IFunction {
     /**
      * 初始化ftp服务器
      */
-    public void initFtpClient(String ftpServerAdd, Integer ftpPort,
+    public FTPClient initFtpClient(String ftpServerAdd, Integer ftpPort,
                               String ftpUID, String ftpPWD) {
         FTPClient ftpClient = new FTPClient();
         ftpClient.setControlEncoding("iso-8859-1");
@@ -158,6 +158,7 @@ public class DownloadFromFtpFunc implements IFunction {
 //                throw new ServerFuncException("登录服务器失败！请检查服务器地址、账号以及密码！");
                 throw new RuntimeException("登录ftp服务器失败，状态码：" + replyCode);
             }
+            return ftpClient;
         } catch (Exception e) {
             throw new RuntimeException("初始化ftp客户端异常：" + e.getMessage(), e);
         }
