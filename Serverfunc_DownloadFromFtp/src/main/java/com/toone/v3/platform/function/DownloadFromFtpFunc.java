@@ -76,8 +76,8 @@ public class DownloadFromFtpFunc implements IFunction {
             // 所要下载的文件在ftp中存放的位置
             String ftpFilePath = (String) param6;
             ftpFilePath = ftpFilePath == null ? "" : ftpFilePath.trim();
-            ftpFilePath = new String(ftpFilePath.getBytes("utf-8"), FTP.DEFAULT_CONTROL_ENCODING);
-            ftpFileName = new String(ftpFileName.getBytes("utf-8"), FTP.DEFAULT_CONTROL_ENCODING);
+//            ftpFilePath = new String(ftpFilePath.getBytes("gbk"), FTP.DEFAULT_CONTROL_ENCODING);
+//            ftpFileName = new String(ftpFileName.getBytes("gbk"), FTP.DEFAULT_CONTROL_ENCODING);
 
             String mongDbFileId = downloadFile(ftpServerAdd, ftpPort, ftpUID,
                     ftpPWD, ftpFilePath, ftpFileName);
@@ -110,7 +110,8 @@ public class DownloadFromFtpFunc implements IFunction {
 
             StringBuffer sb = new StringBuffer();
             for (FTPFile file : ftpFiles) {
-                if (filename.equalsIgnoreCase(file.getName())) {
+                String name = new String(file.getName().getBytes(FTP.DEFAULT_CONTROL_ENCODING), "gbk");
+                if (filename.equalsIgnoreCase(name)) {
                     localFile = new File(file.getName());
                     os = new FileOutputStream(localFile);
                     ftpClient.retrieveFile(file.getName(), os);
@@ -119,8 +120,7 @@ public class DownloadFromFtpFunc implements IFunction {
                     String fileId = VdsUtils.uuid.generate();
                     appFileInfo.setId(fileId);
                     appFileInfo.setDataStream(in);
-                    appFileInfo.setOldFileName(new String(file.getName()
-                            .getBytes(FTP.DEFAULT_CONTROL_ENCODING), "utf-8"));
+                    appFileInfo.setOldFileName(name);
                     VDS.getIntance().getFileOperate().saveFileInfo(appFileInfo);
                     sb.append("," + fileId);
                     String[] fileList = sb.toString().split(",");
@@ -150,7 +150,7 @@ public class DownloadFromFtpFunc implements IFunction {
                 } catch (IOException e) {
                 }
             }
-            if(localFile.exists()) {
+            if(localFile != null && localFile.exists()) {
                 localFile.delete();
             }
         }
