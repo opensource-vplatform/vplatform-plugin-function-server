@@ -8,6 +8,7 @@ import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFunction;
 import com.yindangu.v3.platform.plugin.util.VdsUtils;
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -57,7 +58,7 @@ public class DownloadFromFtpFunc implements IFunction {
             param4 = context.getInput(3);
             param5 = context.getInput(4);
             param6 = context.getInput(5);
-            service.checkParamBlank(funcCode, param1, param2, param3, param4, param5, param6);
+            service.checkParamBlank(funcCode, param1, param2, param3, param4, param5);
 
             // 所要下载的文件名
             String ftpFileName = (String) param1;
@@ -74,8 +75,9 @@ public class DownloadFromFtpFunc implements IFunction {
              */
             // 所要下载的文件在ftp中存放的位置
             String ftpFilePath = (String) param6;
-            ftpFilePath = new String(ftpFilePath.getBytes("GBk"), "iso-8859-1");
-            ftpFileName = new String(ftpFileName.getBytes("GBk"), "iso-8859-1");
+            ftpFilePath = ftpFilePath == null ? "" : ftpFilePath.trim();
+            ftpFilePath = new String(ftpFilePath.getBytes("utf-8"), FTP.DEFAULT_CONTROL_ENCODING);
+            ftpFileName = new String(ftpFileName.getBytes("utf-8"), FTP.DEFAULT_CONTROL_ENCODING);
 
             String mongDbFileId = downloadFile(ftpServerAdd, ftpPort, ftpUID,
                     ftpPWD, ftpFilePath, ftpFileName);
@@ -98,6 +100,8 @@ public class DownloadFromFtpFunc implements IFunction {
         String finallyFileID = "-1";
         OutputStream os = null;
         FTPClient ftpClient = null;
+        File localFile = null;
+        FileInputStream in = null;
         try {
             ftpClient = initFtpClient(ftpServerAdd, ftpPort, ftpUID, ftpPWD);
             // 切换FTP目录
@@ -107,20 +111,21 @@ public class DownloadFromFtpFunc implements IFunction {
             StringBuffer sb = new StringBuffer();
             for (FTPFile file : ftpFiles) {
                 if (filename.equalsIgnoreCase(file.getName())) {
-                    File localFile = new File(file.getName());
+                    localFile = new File(file.getName());
                     os = new FileOutputStream(localFile);
                     ftpClient.retrieveFile(file.getName(), os);
-                    os.close();
-                    InputStream input = new FileInputStream(localFile);
+                    in = new FileInputStream(localFile);
                     IAppFileInfo appFileInfo = VDS.getIntance().newAppFileInfo();
                     String fileId = VdsUtils.uuid.generate();
                     appFileInfo.setId(fileId);
+                    appFileInfo.setDataStream(in);
                     appFileInfo.setOldFileName(new String(file.getName()
-                            .getBytes("iso-8859-1"), "utf-8"));
+                            .getBytes(FTP.DEFAULT_CONTROL_ENCODING), "utf-8"));
                     VDS.getIntance().getFileOperate().saveFileInfo(appFileInfo);
                     sb.append("," + fileId);
                     String[] fileList = sb.toString().split(",");
                     finallyFileID = fileList[fileList.length - 1];
+                    break;
                 }
             }
             ftpClient.logout();
@@ -139,6 +144,15 @@ public class DownloadFromFtpFunc implements IFunction {
                 } catch (IOException e) {
                 }
             }
+            if(in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                }
+            }
+            if(localFile.exists()) {
+                localFile.delete();
+            }
         }
         return finallyFileID;
     }
@@ -149,7 +163,7 @@ public class DownloadFromFtpFunc implements IFunction {
     public FTPClient initFtpClient(String ftpServerAdd, Integer ftpPort,
                               String ftpUID, String ftpPWD) {
         FTPClient ftpClient = new FTPClient();
-        ftpClient.setControlEncoding("iso-8859-1");
+        ftpClient.setControlEncoding(FTP.DEFAULT_CONTROL_ENCODING);
         try {
             ftpClient.connect(ftpServerAdd, ftpPort); // 连接ftp服务器
             ftpClient.login(ftpUID, ftpPWD); // 登录ftp服务器
