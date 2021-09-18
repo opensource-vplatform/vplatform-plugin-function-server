@@ -151,7 +151,12 @@ public class GetLoactionPlaceFunc implements IFunction {
         if (locationInfo != null && !locationInfo.equals("")) {
             //去掉没用的格式
             locationInfo = locationInfo.substring(0, locationInfo.length() - 1).replace("renderReverse&&renderReverse(", "");
-            Map<String, Object> mmMap = VdsUtils.json.fromJson(locationInfo);
+            Map<String, Object> mmMap = null;
+            try {
+                mmMap = VdsUtils.json.fromJson(locationInfo);
+            } catch(Exception e) {
+                // json解析失败，按照旧的逻辑，就是直接处理了
+            }
             if (mmMap != null && mmMap.containsKey("result")) {
                 Map resultslist = (Map) mmMap.get("result");
                 if (resultslist != null && resultslist.containsKey("addressComponent")) {
@@ -195,7 +200,12 @@ public class GetLoactionPlaceFunc implements IFunction {
         if (locationInfo != null && !locationInfo.equals("")) {
             //去掉没用的格式
             locationInfo = locationInfo.substring(0, locationInfo.length() - 1).replace("renderReverse&&renderReverse(", "");
-            Map<String, Object> mmMap = VdsUtils.json.fromJson(locationInfo);
+            Map<String, Object> mmMap = null;
+            try {
+                mmMap = VdsUtils.json.fromJson(locationInfo);
+            } catch(Exception e) {
+                // json解析失败，按照旧的逻辑，直接处理
+            }
             if (mmMap != null && mmMap.containsKey("result")) {
                 Map resultslist = (Map) mmMap.get("result");
                 if (resultslist != null && resultslist.containsKey("addressComponent")) {
