@@ -46,7 +46,7 @@ public class GetSerialNumberFunc implements IFunction {
         IFuncOutputVo outputVo = context.newOutputVo();
         Object param = null;
         try {
-            ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
+            //ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
             String tableName = (String) context.getInput(0);
             String tableColumn = (String) context.getInput(1);
