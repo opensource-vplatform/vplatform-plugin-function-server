@@ -53,7 +53,7 @@ public class DowdloadFileToFileSystemFunc implements IFunction {
                 param1 = context.getInput(0);
                 type = (String) context.getInput(1);
             } else {
-                throw new ServerFuncException("函数【】参数不合法，需要1个或者2个参数，当前参数个数：" + size);
+                throw new ServerFuncException("函数【" + funcCode + "】参数不合法，需要1个或者2个参数，当前参数个数：" + size);
             }
 
             String fileId = VdsUtils.uuid.generate();
@@ -75,6 +75,9 @@ public class DowdloadFileToFileSystemFunc implements IFunction {
                     appFileInfo.setOldFileName(fileId + type);
                     appFileInfo.setDataStream(inputStreams[0]);
                 } else {
+                    if(!type.startsWith(".")){
+                        type="."+type;
+                    }
                     appFileInfo.setFileType(type);
                     appFileInfo.setOldFileName(fileId + type);
                     appFileInfo.setDataStream(inputStream);
