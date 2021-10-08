@@ -73,9 +73,11 @@ public class DowdloadFileToFileSystemFunc implements IFunction {
                     type = FileType.getFileTypeByFileInputStream(inputStreams[1]);
                     appFileInfo.setFileType(type);
                     appFileInfo.setOldFileName(fileId + type);
+                    appFileInfo.setDataStream(inputStreams[0]);
                 } else {
                     appFileInfo.setFileType(type);
                     appFileInfo.setOldFileName(fileId + type);
+                    appFileInfo.setDataStream(inputStream);
                 }
                 VDS.getIntance().getFileOperate().saveFileInfo(appFileInfo);
             } catch (Exception e) {
