@@ -83,14 +83,14 @@ public class DowdloadFileToFileSystemFunc implements IFunction {
                     appFileInfo.setDataStream(inputStream);
                 }
                 VDS.getIntance().getFileOperate().saveFileInfo(appFileInfo);
+
+                outputVo.setSuccess(true);
+                outputVo.put(fileId);
             } catch (Exception e) {
                 log.warn("下载网络文件上传到文件服务失败，url=" + param1.toString(), e);
                 outputVo.setSuccess(true);
                 outputVo.put("-1");
             }
-
-            outputVo.setSuccess(true);
-            outputVo.put(fileId);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());
