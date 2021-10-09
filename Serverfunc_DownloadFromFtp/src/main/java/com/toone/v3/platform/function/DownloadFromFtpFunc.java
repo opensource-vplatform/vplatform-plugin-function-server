@@ -8,6 +8,7 @@ import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFunction;
 import com.yindangu.v3.platform.plugin.util.VdsUtils;
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -51,13 +52,13 @@ public class DownloadFromFtpFunc implements IFunction {
             ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
             service.checkParamSize(funcCode, context, 6);
-            param1 = context.getInput(1);
-            param2 = context.getInput(2);
-            param3 = context.getInput(3);
-            param4 = context.getInput(4);
-            param5 = context.getInput(5);
-            param6 = context.getInput(6);
-            service.checkParamBlank(funcCode, param1, param2, param3, param4, param5, param6);
+            param1 = context.getInput(0);
+            param2 = context.getInput(1);
+            param3 = context.getInput(2);
+            param4 = context.getInput(3);
+            param5 = context.getInput(4);
+            param6 = context.getInput(5);
+            service.checkParamBlank(funcCode, param1, param2, param3, param4, param5);
 
             // 所要下载的文件名
             String ftpFileName = (String) param1;
@@ -74,8 +75,9 @@ public class DownloadFromFtpFunc implements IFunction {
              */
             // 所要下载的文件在ftp中存放的位置
             String ftpFilePath = (String) param6;
-            ftpFilePath = new String(ftpFilePath.getBytes("GBk"), "iso-8859-1");
-            ftpFileName = new String(ftpFileName.getBytes("GBk"), "iso-8859-1");
+            ftpFilePath = ftpFilePath == null ? "" : ftpFilePath.trim();
+//            ftpFilePath = new String(ftpFilePath.getBytes("gbk"), FTP.DEFAULT_CONTROL_ENCODING);
+//            ftpFileName = new String(ftpFileName.getBytes("gbk"), FTP.DEFAULT_CONTROL_ENCODING);
 
             String mongDbFileId = downloadFile(ftpServerAdd, ftpPort, ftpUID,
                     ftpPWD, ftpFilePath, ftpFileName);
@@ -98,48 +100,58 @@ public class DownloadFromFtpFunc implements IFunction {
         String finallyFileID = "-1";
         OutputStream os = null;
         FTPClient ftpClient = null;
+        File localFile = null;
+        FileInputStream in = null;
         try {
-            initFtpClient(ftpServerAdd, ftpPort, ftpUID, ftpPWD);
+            ftpClient = initFtpClient(ftpServerAdd, ftpPort, ftpUID, ftpPWD);
             // 切换FTP目录
             ftpClient.changeWorkingDirectory(pathname);
             FTPFile[] ftpFiles = ftpClient.listFiles();
 
             StringBuffer sb = new StringBuffer();
             for (FTPFile file : ftpFiles) {
-                if (filename.equalsIgnoreCase(file.getName())) {
-                    File localFile = new File(file.getName());
+                String name = new String(file.getName().getBytes(FTP.DEFAULT_CONTROL_ENCODING), "gbk");
+                if (filename.equalsIgnoreCase(name)) {
+                    localFile = new File(file.getName());
                     os = new FileOutputStream(localFile);
                     ftpClient.retrieveFile(file.getName(), os);
-                    os.close();
-                    InputStream input = new FileInputStream(localFile);
+                    in = new FileInputStream(localFile);
                     IAppFileInfo appFileInfo = VDS.getIntance().newAppFileInfo();
                     String fileId = VdsUtils.uuid.generate();
                     appFileInfo.setId(fileId);
-                    appFileInfo.setOldFileName(new String(file.getName()
-                            .getBytes("iso-8859-1"), "utf-8"));
+                    appFileInfo.setDataStream(in);
+                    appFileInfo.setOldFileName(name);
                     VDS.getIntance().getFileOperate().saveFileInfo(appFileInfo);
                     sb.append("," + fileId);
                     String[] fileList = sb.toString().split(",");
                     finallyFileID = fileList[fileList.length - 1];
+                    break;
                 }
             }
             ftpClient.logout();
         } catch (Exception e) {
-            e.printStackTrace();
+           throw new RuntimeException("下载ftp文件失败：" + e.getMessage(), e);
         } finally {
-            if (ftpClient.isConnected()) {
+            if (ftpClient != null && ftpClient.isConnected()) {
                 try {
                     ftpClient.disconnect();
                 } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
             if (null != os) {
                 try {
                     os.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            }
+            if(in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                }
+            }
+            if(localFile != null && localFile.exists()) {
+                localFile.delete();
             }
         }
         return finallyFileID;
@@ -148,21 +160,21 @@ public class DownloadFromFtpFunc implements IFunction {
     /**
      * 初始化ftp服务器
      */
-    public void initFtpClient(String ftpServerAdd, Integer ftpPort,
+    public FTPClient initFtpClient(String ftpServerAdd, Integer ftpPort,
                               String ftpUID, String ftpPWD) {
         FTPClient ftpClient = new FTPClient();
-        ftpClient.setControlEncoding("iso-8859-1");
+        ftpClient.setControlEncoding(FTP.DEFAULT_CONTROL_ENCODING);
         try {
             ftpClient.connect(ftpServerAdd, ftpPort); // 连接ftp服务器
             ftpClient.login(ftpUID, ftpPWD); // 登录ftp服务器
             int replyCode = ftpClient.getReplyCode(); // 是否成功登录服务器
             if (!FTPReply.isPositiveCompletion(replyCode)) {
-                throw new ServerFuncException("登录服务器失败！请检查服务器地址、账号以及密码！");
+//                throw new ServerFuncException("登录服务器失败！请检查服务器地址、账号以及密码！");
+                throw new RuntimeException("登录ftp服务器失败，状态码：" + replyCode);
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            return ftpClient;
+        } catch (Exception e) {
+            throw new RuntimeException("初始化ftp客户端异常：" + e.getMessage(), e);
         }
     }
 }

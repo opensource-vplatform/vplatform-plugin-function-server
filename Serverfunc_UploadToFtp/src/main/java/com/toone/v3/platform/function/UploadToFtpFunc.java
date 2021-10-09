@@ -7,6 +7,7 @@ import com.yindangu.v3.business.file.api.model.IAppFileInfo;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFunction;
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -115,26 +116,24 @@ public class UploadToFtpFunc implements IFunction {
             ftpClient.setFileType(ftpClient.BINARY_FILE_TYPE);
             CreateDirecroty(ftpFilePath, ftpClient);
             //ftpClient.makeDirectory(ftpFilePath);
-            ftpClient.changeWorkingDirectory(ftpFilePath);
-            ftpClient.storeFile(ftpFileName, inputStream);
+//            ftpClient.changeWorkingDirectory(ftpFilePath);
+            ftpClient.storeFile(new String(ftpFileName.getBytes(), FTP.DEFAULT_CONTROL_ENCODING), inputStream);
             inputStream.close();
             ftpClient.logout();
             flag = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("上传文件到ftp服务器失败，" + e.getMessage(), e);
         } finally {
             if (ftpClient != null && ftpClient.isConnected()) {
                 try {
                     ftpClient.disconnect();
                 } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
             if (null != inputStream) {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }
@@ -147,17 +146,17 @@ public class UploadToFtpFunc implements IFunction {
     private FTPClient initFtpClient(String ftpServerAdd, Integer ftpPort, String ftpUID,
                                     String ftpPWD) {
         FTPClient ftpClient = new FTPClient();
-        ftpClient.setControlEncoding("utf-8");
+        ftpClient.setControlEncoding(FTP.DEFAULT_CONTROL_ENCODING);
         try {
             ftpClient.connect(ftpServerAdd, ftpPort); // 连接ftp服务器
             ftpClient.login(ftpUID, ftpPWD); // 登录ftp服务器
             int replyCode = ftpClient.getReplyCode(); // 是否成功登录服务器
             if (!FTPReply.isPositiveCompletion(replyCode)) {
+                // 登录失败
+                throw new RuntimeException("登录ftp服务器失败，状态码：" + replyCode);
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch(Exception e) {
+            throw new RuntimeException("初始化ftp客户端异常，" + e.getMessage(), e);
         }
 
         return ftpClient;
@@ -181,8 +180,8 @@ public class UploadToFtpFunc implements IFunction {
             String path = "";
             String paths = "";
             while (true) {
-                String subDirectory = new String(ftpFilePath.substring(start, end)
-                        .getBytes("GBK"), "iso-8859-1");
+//                String subDirectory = new String(ftpFilePath.substring(start, end).getBytes("GBK"), "iso-8859-1");
+                String subDirectory = new String(ftpFilePath.substring(start, end).getBytes(), FTP.DEFAULT_CONTROL_ENCODING);
                 path = path + "/" + subDirectory;
                 if (!existFile(path, ftpClient)) {
                     if (makeDirectory(subDirectory, ftpClient)) {
@@ -207,13 +206,8 @@ public class UploadToFtpFunc implements IFunction {
     }
 
     // 改变目录路径
-    private boolean changeWorkingDirectory(String directory, FTPClient ftpClient) {
-        boolean flag = true;
-        try {
-            flag = ftpClient.changeWorkingDirectory(directory);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+    private boolean changeWorkingDirectory(String directory, FTPClient ftpClient) throws IOException {
+        boolean flag = ftpClient.changeWorkingDirectory(directory);
         return flag;
     }
 
@@ -228,13 +222,8 @@ public class UploadToFtpFunc implements IFunction {
     }
 
     // 创建目录
-    private boolean makeDirectory(String dir, FTPClient ftpClient) {
-        boolean flag = true;
-        try {
-            flag = ftpClient.makeDirectory(dir);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private boolean makeDirectory(String dir, FTPClient ftpClient) throws IOException {
+        boolean flag = ftpClient.makeDirectory(dir);
         return flag;
     }
 }

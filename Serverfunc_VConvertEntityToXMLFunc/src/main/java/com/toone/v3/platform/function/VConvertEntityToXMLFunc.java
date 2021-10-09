@@ -93,7 +93,7 @@ public class VConvertEntityToXMLFunc implements IFunction {
             Element tableEle = root.addElement(datasourceName);
 
             // 抽取元数据到XML中
-            Set<String> columnNames = dataView.getMetadata().getColumnNames();
+            Set<String> columnNames = dataView.getMetadata().getColumnNamesAll();//.getColumnNames();
             List<IColumn> fieldSet = new ArrayList<>();
             for (String name : columnNames) {
                 if(H2_STATE_FIELD.equalsIgnoreCase(name) || H2_ORGID_FIELD.equalsIgnoreCase(name) || H2_SOURCE_FIELD.equalsIgnoreCase(name) || H2_PK_FIELD.equalsIgnoreCase(name) || H2_TenantID_Field.equalsIgnoreCase(name)) {
