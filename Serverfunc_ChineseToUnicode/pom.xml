@@ -16,9 +16,9 @@
     <dependency> 
       <groupId>com.yindangu.v3.platform</groupId>  
       <artifactId>Serverfunc_CommonUtils</artifactId>  
-      <version>3.0.0</version>
-      <scope>system</scope>
-      <systemPath>${pom.basedir}/src/main/resources/lib/Serverfunc_CommonUtils-3.0.0.jar</systemPath>
+      <version>3.0.0</version>  
+      <scope>system</scope>  
+      <systemPath>${pom.basedir}/src/main/resources/lib/Serverfunc_CommonUtils-3.0.0.jar</systemPath> 
     </dependency>  
     <!-- ////////////////插件依赖开始/////////////////// -->  
     <dependency> 
@@ -45,7 +45,7 @@
     </dependency> 
   </dependencies>  
   <build> 
-    <pluginManagement>
+    <pluginManagement> 
       <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->  
       <plugins> 
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->  
@@ -88,6 +88,14 @@
           <version>3.0.0</version> 
         </plugin> 
       </plugins> 
-    </pluginManagement> 
+    </pluginManagement>  
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>lib/Serverfunc_CommonUtils-3.0.0.jar</exclude>
+        </excludes>
+      </resource>
+    </resources>
   </build> 
 </project>
