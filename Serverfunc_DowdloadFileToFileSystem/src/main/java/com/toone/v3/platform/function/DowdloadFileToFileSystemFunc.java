@@ -53,7 +53,7 @@ public class DowdloadFileToFileSystemFunc implements IFunction {
                 param1 = context.getInput(0);
                 type = (String) context.getInput(1);
             } else {
-                throw new ServerFuncException("函数【】参数不合法，需要1个或者2个参数，当前参数个数：" + size);
+                throw new ServerFuncException("函数【" + funcCode + "】参数不合法，需要1个或者2个参数，当前参数个数：" + size);
             }
 
             String fileId = VdsUtils.uuid.generate();
@@ -73,19 +73,24 @@ public class DowdloadFileToFileSystemFunc implements IFunction {
                     type = FileType.getFileTypeByFileInputStream(inputStreams[1]);
                     appFileInfo.setFileType(type);
                     appFileInfo.setOldFileName(fileId + type);
+                    appFileInfo.setDataStream(inputStreams[0]);
                 } else {
+                    if(!type.startsWith(".")){
+                        type="."+type;
+                    }
                     appFileInfo.setFileType(type);
                     appFileInfo.setOldFileName(fileId + type);
+                    appFileInfo.setDataStream(inputStream);
                 }
                 VDS.getIntance().getFileOperate().saveFileInfo(appFileInfo);
+
+                outputVo.setSuccess(true);
+                outputVo.put(fileId);
             } catch (Exception e) {
                 log.warn("下载网络文件上传到文件服务失败，url=" + param1.toString(), e);
                 outputVo.setSuccess(true);
                 outputVo.put("-1");
             }
-
-            outputVo.setSuccess(true);
-            outputVo.put(fileId);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());
