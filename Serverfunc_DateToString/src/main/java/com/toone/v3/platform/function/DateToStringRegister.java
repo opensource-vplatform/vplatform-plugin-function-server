@@ -9,6 +9,7 @@ import com.yindangu.v3.plugin.vds.reg.api.model.VariableType;
 import com.yindangu.v3.plugin.vds.reg.common.RegVds;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -59,7 +60,8 @@ public class DateToStringRegister implements IRegisterPlugin {
                 .build();
         IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
                 .setDesc("时间")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Char, VariableType.Date, VariableType.LongDate))
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
