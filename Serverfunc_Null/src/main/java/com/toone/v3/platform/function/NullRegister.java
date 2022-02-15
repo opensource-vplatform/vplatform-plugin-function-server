@@ -1,5 +1,6 @@
 package com.toone.v3.platform.function;
 
+import com.sun.org.apache.xpath.internal.operations.Variable;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -9,6 +10,7 @@ import com.yindangu.v3.plugin.vds.reg.api.model.VariableType;
 import com.yindangu.v3.plugin.vds.reg.common.RegVds;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -54,7 +56,8 @@ public class NullRegister implements IRegisterPlugin {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("返回值")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Char, VariableType.Boolean, VariableType.Date, VariableType.Entity, VariableType.Integer, VariableType.LongDate, VariableType.Number, VariableType.Text))
                 .build();
         pluginBuilder.setAuthor(Plugin_Author)
                 .setCode(Plugin_Code)
