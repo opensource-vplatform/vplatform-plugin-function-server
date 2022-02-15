@@ -239,7 +239,7 @@ public class ListToStringFunc implements IFunction {
 	            if (o != null && (s = o.toString()).length()>0) {
 	            	rds.add(s);
 	            }
-	            size ++;
+	            //size ++;
 	    	}
 	    	 
 	    	if(rds.size()>0){
