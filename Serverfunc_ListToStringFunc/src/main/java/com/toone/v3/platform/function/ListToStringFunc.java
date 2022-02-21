@@ -208,8 +208,13 @@ public class ListToStringFunc implements IFunction {
                 }
             }
         }
-        long endTime = System.currentTimeMillis();
-        log.info("列转字符串处理(v1版本-toone版)耗时:" + (endTime - startTime) + ",其中转换map时间(" + (startTime2-startTime) +"),recordSize=" + size);
+        long endTime = System.currentTimeMillis() ,times = endTime - startTime;
+        if(times>128) {
+        	log.info("列转字符串处理(v1版本-toone版)耗时:{},其中转换map时间({}),recordSize={}" ,times, (startTime2-startTime), size);
+        }
+        else {
+        	log.debug("列转字符串处理(v1版本-toone版)耗时:{},其中转换map时间({}),recordSize={}" ,times, (startTime2-startTime), size);
+        }
         return retStr.toString();
     }
     /**
@@ -256,8 +261,13 @@ public class ListToStringFunc implements IFunction {
     		return retStr;
     	}
     	finally {
-	        long endTime = System.currentTimeMillis();
-	        log.info("列转字符串处理(v1b版本-toone版)耗时:" + (endTime - startTime) + ",recordSize=" + size);
+	        long endTime = System.currentTimeMillis(),t =(endTime - startTime);
+	        if(t>128) {
+	        	log.info("列转字符串处理(v1b版本-toone版)耗时:{},recordSize={}" ,(endTime - startTime), size);	
+	        }
+	        else {
+	        	log.debug("列转字符串处理(v1b版本-toone版)耗时:{},recordSize={}" ,(endTime - startTime), size);
+	        }
     	}
     }
 }
