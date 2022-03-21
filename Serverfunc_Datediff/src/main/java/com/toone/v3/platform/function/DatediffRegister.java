@@ -9,6 +9,7 @@ import com.yindangu.v3.plugin.vds.reg.api.model.VariableType;
 import com.yindangu.v3.plugin.vds.reg.common.RegVds;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -54,12 +55,14 @@ public class DatediffRegister implements IRegisterPlugin {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
                 .setDesc("原日期")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Char, VariableType.Date, VariableType.LongDate))
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
                 .setDesc("目标日期")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Char, VariableType.Date, VariableType.LongDate))
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionInputVo inputVo3 = pluginBuilder.newInput()

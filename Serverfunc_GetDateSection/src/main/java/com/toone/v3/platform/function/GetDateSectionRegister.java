@@ -1,5 +1,6 @@
 package com.toone.v3.platform.function;
 
+import com.sun.org.apache.xpath.internal.operations.Variable;
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -55,7 +56,8 @@ public class GetDateSectionRegister implements IRegisterPlugin {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
                 .setDesc("日期")
-                .setType(VariableType.Char)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Char, VariableType.Date, VariableType.LongDate))
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
