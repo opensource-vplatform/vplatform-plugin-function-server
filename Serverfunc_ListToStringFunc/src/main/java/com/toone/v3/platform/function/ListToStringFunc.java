@@ -263,10 +263,10 @@ public class ListToStringFunc implements IFunction {
     	finally {
 	        long endTime = System.currentTimeMillis(),t =(endTime - startTime);
 	        if(t>128) {
-	        	log.info("列转字符串处理(v1b版本-toone版)耗时:{},recordSize={}" ,(endTime - startTime), size);	
+	        	log.info("列转字符串处理(v1b版本-toone版)耗时:{},recordSize={}" ,t, size);	
 	        }
 	        else {
-	        	log.debug("列转字符串处理(v1b版本-toone版)耗时:{},recordSize={}" ,(endTime - startTime), size);
+	        	log.debug("列转字符串处理(v1b版本-toone版)耗时:{},recordSize={}" ,t, size);
 	        }
     	}
     }
