@@ -5,26 +5,16 @@ import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncVObject;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 /**
  * Unit test for simple App.
  */
 public class ABSFuncTest {
 
-    private final ABSFunc func = new ABSFunc();
     /**
      * Rigorous Test :-)
      */
     @Test
     public void shouldAnswerWithTrue() {
-//        double input = -10;
-//        IFuncContext context = getIFuncContext(input);
-//        IFuncOutputVo outputVo = func.evaluate(context);
-//        double out = (double) outputVo.get();
-//        System.out.println(out);
-//        assertEquals(Math.abs(input), out, 0.0);
     }
 
     private IFuncContext getIFuncContext(Object input) {
