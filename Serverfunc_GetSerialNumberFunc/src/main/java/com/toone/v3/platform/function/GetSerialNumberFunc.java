@@ -59,10 +59,11 @@ public class GetSerialNumberFunc implements IFunction {
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());
+            log.error("函数[" + funcCode + "]计算失败", e);
         } catch (Exception e) {
             outputVo.setSuccess(false);
             outputVo.setMessage("函数【" + funcCode + "】计算有误，" + e.getMessage());
-            log.error("函数【" + funcCode + "】计算失败", e);
+            log.error("函数【" + funcCode + "】计算有误", e);
         }
         return outputVo;
     }
