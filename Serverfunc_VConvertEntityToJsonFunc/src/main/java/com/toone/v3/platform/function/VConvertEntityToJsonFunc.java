@@ -1,6 +1,5 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.toone.v3.platform.function.common.exception.ServerFuncException;
 import com.yindangu.v3.business.VDS;
 import com.yindangu.v3.business.metadata.api.IDataView;
@@ -53,7 +52,9 @@ public class VConvertEntityToJsonFunc implements IFunction {
             //获取参数
             String entityCode = CheckStringNull(param1, 1);
             IDataView dataView = VDS.getIntance().getFormulaEngine().eval(entityCode);
-            ;
+            if(dataView == null) {
+            	throw new ServerFuncException("函数【" + funcCode + "】找不到实体：" + entityCode);
+            }
             //获取实体数据
             List dataList = dataView.getDatas();
             //如果存在第二个参数
@@ -70,8 +71,8 @@ public class VConvertEntityToJsonFunc implements IFunction {
                     Map<String, Object> item = (Map<String, Object>) dataList.get(i);
                     for (String string : item.keySet()) {
                         fieldValue = item.get(string);
-                        if (fileList.contains(string)) {
-                            fieldValue = VdsUtils.json.fromJsonList(item.get(string).toString());
+                        if (fieldValue != null && fileList.contains(string)) {
+                            fieldValue = VdsUtils.json.fromJsonList(fieldValue.toString());
                         }
                         convertMap.put(string, fieldValue);
                     }
