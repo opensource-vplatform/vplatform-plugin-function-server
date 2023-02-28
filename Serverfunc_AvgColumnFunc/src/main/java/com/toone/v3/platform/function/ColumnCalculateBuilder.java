@@ -137,9 +137,12 @@ public class ColumnCalculateBuilder {
 	 */
 	public Number max()  {
 		List<IDataObject> mapList = build.getDataList();// data.select();
+		if(mapList.isEmpty()) {
+			return Integer.valueOf(0);
+		}
 		String columnName = build.getColumn().getColumnName();
-		BigDecimal maxDec = BigDecimal.valueOf(0);
-		long max = 0;
+		long max = Integer.MIN_VALUE;
+		BigDecimal maxDec = BigDecimal.valueOf(max);
 		boolean integerField =(build.isIntegerField()) ;
 		
 		for (IDataObject map : mapList) {
@@ -161,9 +164,13 @@ public class ColumnCalculateBuilder {
 	}
 	public Number min()  {
 		List<IDataObject> mapList = build.getDataList();// data.select();
+		if(mapList.isEmpty()) {
+			return Integer.valueOf(0);
+		}
+		
 		String columnName = build.getColumn().getColumnName();
-		BigDecimal minDec = BigDecimal.valueOf(0);
-		long min = 0;
+		long min = Integer.MAX_VALUE;
+		BigDecimal minDec = BigDecimal.valueOf(min);
 		boolean integerField =(build.isIntegerField()) ;
 		
 		for (IDataObject map : mapList) {

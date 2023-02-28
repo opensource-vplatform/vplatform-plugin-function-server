@@ -1,7 +1,6 @@
 package com.toone.v3.platform.function;
 
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
