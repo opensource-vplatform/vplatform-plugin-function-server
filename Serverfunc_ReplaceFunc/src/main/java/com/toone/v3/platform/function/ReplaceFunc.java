@@ -35,7 +35,7 @@ public class ReplaceFunc implements IFunction {
         Object param3 = null;
         boolean isReg = false;
         try {
-            ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
+            //ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
             int size = context.getInputSize();
             if(size < 3 || size > 4) {
                 throw new ServerFuncException("函数【" + funcCode + "】需要3个或者4个参数，当前参数个数：" + size);
@@ -76,46 +76,46 @@ public class ReplaceFunc implements IFunction {
 
     private String chRegex(String x) {
         //^$.?+*|[](){}\
-        if(x.contains("\\")) {
+        if(x.indexOf('\\')>0) {
             x = x.replaceAll("\\\\","\\\\\\\\");
         }
-        if(x.contains("^")) {
+        if(x.indexOf('^')>0) {
             x = x.replaceAll("\\^","\\\\\\^");
         }
-        if(x.contains("$")) {
+        if(x.indexOf('$')>0) {
             x = x.replaceAll("\\$","\\\\\\$");
         }
-        if(x.contains(".")) {
+        if(x.indexOf('.')>0) {
             x = x.replaceAll("\\.","\\\\\\.");
         }
-        if(x.contains("?")) {
+        if(x.indexOf('?')>0) {
             x = x.replaceAll("\\?","\\\\\\?");
         }
-        if(x.contains("+")) {
+        if(x.indexOf('+')>0) {
             x = x.replaceAll("\\+","\\\\\\+");
         }
-        if(x.contains("*")) {
+        if(x.indexOf('*')>0) {
             x = x.replaceAll("\\*","\\\\\\*");
         }
-        if(x.contains("|")) {
+        if(x.indexOf('|')>0) {
             x = x.replaceAll("\\|","\\\\\\|");
         }
-        if(x.contains("{")) {
+        if(x.indexOf('{')>0) {
             x = x.replaceAll("\\{","\\\\\\{");
         }
-        if(x.contains("}")) {
+        if(x.indexOf('}')>0) {
             x = x.replaceAll("\\}","\\\\\\}");
         }
-        if(x.contains("(")) {
+        if(x.indexOf('(')>0) {
             x = x.replaceAll("\\(","\\\\\\(");
         }
-        if(x.contains(")")) {
+        if(x.indexOf(')')>0) {
             x = x.replaceAll("\\)","\\\\\\)");
         }
-        if(x.contains("[")) {
+        if(x.indexOf('[')>0) {
             x = x.replaceAll("\\[","\\\\\\[");
         }
-        if(x.contains("]")) {
+        if(x.indexOf(']')>0) {
             x = x.replaceAll("\\]","\\\\\\]");
         }
 

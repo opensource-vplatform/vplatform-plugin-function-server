@@ -1,17 +1,16 @@
 package com.toone.v3.platform.function;
 
-import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.toone.v3.platform.function.common.exception.ServerFuncException;
-import com.yindangu.v3.business.VDS;
+import com.yindangu.v3.business.jdbc.api.model.IColumn;
 import com.yindangu.v3.business.metadata.api.IDataView;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncOutputVo;
 import com.yindangu.v3.business.plugin.business.api.func.IFunction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * 计算实体某个字段的平均值。<br>
@@ -32,60 +31,46 @@ public class AvgColumnFunc implements IFunction {
     @Override
     public IFuncOutputVo evaluate(IFuncContext context) {
         IFuncOutputVo outputVo = context.newOutputVo();
-        Object param1 = null;
-        Object param2 = null;
+
+        ColumnCalculateUtil util = new ColumnCalculateUtil(funcCode, context);
         try {
-            ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
-
-            service.checkParamSize(funcCode, context, 2);
-            param1 = context.getInput(0);
-            param2 = context.getInput(1);
-
-            service.checkParamNull(funcCode, param1, param2);
-
-            IDataView dv;
-            if(param1 instanceof IDataView) {
-                dv = (IDataView) param1;
-            } else if(param1 instanceof String) {
-                dv = VDS.getIntance().getFormulaEngine().eval(param1.toString());
-            } else {
-                throw new ServerFuncException("函数【" + funcCode + "】的第一个参数必须是字符串类型或者实体类型，当前值：" + param1);
-            }
-
-            String columnName = param2.toString();
-
-            List<Map<String, Object>> datas = dv.getDatas();
+        	IDataView data = util.getDataView(0);
+        	IColumn column = util.getColumnByDataView(1,data);
 
             // TODO 求和应该使用功大数计算BigDecimal
-            int count = 0;
-            double sum = 0.0d;
-            for(Map<String, Object> data : datas) {
-                Object value = data.get(columnName);
-                if(value!=null) {
-                    if(value instanceof Double || value instanceof Integer || value instanceof java.math.BigDecimal){
-                        sum =sum + Double.parseDouble(value.toString());
-                    }else{
-                        throw new ServerFuncException("函数【" + funcCode + "】的第2个参数对应的字段值必须是数字类型，参数2：" + param2);
-                    }
-                }
-                count++;
-            }
+        	if(data.size() >0) {
+	            String filter = util.getFilters(2);
+	            Map<String,Object> params = null;
+	            if(filter.length()>0){ //有条件
+	            	params = util.getFilterParams(3);
+	            }
 
-            if(count > 0) {
-                outputVo.put(sum/count);
-            } else {
-                outputVo.put(0.0d);
+	            Number rs =  ColumnCalculateBuilder.newBuild(funcCode)
+            		.setColumn(column)
+            		.setDataView(data)
+            		.setFilters(filter)//二次过滤
+            		.setParams(params)
+            		.build()
+            		.avg()
+            	; 
+	            outputVo.put(rs); 
+            }
+            else {
+            	outputVo.put(Integer.valueOf(0));	
             }
             outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
+        	String msg = util.getFullParams(e.getMessage());
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + param1 + "，参数2：" + param2 + "，" + e.getMessage());
-            log.error("函数【" + funcCode + "】计算失败，参数1：" + param1 + "，参数2：" + param2, e);
+            //outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + entityname + "，参数2：" + columnname + ", " + e.getMessage());
+            outputVo.setMessage(msg);
+            log.error(msg, e);
         }
-
         return outputVo;
     }
+    
+    
 }

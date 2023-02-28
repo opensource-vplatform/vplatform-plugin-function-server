@@ -37,80 +37,45 @@ public class MaxColumnFunc implements IFunction {
     @Override
     public IFuncOutputVo evaluate(IFuncContext context) {
         IFuncOutputVo outputVo = context.newOutputVo();
-        Object entityname = null;
-        Object columnname = null;
+
+        ColumnCalculateUtil util = new ColumnCalculateUtil(funcCode, context);
         try {
-            ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
-            service.checkParamSize(funcCode, context, 2);
-            entityname = context.getInput(0);
-            columnname = context.getInput(1);
-            String column = "";
-            IDataView data = null;
-            BigDecimal resultValue = new BigDecimal(0);
-            int resultValue2 = 0;
-            int ctype = 0;
-            if (entityname instanceof IDataView) {
-                data = (IDataView) entityname;
-            } else if (entityname instanceof String) {
-                data = (IDataView) VDS.getIntance().getFormulaEngine().eval(entityname.toString());
-            } else {
-                throw new ServerFuncException("函数【" + funcCode + "】的第1个参数类型必须是字符串类型或者实体类型，参数1：" + entityname);
+        	IDataView data = util.getDataView(0);
+        	IColumn column = util.getColumnByDataView(1,data);
+
+            // TODO 求和应该使用功大数计算BigDecimal
+        	if(data.size() >0) {
+	            String filter = util.getFilters(2);
+	            Map<String,Object> params = null;
+	            if(filter.length()>0){ //有条件
+	            	params = util.getFilterParams(3);
+	            }
+
+	            Number rs =  ColumnCalculateBuilder.newBuild(funcCode)
+            		.setColumn(column)
+            		.setDataView(data)
+            		.setFilters(filter)//二次过滤
+            		.setParams(params)
+            		.build()
+            		.max()
+            	; 
+	            outputVo.put(rs); 
             }
-            if (columnname instanceof String) {
-                column = columnname.toString();
-            } else {
-                throw new ServerFuncException("函数【" + funcCode + "】的第2个参数类型必须是字符串类型，参数2：" + columnname);
-            }
-            List mapList = data.getDatas();
-            if (mapList.size() == 0) {
-                outputVo.put(0);
-                outputVo.setSuccess(true);
-                return outputVo;
-            } else {
-                IDataSetMetaData setMetaData = data.getMetadata();
-                try {
-                    IColumn vColumn = setMetaData.getColumn(column);
-                    ColumnType type = vColumn.getColumnType();
-                    if (type == ColumnType.Integer) {
-                        ctype = 1;
-                    }
-                } catch (Exception e) {
-                    throw new ServerFuncException("函数【" + funcCode + "】计算失败，字段类型获取失败！" + e.toString());
-                }
-            }
-            resultValue = new BigDecimal(data.getDatas().get(0).get(column).toString());
-            for (Object map : mapList) {
-                if (map instanceof Map) {
-                    Map recordMap = (Map) map;
-                    Object value = recordMap.get(column);
-                    if (value != null) {
-                        if (value instanceof Double || value instanceof Integer || value instanceof java.math.BigDecimal) {
-                            //比较获取最大值
-                            BigDecimal valueBig = new BigDecimal(value.toString());
-                            if (valueBig.compareTo(resultValue) > 0) {
-                                resultValue = valueBig;
-                            }
-                        } else {
-                            throw new ServerFuncException("函数【" + funcCode + "】的第2个参数对应的字段类型必须是数字类型");
-                        }
-                    }
-                }
-            }
-            if (ctype == 1) {
-                resultValue2 = resultValue.intValue();
-                outputVo.put(resultValue2);
-            } else {
-                outputVo.put(resultValue);
+            else {
+            	outputVo.put(Integer.valueOf(0));	
             }
             outputVo.setSuccess(true);
         } catch (ServerFuncException e) {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
+        	String msg = util.getFullParams("计算有误");
             outputVo.setSuccess(false);
-            outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + entityname + "，参数2：" + columnname + ", " + e.getMessage());
-            log.error("函数【" + funcCode + "】计算失败，参数1：" + entityname + "，参数2：" + columnname, e);
+            //outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + entityname + "，参数2：" + columnname + ", " + e.getMessage());
+            outputVo.setMessage(msg);
+            log.error(msg, e);
         }
         return outputVo;
     }
+    
 }

@@ -37,6 +37,7 @@ public class GetSerialNumberFunc implements IFunction {
     public IFuncOutputVo evaluate(IFuncContext context) {
         IFuncOutputVo outputVo = context.newOutputVo();
         Object param = null;
+        long startTime = System.currentTimeMillis();
         try {
             //ServerFuncCommonUtils service = VDS.getIntance().getService(ServerFuncCommonUtils.class, ServerFuncCommonUtils.OutServer_Code);
 
@@ -64,6 +65,11 @@ public class GetSerialNumberFunc implements IFunction {
             outputVo.setSuccess(false);
             outputVo.setMessage("函数【" + funcCode + "】计算有误，" + e.getMessage());
             log.error("函数【" + funcCode + "】计算有误", e);
+        }
+        finally {
+
+			long time = System.currentTimeMillis() - startTime;
+			log.info("GetSerialNumberFunc,耗时:{}",time);
         }
         return outputVo;
     }

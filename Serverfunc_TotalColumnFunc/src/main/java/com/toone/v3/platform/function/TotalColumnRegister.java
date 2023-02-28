@@ -64,6 +64,20 @@ public class TotalColumnRegister implements IRegisterPlugin {
                 .setType(VariableType.Char)
                 .setRequired(true)
                 .build();
+        
+        IFunctionProfileVo.IFunctionInputVo filters = pluginBuilder.newInput()
+                .setDesc("过滤条件")
+                .setType(VariableType.Char)
+                .setRequired(false)
+                .build();
+        
+        IFunctionProfileVo.IFunctionInputVo pars = pluginBuilder.newInput()
+                .setDesc("条件参数(json)")
+                .setType(VariableType.Char)
+                .setRequired(false)
+                .build();
+        
+        
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("返回值")
                 .setType(VariableType.Range)
@@ -75,13 +89,17 @@ public class TotalColumnRegister implements IRegisterPlugin {
                 .setName(Plugin_Name)
                 .setEntry(TotalColumnFunc.class)
                 .setExample("代码示例: TotalColumnFunc(\"BR_IN_PARENT.xiaoshu\",\"price\") 返回实体字段price的总和。\n" +
-                        "参数1--活动集实体(字符串类型)；\n" +
-                        "参数2--计算总和的字段名称(字符串类型)；\n" +
+                        "参数1--活动集实体(字符串类型)\n" +
+                        "参数2--计算总和的字段名称(字符串类型)\n" +
+                        "参数3--过滤条件，格式:fd1=:a and fd2=:b\n" +
+                        "参数4--条件参数map或者base64的json: eyJtMSI6IjAxIiwibTIiOiJcImJcIiJ9\n" +
                         "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
-                .addInputParam(inputVo2);
-
+                .addInputParam(inputVo2)
+		        .addInputParam(filters)
+		        .addInputParam(pars)
+		        ;
         return pluginBuilder.build();
     }
 }
