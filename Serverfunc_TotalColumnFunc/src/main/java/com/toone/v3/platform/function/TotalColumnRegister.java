@@ -54,13 +54,13 @@ public class TotalColumnRegister implements IRegisterPlugin {
     private IFunctionProfileVo getFunc() {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
-                .setDesc("活动集实体")
+                .setDesc("实体名称")
                 .setType(VariableType.Range)
                 .setTypeRange(Arrays.asList(VariableType.Char, VariableType.Entity))
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
-                .setDesc("字段名称")
+                .setDesc("实体字段")
                 .setType(VariableType.Char)
                 .setRequired(true)
                 .build();
@@ -79,27 +79,29 @@ public class TotalColumnRegister implements IRegisterPlugin {
         
         
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
-                .setDesc("返回值")
+                .setDesc("总数")
                 .setType(VariableType.Range)
                 .setTypeRange(Arrays.asList(VariableType.Integer, VariableType.Number))
                 .build();
+        
         pluginBuilder.setAuthor(Plugin_Author)
                 .setCode(Plugin_Code)
                 .setDesc(Plugin_Desc)
                 .setName(Plugin_Name)
                 .setEntry(TotalColumnFunc.class)
                 .setExample("代码示例: TotalColumnFunc(\"BR_IN_PARENT.xiaoshu\",\"price\") 返回实体字段price的总和。\n" +
-                        "参数1--活动集实体(字符串类型)\n" +
-                        "参数2--计算总和的字段名称(字符串类型)\n" +
+                        "参数1--实体名(字符串类型，需要加入前缀)； 例如：BR_IN_PARENT:方法输入实体，BR_OUT_PARENT：方法输出实体，BR_VAR_PARENT：方法变量实体；\n" +
+                        "参数2--字段名称(字符串类型)；\n" +
                         "参数3--过滤条件，格式:fd1=:a and fd2=:b\n" +
-                        "参数4--条件参数map或者base64的json: eyJtMSI6IjAxIiwibTIiOiJcImJcIiJ9\n" +
+                        "参数4--条件参数map或者base64的json: eyJtMSI6IuaVsOWtly/lj5jph4/lkI0iLCJtMiI6Ilwi5a2X56ym5LiyXCIifQ==\n" +
                         "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
                 .addInputParam(inputVo2)
-		        .addInputParam(filters)
+                .addInputParam(filters)
 		        .addInputParam(pars)
 		        ;
+
         return pluginBuilder.build();
     }
 }

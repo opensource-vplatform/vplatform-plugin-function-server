@@ -64,8 +64,21 @@ public class MaxColumnRegister implements IRegisterPlugin {
                 .setType(VariableType.Char)
                 .setRequired(true)
                 .build();
+        
+        IFunctionProfileVo.IFunctionInputVo filters = pluginBuilder.newInput()
+                .setDesc("过滤条件")
+                .setType(VariableType.Char)
+                .setRequired(false)
+                .build();
+        
+        IFunctionProfileVo.IFunctionInputVo pars = pluginBuilder.newInput()
+                .setDesc("条件参数(json)")
+                .setType(VariableType.Char)
+                .setRequired(false)
+                .build();
+        
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
-                .setDesc("返回值")
+                .setDesc("最大值")
                 .setType(VariableType.Range)
                 .setTypeRange(Arrays.asList(VariableType.Integer, VariableType.Number))
                 .build();
@@ -77,10 +90,15 @@ public class MaxColumnRegister implements IRegisterPlugin {
                 .setExample("代码示例:MaxColumn(\"EntityName\",\"ColumnName\") 返回值为实体\"EntityName\"的\"ColumnName\"字段的最大值。\n" +
                         "参数1--实体名（字符串类型，需要加入前缀)；例如：BR_IN_PARENT:方法输入实体，BR_OUT_PARENT：方法输出实体，BR_VAR_PARENT：方法变量实体；\n" +
                         "参数2--字段名称(字符串类型)；\n" +
+                        "参数3--过滤条件，格式:fd1=:a and fd2=:b\n" +
+                        "参数4--条件参数map或者base64的json: eyJtMSI6IuaVsOWtly/lj5jph4/lkI0iLCJtMiI6Ilwi5a2X56ym5LiyXCIifQ==\n" +
                         "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)
-                .addInputParam(inputVo2);
+                .addInputParam(inputVo2)
+                .addInputParam(filters)
+		        .addInputParam(pars)
+		        ;
 
         return pluginBuilder.build();
     }

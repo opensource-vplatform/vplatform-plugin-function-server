@@ -156,8 +156,9 @@ public class ColumnCalculateUtil {
 			}
 			else {
 				byte[] bys = VdsUtils.crypto.decodeBase64(json, StandardCharsets.UTF_8.name());
-				params = new String(bys,StandardCharsets.UTF_8);
-				pars = VdsUtils.json.fromJson(params);	
+				String js = new String(bys,StandardCharsets.UTF_8);
+				params = js;
+				pars = VdsUtils.json.fromJson(js);	
 			} 
     	}
     	else if(ps instanceof Map) {

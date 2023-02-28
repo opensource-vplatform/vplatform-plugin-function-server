@@ -1,5 +1,9 @@
 package com.toone.v3.platform.function;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.yindangu.v3.plugin.vds.reg.api.IRegisterPlugin;
 import com.yindangu.v3.plugin.vds.reg.api.builder.IFunctionBuilder;
 import com.yindangu.v3.plugin.vds.reg.api.model.IComponentProfileVo;
@@ -7,9 +11,6 @@ import com.yindangu.v3.plugin.vds.reg.api.model.IFunctionProfileVo;
 import com.yindangu.v3.plugin.vds.reg.api.model.IPluginProfileVo;
 import com.yindangu.v3.plugin.vds.reg.api.model.VariableType;
 import com.yindangu.v3.plugin.vds.reg.common.RegVds;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 函数注册器
@@ -53,8 +54,9 @@ public class AvgColumnRegister implements IRegisterPlugin {
     private IFunctionProfileVo getFunc() {
         IFunctionBuilder pluginBuilder = RegVds.getPlugin().getFunctiontPlugin();
         IFunctionProfileVo.IFunctionInputVo inputVo1 = pluginBuilder.newInput()
-                .setDesc("活动集实体")
-                .setType(VariableType.Char)
+                .setDesc("实体名称")
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Char, VariableType.Entity))
                 .setRequired(true)
                 .build();
         IFunctionProfileVo.IFunctionInputVo inputVo2 = pluginBuilder.newInput()
@@ -77,7 +79,8 @@ public class AvgColumnRegister implements IRegisterPlugin {
         
         IFunctionProfileVo.IFunctionOutputVo outputVo = pluginBuilder.newOutput()
                 .setDesc("平均值")
-                .setType(VariableType.Number)
+                .setType(VariableType.Range)
+                .setTypeRange(Arrays.asList(VariableType.Integer, VariableType.Number))
                 .build();
         
         pluginBuilder.setAuthor(Plugin_Author)
@@ -86,10 +89,10 @@ public class AvgColumnRegister implements IRegisterPlugin {
                 .setName(Plugin_Name)
                 .setEntry(AvgColumnFunc.class)
                 .setExample("代码示例:AvgColumnFunc(\"BR_IN_PARENT.xiaoshu\",\"price\") 返回实体字段price的平均值。\n" +
-                        "参数1--活动集实体(字符串类型)\n" +
-                        "参数2--计算平均值的字段名称(字符串类型))\n" +
+                        "参数1--实体名(字符串类型，需要加入前缀)； 例如：BR_IN_PARENT:方法输入实体，BR_OUT_PARENT：方法输出实体，BR_VAR_PARENT：方法变量实体；\n" +
+                        "参数2--字段名称(字符串类型)；\n" +
                         "参数3--过滤条件，格式:fd1=:a and fd2=:b\n" +
-                        "参数4--条件参数map或者base64的json: eyJtMSI6IjAxIiwibTIiOiJcImJcIiJ9\n" +
+                        "参数4--条件参数map或者base64的json: eyJtMSI6IuaVsOWtly/lj5jph4/lkI0iLCJtMiI6Ilwi5a2X56ym5LiyXCIifQ==\n" +
                         "返回值类型：数字类型。")
                 .setOutput(outputVo)
                 .addInputParam(inputVo1)

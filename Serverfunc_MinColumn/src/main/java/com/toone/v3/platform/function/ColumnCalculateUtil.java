@@ -1,5 +1,6 @@
 package com.toone.v3.platform.function;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.util.Collections;
@@ -143,8 +144,22 @@ public class ColumnCalculateUtil {
     		pars = null;
     	}
     	else if(ps instanceof String){ 
-    		params = (String)ps;
-    		pars = VdsUtils.json.fromJson(params);
+    		//开发系统输入: {\"m1\":\"01\",\"m2\":\"02\"}
+    		//运行时也是得到这个样的字符串 {\"m1\":\"01\",\"m2\":\"02\"}
+    		//所以需要编码base64
+			String json = ((String)ps).trim();
+			if(json.length() ==0) {
+				pars = Collections.emptyMap();
+			}
+			else if(json.indexOf('{')>=0) {
+				throw errorMessage(inputIndex,"的条件参数必须是json字符串必须是base64编码");
+			}
+			else {
+				byte[] bys = VdsUtils.crypto.decodeBase64(json, StandardCharsets.UTF_8.name());
+				String js = new String(bys,StandardCharsets.UTF_8);
+				params = js;
+				pars = VdsUtils.json.fromJson(js);	
+			} 
     	}
     	else if(ps instanceof Map) {
     		pars = (Map)ps;

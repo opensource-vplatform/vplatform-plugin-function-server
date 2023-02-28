@@ -138,30 +138,50 @@ public class ColumnCalculateBuilder {
 	public Number max()  {
 		List<IDataObject> mapList = build.getDataList();// data.select();
 		String columnName = build.getColumn().getColumnName();
-		BigDecimal max = BigDecimal.valueOf(0);
+		BigDecimal maxDec = BigDecimal.valueOf(0);
+		long max = 0;
+		boolean integerField =(build.isIntegerField()) ;
 		
 		for (IDataObject map : mapList) {
 			Object value = map.get(columnName);
-			BigDecimal n = convertDecimal(value);
-			if(n.compareTo(max)>0) {
-				max = n;
+			if(integerField) {
+				long n = convertLong(value);
+				if(n > max) {
+					max = n;
+				}
+			}
+			else {
+				BigDecimal n = convertDecimal(value);
+				if(n.compareTo(maxDec)>0) {
+					maxDec = n;
+				}
 			}
 		}
-		return max;
+		return (integerField ? Long.valueOf(max) : maxDec);
 	}
 	public Number min()  {
 		List<IDataObject> mapList = build.getDataList();// data.select();
 		String columnName = build.getColumn().getColumnName();
-		BigDecimal min = BigDecimal.valueOf(0);
+		BigDecimal minDec = BigDecimal.valueOf(0);
+		long min = 0;
+		boolean integerField =(build.isIntegerField()) ;
 		
 		for (IDataObject map : mapList) {
 			Object value = map.get(columnName);
-			BigDecimal n = convertDecimal(value);
-			if(n.compareTo(min) < 0) {
-				min = n;
+			if(integerField) {
+				long n = convertLong(value);
+				if(n < min) {
+					min  = n;
+				}
+			}
+			else {
+				BigDecimal n = convertDecimal(value);
+				if(n.compareTo(minDec) < 0) {
+					minDec = n;
+				}
 			}
 		}
-		return min;
+		return (integerField ? Long.valueOf(min) : minDec);
 	}
 	
 	private Number total0() {
@@ -231,6 +251,9 @@ public class ColumnCalculateBuilder {
 	}
  
 	private BigDecimal roundScale(BigDecimal n) {
+		if(n.equals(BigDecimal.ZERO) || n.compareTo(BigDecimal.ZERO) ==0) {
+			return n;
+		}
 		int precision = build.getColumn().getPrecision();// 精度位数
 		BigDecimal dec = n.setScale(precision, BigDecimal.ROUND_HALF_UP);
 		return dec;
