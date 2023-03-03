@@ -64,7 +64,7 @@ public class TotalColumnFunc implements IFunction {
             outputVo.setSuccess(false);
             outputVo.setMessage(e.getMessage());
         } catch (Exception e) {
-        	String msg = util.getFullParams(e.getMessage());
+        	String msg = util.getFullParams("计算有误:【" + e.getMessage() + "】");
             outputVo.setSuccess(false);
             //outputVo.setMessage("函数【" + funcCode + "】计算有误，参数1：" + entityname + "，参数2：" + columnname + ", " + e.getMessage());
             outputVo.setMessage(msg);
