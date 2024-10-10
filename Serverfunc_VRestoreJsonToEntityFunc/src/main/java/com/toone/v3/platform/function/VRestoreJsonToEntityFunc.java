@@ -3,6 +3,7 @@ package com.toone.v3.platform.function;
 import com.toone.v3.platform.function.common.ServerFuncCommonUtils;
 import com.toone.v3.platform.function.common.exception.ServerFuncException;
 import com.yindangu.v3.business.VDS;
+import com.yindangu.v3.business.jdbc.api.model.IColumn;
 import com.yindangu.v3.business.metadata.api.IDataObject;
 import com.yindangu.v3.business.metadata.api.IDataView;
 import com.yindangu.v3.business.plugin.business.api.func.IFuncContext;
@@ -12,6 +13,8 @@ import com.yindangu.v3.platform.plugin.util.VdsUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +60,7 @@ public class VRestoreJsonToEntityFunc implements IFunction {
             } catch (Exception e) {
                 throw new ServerFuncException("函数【" + funcCode + "】的第1个参数的值格式不是json格式，转换成json时失败，传入值=" + sourceJson);
             }
-
+            List<String> columnNames = collectColumnName(dataView);
             if (sourceList != null) {
                 for (int i = 0; i < sourceList.size(); i++) {
                     //获取每行记录
@@ -66,6 +69,10 @@ public class VRestoreJsonToEntityFunc implements IFunction {
                     IDataObject dataObject = dataView.insertDataObject();
                     //设置当前记录的字段值
                     for (String fieldCode : item.keySet()) {
+                        // 字段不包含的不处理
+                        if (!columnNames.contains(fieldCode)) {
+                            continue;
+                        }
                         Object fieldValue = item.get(fieldCode);
                         if (fieldValue instanceof Map || fieldValue instanceof List) {//防止某个值是一个json的格式
                             fieldValue = VdsUtils.json.toJson(fieldValue);
@@ -86,6 +93,21 @@ public class VRestoreJsonToEntityFunc implements IFunction {
             log.error("函数【" + funcCode + "】计算失败", e);
         }
         return outputVo;
+    }
+
+    /**
+     * 收集实体字段
+     * @param dataView
+     * @return
+     */
+    private List<String> collectColumnName(IDataView dataView) {
+        List<String> columnNames = new ArrayList<String>();
+        Collection<IColumn> columns = dataView.getMetadata().getColumns();
+        for (IColumn iColumn : columns) {
+            String columnName = iColumn.getColumnName();
+            columnNames.add(columnName);
+        }
+        return columnNames;
     }
 
     /**
